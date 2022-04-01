@@ -7,7 +7,7 @@ import javax.persistence.Id;
 @Entity
 public class Member {
 
-    @Id @GeneratedValue
+    @Id
     private String id;
     private String name;
     private String pwd;
