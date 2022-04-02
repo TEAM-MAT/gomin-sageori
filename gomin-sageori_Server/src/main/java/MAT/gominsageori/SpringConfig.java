@@ -2,10 +2,8 @@ package MAT.gominsageori;
 
 import MAT.gominsageori.repository.JpaMemberRepository;
 import MAT.gominsageori.repository.MemberRepository;
-import MAT.gominsageori.repository.MemoryMemberRepository;
 import MAT.gominsageori.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
