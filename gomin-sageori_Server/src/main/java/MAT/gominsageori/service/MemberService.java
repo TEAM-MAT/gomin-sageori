@@ -2,7 +2,6 @@ package MAT.gominsageori.service;
 
 import MAT.gominsageori.domain.Member;
 import MAT.gominsageori.repository.MemberRepository;
-import MAT.gominsageori.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

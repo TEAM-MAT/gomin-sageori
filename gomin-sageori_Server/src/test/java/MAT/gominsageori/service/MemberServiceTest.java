@@ -2,7 +2,6 @@ package MAT.gominsageori.service;
 
 import MAT.gominsageori.domain.Member;
 import MAT.gominsageori.repository.MemberRepository;
-import MAT.gominsageori.repository.MemoryMemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
