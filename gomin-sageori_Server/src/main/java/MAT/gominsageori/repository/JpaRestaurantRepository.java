@@ -1,6 +1,7 @@
 package MAT.gominsageori.repository;
 
 import MAT.gominsageori.domain.Restaurant;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Optional;
 public class JpaRestaurantRepository implements RestaurantRepository{
     public final EntityManager em;
 
+    @Autowired
     public JpaRestaurantRepository(EntityManager em) {
         this.em = em;
     }
