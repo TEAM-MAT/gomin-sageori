@@ -2,11 +2,10 @@ package MAT.gominsageori.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import java.sql.Time;
 
 @Entity
 @Table(name = "Restaurant")
@@ -17,5 +16,31 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column( nullable= false , unique = false , length = 50)
+    private String name;
 
+    @Column (nullable = false)
+    private boolean Franchise; // 프랜차이즈 여부
+
+    @Column (nullable = true)
+    private Float external_star; //외부 평점
+
+    @Column (nullable = true)
+    private Float internal_start; //내부 평점
+
+    @Column (nullable = true)
+    private Time startTime; //영업시작시간
+
+    @Column (nullable = true)
+    private Time finTime; //영업 종료 시간
+
+    @ManyToOne
+    @JoinColumn(name = "bestMenu" , nullable = true)
+    private Menu bestMenu;
+
+    @Column (nullable= false)
+    private String restaurant_type;
+
+    @Column (nullable = false)
+    private String call_number;
 }
