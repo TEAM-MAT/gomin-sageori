@@ -1,5 +1,6 @@
 package MAT.gominsageori.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,7 +10,11 @@ public class Member {
 
     @Id
     private String id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String pwd;
 
     public String getId() {
