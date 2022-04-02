@@ -19,7 +19,7 @@ public class Restaurant {
     @Column( nullable= false , unique = false , length = 50)
     private String name;
 
-    @Column (nullable = false)
+    @Column (nullable = true)
     private boolean Franchise; // 프랜차이즈 여부
 
     @Column (nullable = true)
@@ -33,14 +33,25 @@ public class Restaurant {
 
     @Column (nullable = true)
     private Time finTime; //영업 종료 시간
-
+/*
     @ManyToOne
     @JoinColumn(name = "bestMenu" , nullable = true)
     private Menu bestMenu;
-
-    @Column (nullable= false)
+*/
+    @Column (nullable= true)
     private String restaurant_type;
 
-    @Column (nullable = false)
+    @Column (nullable = true)
     private String call_number;
+
+    public Long getId(){
+        return id;
+    }
+
+    public String getName(){
+        return name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
 }

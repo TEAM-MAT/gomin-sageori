@@ -2,11 +2,13 @@ package MAT.gominsageori.repository;
 
 import MAT.gominsageori.domain.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class JpaRestaurantRepository implements RestaurantRepository{
     public final EntityManager em;
 
@@ -29,8 +31,10 @@ public class JpaRestaurantRepository implements RestaurantRepository{
 
     @Override
     public Optional<Restaurant> findByName(String name) {
-        Restaurant restuarant = em.find(Restaurant.class , name);
-        return Optional.ofNullable(restuarant);
+        List<Restaurant> result = em.createQuery("select r from Restaurant r where r.name = :name", Restaurant.class)
+                .setParameter("name", name)
+                .getResultList();
+        return result.stream().findAny();
     }
 
     @Override
