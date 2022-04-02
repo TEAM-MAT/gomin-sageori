@@ -1,6 +1,7 @@
 package MAT.gominsageori;
 
 import MAT.gominsageori.repository.JpaMemberRepository;
+import MAT.gominsageori.repository.JpaRestaurantRepository;
 import MAT.gominsageori.repository.MemberRepository;
 import MAT.gominsageori.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +32,5 @@ public class SpringConfig {
         //return new MemoryMemberRepository();
         return new JpaMemberRepository(em);
     }
+
 }
