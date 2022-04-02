@@ -25,8 +25,17 @@ public class JpaMemberRepository implements MemberRepository {
         return Optional.ofNullable(member);
     }
 
-    /*@Override
-    public Member delete(Member member) {
+    @Override
+    public Member update(Member memberParam) {
+        Member member = em.find(Member.class, memberParam.getId());
+        member.setName(memberParam.getName());
+        member.setPwd(memberParam.getPwd());
+        return member;
+    }
 
-    }*/
+    @Override
+    public void delete(Member memberParam) {
+        Member member = em.find(Member.class, memberParam.getId());
+        em.remove(member);
+    }
 }
