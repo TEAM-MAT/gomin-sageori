@@ -3,9 +3,9 @@ import { Container } from "../styles/layout/Container";
 
 function Main() {
     return (
-      <Container>
+      <div>
         <BasicButton content='햄버거'></BasicButton>
-      </Container>
+      </div>
     );
   }
   
