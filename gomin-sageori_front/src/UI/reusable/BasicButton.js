@@ -18,6 +18,8 @@ function BasicButton(props) {
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
+      cursor: pointer;
     `
 
     const clickedButtonStyle = css`
@@ -26,13 +28,15 @@ function BasicButton(props) {
       background-color: #FFE9D3;
       border-radius: 50px;
       font-size: 10px;
-      color: #F58634;
+      color: #F7964F;
       border: solid 0.7px #F58634;
       
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
+      cursor: pointer;
     `
 
     useEffect(() => {
