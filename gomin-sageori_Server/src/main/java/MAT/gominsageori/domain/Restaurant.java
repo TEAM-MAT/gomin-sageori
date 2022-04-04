@@ -44,6 +44,10 @@ public class Restaurant {
     @Column (nullable = true)
     private String call_number;
 
+    @OneToOne
+    @JoinColumn(name = "RestaurantAdd" , nullable = false )
+    private Address address;
+
     public Long getId(){
         return id;
     }

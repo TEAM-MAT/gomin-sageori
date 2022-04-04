@@ -11,7 +11,7 @@ public class Address {
     private Long addressnum;
 
     @OneToOne
-    @JoinColumn( name = "restaurant" , nullable = false)
+    @JoinColumn( name = "address_restaurant" , nullable = false)
     private Restaurant restaurant;
 
     @Column
@@ -48,4 +48,30 @@ public class Address {
     public String getDistrict(){
         return this.district;
     }
+
+    public String setCity(String city){
+        this.City = city;
+        return city;
+    }
+
+    public String setDistrict(String district){
+        this.district = district;
+        return district;
+    }
+
+    public String setRoad (String road){
+        this.road = road;
+        return road;
+    }
+
+    public String setbuildingnum(String num){
+        this.building_number = num;
+        return num;
+    }
+
+    public String setFloor(String floor){
+        this.floor = floor;
+        return floor;
+    }
+
 }
