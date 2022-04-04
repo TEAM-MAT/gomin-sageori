@@ -58,4 +58,8 @@ public class Restaurant {
     public void setName(String name){
         this.name = name;
     }
+
+    public String getFullAddress(){
+        return this.address.getfulladdress();
+    }
 }
