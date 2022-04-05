@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="517bf373-ca46-4d34-801b-2d09ab53e483" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/gomin-sageori_front/src/UI/reusable/ToggleButton.js" afterDir="false" />
+    <list default="true" id="517bf373-ca46-4d34-801b-2d09ab53e483" name="Changes" comment="토글 버튼 제작 완료">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gomin-sageori_Server/src/main/Resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/Resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gomin-sageori_front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_front/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gomin-sageori_front/src/UI/reusable/BasicButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_front/src/UI/reusable/BasicButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gomin-sageori_front/src/pages/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_front/src/pages/Main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,8 +52,16 @@
       <option name="presentableId" value="Default" />
       <updated>1647703758702</updated>
       <workItem from="1647703762001" duration="11000" />
-      <workItem from="1649066475186" duration="3010000" />
+      <workItem from="1649066475186" duration="4412000" />
     </task>
+    <task id="LOCAL-00001" summary="토글 버튼 제작 완료">
+      <created>1649070339689</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1649070339689</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -91,5 +94,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="토글 버튼 제작 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="토글 버튼 제작 완료" />
   </component>
 </project>
