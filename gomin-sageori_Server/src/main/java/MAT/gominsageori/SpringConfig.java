@@ -1,9 +1,9 @@
 package MAT.gominsageori;
 
-import MAT.gominsageori.repository.JpaMemberRepository;
-import MAT.gominsageori.repository.JpaRestaurantRepository;
-import MAT.gominsageori.repository.MemberRepository;
+import MAT.gominsageori.repository.*;
 import MAT.gominsageori.service.MemberService;
+import MAT.gominsageori.service.MenuService;
+import MAT.gominsageori.service.RestaurantMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,8 +29,21 @@ public class SpringConfig {
 
     @Bean
     public MemberRepository memberRepository() {
-        //return new MemoryMemberRepository();
         return new JpaMemberRepository(em);
+    }
+
+    @Bean
+    public RestaurantMenuService restaurantMenuService() { return new RestaurantMenuService(restaurantMenuRepository()); }
+
+    @Bean
+    public RestaurantMenuRepository restaurantMenuRepository() { return new JpaRestaurantMenuRepository(em); }
+
+    @Bean
+    public MenuService menuService() { return new MenuService(menuRepository()); }
+
+    @Bean
+    public MenuRepository menuRepository() {
+        return new JpaMenuRepository(em);
     }
 
 }

@@ -14,6 +14,7 @@ import java.sql.Time;
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "restaurant_id")
     private Long id;
 
     @Column( nullable= false , unique = false , length = 50)
