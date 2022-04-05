@@ -1,8 +1,7 @@
 package MAT.gominsageori.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -15,6 +14,10 @@ public class Member {
 
     @Column(nullable = false)
     private String pwd;
+
+    @ManyToMany
+    @JoinColumn( name = "favoriteRestaurant" , nullable = true)
+    private List<Restaurant> favoriteRestaurant;
 
     public String getId() {
         return id;
@@ -38,5 +41,13 @@ public class Member {
 
     public void setPwd(String pwd) {
         this.pwd = pwd;
+    }
+
+    public List<Restaurant> getFavoriteRestaurant(){
+        return this.favoriteRestaurant;
+    }
+
+    public void SetFavorites(List<Restaurant> favorites){
+        this.favoriteRestaurant = favorites;
     }
 }

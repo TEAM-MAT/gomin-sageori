@@ -1,5 +1,6 @@
 package MAT.gominsageori.repository;
 
+import MAT.gominsageori.domain.Address;
 import MAT.gominsageori.domain.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,5 +42,13 @@ public class JpaRestaurantRepository implements RestaurantRepository{
     public List<Restaurant> findAll() {
         return em.createQuery("select r from Restaurant r" , Restaurant.class)
                 .getResultList();
+    }
+
+    @Override
+    public Optional<Restaurant> findRestaurantByAdd(Address address){
+        List <Restaurant> result = em.createQuery("select r from Restaurant  r where r.address = :address",Restaurant.class )
+                .setParameter("address",address)
+                .getResultList();
+        return result.stream().findAny();
     }
 }
