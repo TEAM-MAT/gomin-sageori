@@ -49,6 +49,16 @@ public class Address {
         return this.district;
     }
 
+    public String getRoad(){return this.road;}
+
+    public String getBuilding_number(){return this.building_number;}
+
+    public String getFloor(){return this.floor;}
+
+    public void setRestaurant(Restaurant restaurant){
+        this.restaurant = restaurant;
+    }
+
     public String setCity(String city){
         this.City = city;
         return city;

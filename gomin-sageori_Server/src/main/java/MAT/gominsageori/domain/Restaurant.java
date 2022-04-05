@@ -44,7 +44,7 @@ public class Restaurant {
     @Column (nullable = true)
     private String call_number;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST , CascadeType.REMOVE})
     @JoinColumn(name = "RestaurantAdd" , nullable = false )
     private Address address;
 

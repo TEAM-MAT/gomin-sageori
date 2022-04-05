@@ -37,7 +37,7 @@ public class RestaurantService {
 
     /**
      *
-     * 전체 회원 조회
+     * 전체 식당 조회
      */
     public List<Restaurant> findAll(){
         return restaurantRepository.findAll();
