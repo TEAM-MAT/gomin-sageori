@@ -44,7 +44,7 @@ public class MemberServiceTest {
 
         memberService.join(member1);
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
-        assertThat(e.getMessage()).isEqualTo("이미 존재하는 아이디입니다.");
+        assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
     }
 
     @Test
@@ -54,7 +54,7 @@ public class MemberServiceTest {
         member1.setName("userName3");
         member1.setPwd("userPwd3");
 
-        String saveId = memberService.Update(member1);
+        String saveId = memberService.update(member1);
 
         if(saveId != null) {
             Member findMember = memberService.findOne(saveId).get();

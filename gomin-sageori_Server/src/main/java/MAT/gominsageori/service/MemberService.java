@@ -25,13 +25,13 @@ public class MemberService {
     private void validateDuplicateMember(Member member) {
         memberRepository.findById(member.getId())
                 .ifPresent(m -> {
-                    throw new IllegalStateException("이미 존재하는 아이디입니다.");
+                    throw new IllegalStateException("이미 존재하는 회원입니다.");
                 });
     }
 
     public Optional<Member> findOne(String memberId) { return memberRepository.findById(memberId); }
 
-    public String Update(Member member) {
+    public String update(Member member) {
         if(memberRepository.findById(member.getId()).isPresent()) {
             memberRepository.update(member);
             return member.getId();
