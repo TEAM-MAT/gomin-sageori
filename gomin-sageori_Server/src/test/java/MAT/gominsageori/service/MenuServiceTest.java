@@ -23,7 +23,6 @@ public class MenuServiceTest {
     @Test
     void 메뉴추가() {
         Menu menu = new Menu();
-        menu.setId(1L);
         menu.setName("닭가슴살");
 
         menuService.addMenu(menu);
@@ -35,10 +34,8 @@ public class MenuServiceTest {
     @Test
     void 중복_메뉴_예외() {
         Menu menu = new Menu();
-        menu.setId(1L);
         menu.setName("닭가슴살");
         Menu menu2 = new Menu();
-        menu2.setId(1L);
         menu2.setName("닭가슴살");
 
         menuService.addMenu(menu);
@@ -49,7 +46,6 @@ public class MenuServiceTest {
     @Test
     void 메뉴수정() {
         Menu menu = new Menu();
-        menu.setId(1L);
         menu.setName("닭가슴살");
 
         Long saveId = menuService.update(menu);
@@ -63,7 +59,6 @@ public class MenuServiceTest {
     @Test
     void 메뉴삭제() {
         Menu menu = new Menu();
-        menu.setId(1L);
         menu.setName("닭가슴살");
 
         menuService.delete(menu);

@@ -9,6 +9,7 @@ import java.util.List;
 public class Menu {
     @Id
     @Column(name = "menu_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -43,10 +44,6 @@ public class Menu {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {

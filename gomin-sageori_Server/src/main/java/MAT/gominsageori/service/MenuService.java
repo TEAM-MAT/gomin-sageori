@@ -19,7 +19,7 @@ public class MenuService {
     }
 
     private void validateDuplicateMenu(Menu menu) {
-        menuRepository.findById(menu.getId())
+        menuRepository.findByName(menu.getName())
                 .ifPresent(m -> {
                     throw new IllegalStateException("이미 존재하는 메뉴입니다.");
                 });
@@ -34,7 +34,7 @@ public class MenuService {
     }
 
     public Long update(Menu menu) {
-        if(menuRepository.findById(menu.getId()).isPresent()) {
+        if(menuRepository.findByName(menu.getName()).isPresent()) {
             menuRepository.update(menu);
             return menu.getId();
         }
@@ -43,7 +43,7 @@ public class MenuService {
     }
 
     public void delete(Menu menu) {
-        if(menuRepository.findById(menu.getId()).isPresent()) {
+        if(menuRepository.findByName(menu.getName()).isPresent()) {
             menuRepository.delete(menu);
         }
     }
