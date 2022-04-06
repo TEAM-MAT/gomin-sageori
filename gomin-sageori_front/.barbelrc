@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    [
+      "@emotion",
+      {
+        "autoLabel": "dev-only", // 기본값 'dev-only'
+        "labelFormat": "mj-[dirname]-[filename]-[local]"
+      }
+    ]
+  ]
+}

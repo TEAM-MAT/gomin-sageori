@@ -46,9 +46,14 @@ public class Restaurant {
     @Column (nullable = true)
     private String call_number;
 
+
     @ManyToMany
     @JoinTable(name = "restaurant_menu")
     private List<Menu> menus = new ArrayList<>();
+
+    @OneToOne(cascade = {CascadeType.PERSIST , CascadeType.REMOVE})
+    @JoinColumn(name = "RestaurantAdd" , nullable = false )
+    private Address address;
 
     public Long getId(){
         return id;
@@ -59,5 +64,9 @@ public class Restaurant {
     }
     public void setName(String name){
         this.name = name;
+    }
+
+    public String getFullAddress(){
+        return this.address.getfulladdress();
     }
 }

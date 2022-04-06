@@ -1,8 +1,10 @@
 package MAT.gominsageori.repository;
 
 import MAT.gominsageori.domain.Member;
+import MAT.gominsageori.domain.Restaurant;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Optional;
 
 public class JpaMemberRepository implements MemberRepository {
@@ -30,6 +32,7 @@ public class JpaMemberRepository implements MemberRepository {
         Member member = em.find(Member.class, memberParam.getId());
         member.setName(memberParam.getName());
         member.setPwd(memberParam.getPwd());
+        member.SetFavorites(memberParam.getFavoriteRestaurant());
         return member;
     }
 
@@ -37,5 +40,11 @@ public class JpaMemberRepository implements MemberRepository {
     public void delete(Member memberParam) {
         Member member = em.find(Member.class, memberParam.getId());
         em.remove(member);
+    }
+
+    @Override
+    public List<Restaurant> getFavorites(Member memberparam){
+        List <Restaurant> result = memberparam.getFavoriteRestaurant();
+        return result;
     }
 }
