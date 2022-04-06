@@ -1,9 +1,8 @@
 package MAT.gominsageori.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Menu")
@@ -38,6 +37,9 @@ public class Menu {
 
     @Column (nullable = true)
     private boolean isBread;
+
+    @ManyToMany(mappedBy = "menus")
+    private List<Restaurant> restaurants = new ArrayList<>();
 
     public Long getId() {
         return id;

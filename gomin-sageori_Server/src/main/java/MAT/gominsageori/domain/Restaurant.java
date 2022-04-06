@@ -6,6 +6,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Restaurant")
@@ -44,6 +46,10 @@ public class Restaurant {
 
     @Column (nullable = true)
     private String call_number;
+
+    @ManyToMany
+    @JoinTable(name = "restaurant_menu")
+    private List<Menu> menus = new ArrayList<>();
 
     public Long getId(){
         return id;
