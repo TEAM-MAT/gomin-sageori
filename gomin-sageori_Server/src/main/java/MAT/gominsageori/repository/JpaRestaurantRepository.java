@@ -51,4 +51,12 @@ public class JpaRestaurantRepository implements RestaurantRepository{
                 .getResultList();
         return result.stream().findAny();
     }
+
+    public Optional<Restaurant> findRestaurantByLocation(String location){
+        List <Restaurant> result = em.createQuery("select r from Restaurant  r where r.address.location = :location",Restaurant.class )
+                .setParameter("location",location)
+                .getResultList();
+        return result.stream().findAny();
+
+    }
 }

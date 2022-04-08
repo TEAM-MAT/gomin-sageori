@@ -34,6 +34,7 @@ public class JpaAddressRepository implements AddressRepository{
         newadd.setRoad(address.getRoad());
         newadd.setbuildingnum(address.getBuilding_number());
         newadd.setFloor(address.getFloor());
+        newadd.setLocation(address.getLocation());
         return newadd;
     }
 
@@ -45,4 +46,5 @@ public class JpaAddressRepository implements AddressRepository{
                 .getResultList();
         return add.stream().findAny();
     }
+
 }
