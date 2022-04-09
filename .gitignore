@@ -24,3 +24,6 @@ hs_err_pid*
 gomin-sageori_Server/src/main/resources/application.properties
 gomin-sageori_Server/src/main/resources/application.properties
 gomin-sageori_Server/src/main/application.properties
+
+# Tools for Gitpod
+.gitpod.yml
