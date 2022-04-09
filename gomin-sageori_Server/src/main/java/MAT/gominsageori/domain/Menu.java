@@ -39,6 +39,63 @@ public class Menu {
     @Column (nullable = true)
     private boolean isBread;
 
+    @Column (nullable = true)
+    private boolean hasBuckwheat;
+
+    @Column (nullable = true)
+    private boolean hasWheat;
+
+    @Column (nullable = true)
+    private boolean hasSoybean;
+
+    @Column (nullable = true)
+    private boolean hasPeanut;
+
+    @Column (nullable = true)
+    private boolean hasWalnut;
+
+    @Column (nullable = true)
+    private boolean hasPineNut;
+
+    @Column (nullable = true)
+    private boolean hasSulFurousAcid;
+
+    @Column (nullable = true)
+    private boolean hasPeach;
+
+    @Column (nullable = true)
+    private boolean hasTomato;
+
+    @Column (nullable = true)
+    private boolean hasEgg;
+
+    @Column (nullable = true)
+    private boolean hasMilk;
+
+    @Column (nullable = true)
+    private boolean hasSquid;
+
+    @Column (nullable = true)
+    private boolean hasMackerel;
+
+    @Column (nullable = true)
+    private boolean hasShrimp;
+
+    @Column (nullable = true)
+    private boolean hasCrab;
+
+    @Column (nullable = true)
+    private boolean hasClam;
+
+    @Column (nullable = true)
+    private boolean hasPork;
+
+    @Column (nullable = true)
+    private boolean hasBeef;
+
+    @Column (nullable = true)
+    private boolean hasChicken;
+
     @ManyToMany(mappedBy = "menus")
     private List<Restaurant> restaurants = new ArrayList<>();
 
@@ -116,5 +173,157 @@ public class Menu {
 
     public void setBread(boolean bread) {
         isBread = bread;
+    }
+
+    public boolean isHasBuckwheat() {
+        return hasBuckwheat;
+    }
+
+    public void setHasBuckwheat(boolean hasBuckwheat) {
+        this.hasBuckwheat = hasBuckwheat;
+    }
+
+    public boolean isHasWheat() {
+        return hasWheat;
+    }
+
+    public void setHasWheat(boolean hasWheat) {
+        this.hasWheat = hasWheat;
+    }
+
+    public boolean isHasSoybean() {
+        return hasSoybean;
+    }
+
+    public void setHasSoybean(boolean hasSoybean) {
+        this.hasSoybean = hasSoybean;
+    }
+
+    public boolean isHasPeanut() {
+        return hasPeanut;
+    }
+
+    public void setHasPeanut(boolean hasPeanut) {
+        this.hasPeanut = hasPeanut;
+    }
+
+    public boolean isHasWalnut() {
+        return hasWalnut;
+    }
+
+    public void setHasWalnut(boolean hasWalnut) {
+        this.hasWalnut = hasWalnut;
+    }
+
+    public boolean isHasPineNut() {
+        return hasPineNut;
+    }
+
+    public void setHasPineNut(boolean hasPineNut) {
+        this.hasPineNut = hasPineNut;
+    }
+
+    public boolean isHasSulFurousAcid() {
+        return hasSulFurousAcid;
+    }
+
+    public void setHasSulFurousAcid(boolean hasSulFurousAcid) {
+        this.hasSulFurousAcid = hasSulFurousAcid;
+    }
+
+    public boolean isHasPeach() {
+        return hasPeach;
+    }
+
+    public void setHasPeach(boolean hasPeach) {
+        this.hasPeach = hasPeach;
+    }
+
+    public boolean isHasTomato() {
+        return hasTomato;
+    }
+
+    public void setHasTomato(boolean hasTomato) {
+        this.hasTomato = hasTomato;
+    }
+
+    public boolean isHasEgg() {
+        return hasEgg;
+    }
+
+    public void setHasEgg(boolean hasEgg) {
+        this.hasEgg = hasEgg;
+    }
+
+    public boolean isHasMilk() {
+        return hasMilk;
+    }
+
+    public void setHasMilk(boolean hasMilk) {
+        this.hasMilk = hasMilk;
+    }
+
+    public boolean isHasSquid() {
+        return hasSquid;
+    }
+
+    public void setHasSquid(boolean hasSquid) {
+        this.hasSquid = hasSquid;
+    }
+
+    public boolean isHasMackerel() {
+        return hasMackerel;
+    }
+
+    public void setHasMackerel(boolean hasMackerel) {
+        this.hasMackerel = hasMackerel;
+    }
+
+    public boolean isHasShrimp() {
+        return hasShrimp;
+    }
+
+    public void setHasShrimp(boolean hasShrimp) {
+        this.hasShrimp = hasShrimp;
+    }
+
+    public boolean isHasCrab() {
+        return hasCrab;
+    }
+
+    public void setHasCrab(boolean hasCrab) {
+        this.hasCrab = hasCrab;
+    }
+
+    public boolean isHasClam() {
+        return hasClam;
+    }
+
+    public void setHasClam(boolean hasClam) {
+        this.hasClam = hasClam;
+    }
+
+    public boolean isHasPork() {
+        return hasPork;
+    }
+
+    public void setHasPork(boolean hasPork) {
+        this.hasPork = hasPork;
+    }
+
+    public boolean isHasBeef() {
+        return hasBeef;
+    }
+
+    public void setHasBeef(boolean hasBeef) {
+        this.hasBeef = hasBeef;
+    }
+
+    public boolean isHasChicken() {
+        return hasChicken;
+    }
+
+    public void setHasChicken(boolean hasChicken) {
+        this.hasChicken = hasChicken;
     }
 }
