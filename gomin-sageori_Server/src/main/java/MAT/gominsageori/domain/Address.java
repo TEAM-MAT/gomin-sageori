@@ -28,6 +28,9 @@ public class Address {
 
     @Column
     private String floor;
+    
+    @Column
+    private String location; //설입,숭입,신촌 단위 구분
 
     public Long getId(){
         return this.addressnum;
@@ -48,6 +51,7 @@ public class Address {
     public String getDistrict(){
         return this.district;
     }
+    public String getLocation(){ return this.location; }
 
     public String getRoad(){return this.road;}
 
@@ -67,6 +71,11 @@ public class Address {
     public String setDistrict(String district){
         this.district = district;
         return district;
+    }
+
+    public String setLocation(String location){
+        this.location = location;
+        return location;
     }
 
     public String setRoad (String road){
