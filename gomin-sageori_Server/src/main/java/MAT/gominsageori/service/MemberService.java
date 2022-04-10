@@ -1,6 +1,7 @@
 package MAT.gominsageori.service;
 
 import MAT.gominsageori.domain.Member;
+import MAT.gominsageori.domain.MemberLoginparam;
 import MAT.gominsageori.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,9 @@ public class MemberService {
         if(memberRepository.findById(member.getId()).isPresent()) {
             memberRepository.delete(member);
         }
+    }
+
+    public String login(MemberLoginparam payload){
+        return "200"; //to do
     }
 }
