@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class ApiController {
     @ResponseBody
-    @GetMapping("/recommedation")
+    @GetMapping("/recommendation")
     public ResponseEntity<String> Recommend(@RequestBody RecommandParam param){
         //추천 알고리즘 호출 및 리턴값 받기
         return ResponseEntity.status(200).body("hi");
