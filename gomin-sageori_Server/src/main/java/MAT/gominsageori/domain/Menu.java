@@ -12,89 +12,89 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private String name;
 
-    @Column(nullable = true)
-    private boolean isSoup;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isSoup = false;
 
-    @Column (nullable = true)
-    private boolean isSpicy;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isSpicy = false;
 
-    @Column (nullable = true)
-    private boolean isSweet;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isSweet = false;
 
-    @Column (nullable = true)
-    private boolean isHot;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isHot = false;
 
-    @Column (nullable = true)
-    private boolean isMeat;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isMeat = false;
 
-    @Column (nullable = true)
-    private boolean isNoodle;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isNoodle = false;
 
-    @Column (nullable = true)
-    private boolean isRice;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isRice = false;
 
-    @Column (nullable = true)
-    private boolean isBread;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isBread = false;
 
-    @Column (nullable = true)
-    private boolean hasBuckwheat;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasBuckwheat = false;
 
-    @Column (nullable = true)
-    private boolean hasWheat;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasWheat = false;
 
-    @Column (nullable = true)
-    private boolean hasSoybean;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasSoybean = false;
 
-    @Column (nullable = true)
-    private boolean hasPeanut;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasPeanut = false;
 
-    @Column (nullable = true)
-    private boolean hasWalnut;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasWalnut = false;
 
-    @Column (nullable = true)
-    private boolean hasPineNut;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasPineNut = false;
 
-    @Column (nullable = true)
-    private boolean hasSulFurousAcid;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasSulFurousAcid = false;
 
-    @Column (nullable = true)
-    private boolean hasPeach;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasPeach = false;
 
-    @Column (nullable = true)
-    private boolean hasTomato;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasTomato = false;
 
-    @Column (nullable = true)
-    private boolean hasEgg;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasEgg = false;
 
-    @Column (nullable = true)
-    private boolean hasMilk;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasMilk = false;
 
-    @Column (nullable = true)
-    private boolean hasSquid;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasSquid = false;
 
-    @Column (nullable = true)
-    private boolean hasMackerel;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasMackerel = false;
 
-    @Column (nullable = true)
-    private boolean hasShrimp;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasShrimp = false;
 
-    @Column (nullable = true)
-    private boolean hasCrab;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasCrab = false;
 
-    @Column (nullable = true)
-    private boolean hasClam;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasClam = false;
 
-    @Column (nullable = true)
-    private boolean hasPork;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasPork = false;
 
-    @Column (nullable = true)
-    private boolean hasBeef;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasBeef = false;
 
-    @Column (nullable = true)
-    private boolean hasChicken;
+    @Column(columnDefinition = "boolean default false")
+    private Boolean hasChicken = false;
 
     @ManyToMany(mappedBy = "menus")
     private List<Restaurant> restaurants = new ArrayList<>();

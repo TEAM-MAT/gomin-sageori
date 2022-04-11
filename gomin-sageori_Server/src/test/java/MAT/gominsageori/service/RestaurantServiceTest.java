@@ -10,6 +10,9 @@ import org.springframework.test.annotation.Commit;
 
 import javax.transaction.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -30,4 +33,11 @@ public class RestaurantServiceTest {
         assertEquals(restaurant.getName(),findresult.getName());
     }
 
+    @Test
+    void findAllRestaurantByLocation() {
+        String location = "신촌";
+        List<Restaurant> find_restaurants = restaurantService.findAllByLocation(location);
+        Restaurant restaurant = find_restaurants.get(2);
+        System.out.println(restaurant.getName());
+    }
 }
