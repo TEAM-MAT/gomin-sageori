@@ -17,14 +17,15 @@ public class ApiController {
     private RestaurantService restaurantService;
     @ResponseBody
     @GetMapping("/recommedation")
-    public ResponseEntity<List> Recommend(@RequestBody RecommandParam param){
-        List<Restaurant> restaurants = restaurantService.recommandRestaurant(param);
-        //추천 알고리즘 호출 및 리턴값 받기
-        if(restaurants.size()>0){
-            return ResponseEntity.status(200).body(restaurants);
+    public ResponseEntity<Restaurant> Recommend(@RequestBody RecommandParam param){
+        try{
+            Restaurant restaurant = restaurantService.recommandRestaurant(param);
+            return ResponseEntity.status(200).body(restaurant);
         }
-        else{
-            return ResponseEntity.status(500).body(restaurants);
+        //추천 알고리즘 호출 및 리턴값 받기
+        catch(err){
+            Restaurant returnres = new Restaurant();
+            return ResponseEntity.status(500).body(returnres);
         }
     }
 
