@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -103,127 +104,130 @@ public class RestaurantService {
     }
 
     public void FilteringFranchise(List<Restaurant> restaurants) {
-        for(Restaurant restaurantIter : restaurants) {
-            if(restaurantIter.getFranchise()==null) continue;
-            if(restaurantIter.getFranchise()) {
-                restaurants.remove(restaurantIter);
+        for(Iterator<Restaurant> restaurantIter = restaurants.iterator(); restaurantIter.hasNext();) {
+            Restaurant cmpRestaurant = restaurantIter.next();
+            if(cmpRestaurant.getFranchise()==null) continue;
+            if(cmpRestaurant.getFranchise()) {
+                restaurantIter.remove();
             }
         }
     }
 
     public void FilteringCharacteristic(List<Restaurant> restaurants, Menu menu) {
-        for(Restaurant restaurantIter : restaurants) {
-            if(menu.isSoup() && !restaurantIter.getBestMenu().isSoup()) {
-                restaurants.remove(restaurantIter);
+        for(Iterator<Restaurant> restaurantIter = restaurants.iterator(); restaurantIter.hasNext();) {
+            Restaurant cmpRestaurant = restaurantIter.next();
+            if(menu.isSoup() && !cmpRestaurant.getBestMenu().isSoup()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isSpicy() && !restaurantIter.getBestMenu().isSpicy()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isSpicy() && !cmpRestaurant.getBestMenu().isSpicy()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isSweet() && !restaurantIter.getBestMenu().isSweet()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isSweet() && !cmpRestaurant.getBestMenu().isSweet()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHot() && !restaurantIter.getBestMenu().isHot()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHot() && !cmpRestaurant.getBestMenu().isHot()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isMeat() && !restaurantIter.getBestMenu().isMeat()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isMeat() && !cmpRestaurant.getBestMenu().isMeat()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isNoodle() && !restaurantIter.getBestMenu().isNoodle()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isNoodle() && !cmpRestaurant.getBestMenu().isNoodle()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isRice() && !restaurantIter.getBestMenu().isRice()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isRice() && !cmpRestaurant.getBestMenu().isRice()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isBread() && !restaurantIter.getBestMenu().isBread()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isBread() && !cmpRestaurant.getBestMenu().isBread()) {
+                restaurantIter.remove();
                 continue;
             }
         }
     }
 
     public void FilteringAllergy(List<Restaurant> restaurants, Menu menu) {
-        for(Restaurant restaurantIter : restaurants) {
-            if(menu.isHasBuckwheat() && restaurantIter.getBestMenu().isHasBuckwheat()) {
-                restaurants.remove(restaurantIter);
+        for(Iterator<Restaurant> restaurantIter = restaurants.iterator(); restaurantIter.hasNext();) {
+            Restaurant cmpRestaurant = restaurantIter.next();
+            if(menu.isHasBuckwheat() && cmpRestaurant.getBestMenu().isHasBuckwheat()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasWheat() && restaurantIter.getBestMenu().isHasWheat()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasWheat() && cmpRestaurant.getBestMenu().isHasWheat()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasSoybean() && restaurantIter.getBestMenu().isHasSoybean()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasSoybean() && cmpRestaurant.getBestMenu().isHasSoybean()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasPeanut() && restaurantIter.getBestMenu().isHasPeanut()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasPeanut() && cmpRestaurant.getBestMenu().isHasPeanut()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasWalnut() && restaurantIter.getBestMenu().isHasWalnut()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasWalnut() && cmpRestaurant.getBestMenu().isHasWalnut()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasPineNut() && restaurantIter.getBestMenu().isHasPineNut()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasPineNut() && cmpRestaurant.getBestMenu().isHasPineNut()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasSulFurousAcid() && restaurantIter.getBestMenu().isHasSulFurousAcid()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasSulFurousAcid() && cmpRestaurant.getBestMenu().isHasSulFurousAcid()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasPeach() && restaurantIter.getBestMenu().isHasPeach()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasPeach() && cmpRestaurant.getBestMenu().isHasPeach()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasTomato() && restaurantIter.getBestMenu().isHasTomato()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasTomato() && cmpRestaurant.getBestMenu().isHasTomato()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasEgg() && restaurantIter.getBestMenu().isHasEgg()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasEgg() && cmpRestaurant.getBestMenu().isHasEgg()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasMilk() && restaurantIter.getBestMenu().isHasMilk()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasMilk() && cmpRestaurant.getBestMenu().isHasMilk()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasSquid() && restaurantIter.getBestMenu().isHasSquid()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasSquid() && cmpRestaurant.getBestMenu().isHasSquid()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasMackerel() && restaurantIter.getBestMenu().isHasMackerel()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasMackerel() && cmpRestaurant.getBestMenu().isHasMackerel()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasShrimp() && restaurantIter.getBestMenu().isHasShrimp()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasShrimp() && cmpRestaurant.getBestMenu().isHasShrimp()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasCrab() && restaurantIter.getBestMenu().isHasCrab()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasCrab() && cmpRestaurant.getBestMenu().isHasCrab()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasClam() && restaurantIter.getBestMenu().isHasClam()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasClam() && cmpRestaurant.getBestMenu().isHasClam()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasPork() && restaurantIter.getBestMenu().isHasPork()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasPork() && cmpRestaurant.getBestMenu().isHasPork()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasBeef() && restaurantIter.getBestMenu().isHasBeef()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasBeef() && cmpRestaurant.getBestMenu().isHasBeef()) {
+                restaurantIter.remove();
                 continue;
             }
-            if(menu.isHasChicken() && restaurantIter.getBestMenu().isHasChicken()) {
-                restaurants.remove(restaurantIter);
+            if(menu.isHasChicken() && cmpRestaurant.getBestMenu().isHasChicken()) {
+                restaurantIter.remove();
                 continue;
             }
         }

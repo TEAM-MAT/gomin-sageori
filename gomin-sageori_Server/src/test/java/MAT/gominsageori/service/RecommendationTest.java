@@ -40,13 +40,10 @@ public class RecommendationTest {
         recommandParam.setFranchise(true);
 
         List<String> menuCharacters = new ArrayList<>();
-        menuCharacters.add("soup");
-        menuCharacters.add("spicy");
-        menuCharacters.add("hot");
+        menuCharacters.add("bread");
         recommandParam.setCharacteristic(menuCharacters);
 
         List<String> menuAllergy = new ArrayList<>();
-        menuAllergy.add("오징어");
         recommandParam.setAllergic(menuAllergy);
 
         List<Restaurant> findRestaurants = restaurantService.recommandRestaurant(recommandParam);
