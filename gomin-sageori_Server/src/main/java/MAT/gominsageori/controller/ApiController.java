@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -17,15 +18,25 @@ public class ApiController {
     private RestaurantService restaurantService;
     @ResponseBody
     @GetMapping("/recommedation")
-    public ResponseEntity<Restaurant> Recommend(@RequestBody RecommandParam param){
+    public ResponseEntity<HashMap> Recommend(@RequestBody RecommandParam param){
         try{
-            Restaurant restaurant = restaurantService.recommandRestaurant(param);
-            return ResponseEntity.status(200).body(restaurant);
+            List<Restaurant> restaurant = restaurantService.recommandRestaurant(param);
+            HashMap<String , String> payload = new HashMap<String , String>();
+            for( int i = 0 ; i<restaurant.size() ; i++){//restaurant정보 hashmap으로 변환.
+                String index = Integer.toString(i);
+                Restaurant tosend_restaurant = restaurant.get(i);
+                payload.put(index + "id" , Long.toString(tosend_restaurant.getId()));
+                payload.put(index + "name", tosend_restaurant.getName());
+                payload.put(index + "address" , tosend_restaurant.getAddress().getfulladdress());
+            }
+            return ResponseEntity.status(200).body(payload);
         }
         //추천 알고리즘 호출 및 리턴값 받기
-        catch(err){
-            Restaurant returnres = new Restaurant();
-            return ResponseEntity.status(500).body(returnres);
+        catch(Exception err){
+            HashMap<String,String> payload = new HashMap<>();
+            payload.put("msg", "no result");
+            System.out.println(err.getMessage());
+            return ResponseEntity.status(500).body(payload);
         }
     }
 
