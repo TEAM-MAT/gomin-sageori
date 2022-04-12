@@ -86,4 +86,12 @@ public class Restaurant {
     public Menu getBestMenu() {
         return bestMenu;
     }
+
+    public void setBestMenu(Menu bestMenu) {
+        this.bestMenu = bestMenu;
+    }
+
+    public void setMenus(List<Menu> menus) {
+        this.menus = menus;
+    }
 }

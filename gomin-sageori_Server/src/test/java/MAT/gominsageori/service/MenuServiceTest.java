@@ -21,9 +21,12 @@ public class MenuServiceTest {
     @Autowired MenuRepository menuRepository;
 
     @Test
+    @Commit
     void 메뉴추가() {
         Menu menu = new Menu();
-        menu.setName("닭가슴살");
+        menu.setName("감자전");
+        menu.setSweet(true);
+        menu.setHasEgg(true);
 
         menuService.addMenu(menu);
 
