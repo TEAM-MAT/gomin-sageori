@@ -3,15 +3,12 @@ package MAT.gominsageori.service;
 import MAT.gominsageori.domain.Menu;
 import MAT.gominsageori.domain.RecommandParam;
 import MAT.gominsageori.domain.Restaurant;
-import MAT.gominsageori.repository.MenuRepository;
 import MAT.gominsageori.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
@@ -64,6 +61,10 @@ public class RestaurantService {
             FilteringFranchise(findRestaurant);
         FilteringCharacteristic(findRestaurant,menu); // 대표 메뉴의 특징을 바탕으로 필터링
         FilteringAllergy(findRestaurant,menu); // 알러지 정보를 바탕으로 필터링*/
+        if(findRestaurant.isEmpty()) {
+            throw new NoSuchElementException("반환할 리스트가 없습니다.");
+        }
+        Collections.shuffle(findRestaurant);
         return findRestaurant;
     }
 
