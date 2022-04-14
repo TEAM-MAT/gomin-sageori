@@ -11,7 +11,7 @@ public class RecommandParam {
     private List<String> characteristic;
     private String location;
     private Boolean franchise;
-    private String atmosphere; //분위기
+    //private String atmosphere; //분위기
     private List<String> allergic;
 
     public List<String> getCharacteristic() {
@@ -38,13 +38,13 @@ public class RecommandParam {
         this.franchise = franchise;
     }
 
-    public String getAtmosphere() {
+    /*public String getAtmosphere() {
         return atmosphere;
-    }
+    }*/
 
-    public void setAtmosphere(String atmosphere) {
+   /* public void setAtmosphere(String atmosphere) {
         this.atmosphere = atmosphere;
-    }
+    }*/
 
     public List<String> getAllergic() {
         return allergic;
