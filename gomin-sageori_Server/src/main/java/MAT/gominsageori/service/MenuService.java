@@ -1,6 +1,7 @@
 package MAT.gominsageori.service;
 
 import MAT.gominsageori.domain.Menu;
+import MAT.gominsageori.domain.RecommandParam;
 import MAT.gominsageori.repository.MenuRepository;
 
 import java.util.Optional;
@@ -47,4 +48,6 @@ public class MenuService {
             menuRepository.delete(menu);
         }
     }
+
+
 }
