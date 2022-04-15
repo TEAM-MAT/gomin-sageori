@@ -10,7 +10,7 @@ import java.util.List;
 public class RecommandParam {
     private List<String> characteristic;
     private String location;
-    private Boolean franchise;
+    private Boolean franchise = false;
     //private String atmosphere; //분위기
     private List<String> allergic;
 
