@@ -5,17 +5,19 @@ import MAT.gominsageori.domain.RecommandParam;
 import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.service.RestaurantService;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api")
 public class ApiController {
-    private RestaurantService restaurantService;
+    @Autowired private RestaurantService restaurantService;
     @ResponseBody
     @GetMapping("/recommendation")
     public ResponseEntity<HashMap> Recommend(@RequestBody RecommandParam param){
