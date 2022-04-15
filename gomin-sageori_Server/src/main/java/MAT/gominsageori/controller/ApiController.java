@@ -17,7 +17,13 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("/api")
 public class ApiController {
-    @Autowired private RestaurantService restaurantService;
+    private RestaurantService restaurantService;
+
+    @Autowired
+    public ApiController(RestaurantService restaurantService) {
+        this.restaurantService = restaurantService;
+    }
+
     @ResponseBody
     @GetMapping("/recommendation")
     public ResponseEntity<HashMap> Recommend(@RequestBody RecommandParam param){
