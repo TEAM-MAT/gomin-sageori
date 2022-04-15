@@ -5,19 +5,27 @@ import MAT.gominsageori.domain.RecommandParam;
 import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.service.RestaurantService;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api")
 public class ApiController {
     private RestaurantService restaurantService;
+
+    @Autowired
+    public ApiController(RestaurantService restaurantService) {
+        this.restaurantService = restaurantService;
+    }
+
     @ResponseBody
-    @GetMapping("/recommedation")
+    @GetMapping("/recommendation")
     public ResponseEntity<HashMap> Recommend(@RequestBody RecommandParam param){
         try{
             List<Restaurant> restaurant = restaurantService.recommandRestaurant(param);
@@ -36,7 +44,7 @@ public class ApiController {
             HashMap<String,String> payload = new HashMap<>();
             payload.put("msg", "no result");
             System.out.println(err.getMessage());
-            return ResponseEntity.status(500).body(payload);
+            return ResponseEntity.status(404).body(payload);
         }
     }
 

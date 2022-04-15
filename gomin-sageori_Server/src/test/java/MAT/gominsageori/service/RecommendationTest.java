@@ -40,7 +40,7 @@ public class RecommendationTest {
         recommandParam.setFranchise(true);
 
         List<String> menuCharacters = new ArrayList<>();
-        menuCharacters.add("rice");
+        menuCharacters.add("hot");
         recommandParam.setCharacteristic(menuCharacters);
 
         List<String> menuAllergy = new ArrayList<>();
