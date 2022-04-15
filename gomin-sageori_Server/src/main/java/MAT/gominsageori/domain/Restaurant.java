@@ -87,6 +87,10 @@ public class Restaurant {
         return bestMenu;
     }
 
+    public void setFranchise(Boolean franchise) {
+        Franchise = franchise;
+    }
+
     public void setBestMenu(Menu bestMenu) {
         this.bestMenu = bestMenu;
     }
