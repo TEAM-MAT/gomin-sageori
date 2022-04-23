@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
+import { jsx, css } from '@emotion/react'
 
 import {containerColStyle} from "../../styles/layout/Container";
 
