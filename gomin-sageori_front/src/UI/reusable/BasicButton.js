@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css } from '@emotion/react'
-import { useState, useEffect } from 'react';
+import { css } from '@emotion/react'
+import '../../styles/base/font.css'
 
 function BasicButton(props) {
-    
-    const [Click, setClick] = useState();
+    const { icon, content, isSelected, handleClick, elementIndex } = props;
 
     const buttonStyle = css`
       width: 80px;
@@ -26,7 +25,7 @@ function BasicButton(props) {
       background-color: #FFE9D3;
       border-radius: 50px;
       font-size: 10px;
-      color: #F58634;
+      color: #F7964F;
       border: solid 0.7px #F58634;
       
       display: flex;
@@ -35,31 +34,15 @@ function BasicButton(props) {
       justify-content: center;
     `
 
-    useEffect(() => {
-      console.log('yes');
-    }, []);
-
-    // const buttonStyle = css`
-    //   width: 80px;
-    //   height: 25px;
-    //   background-color: #FFE9D3;
-    //   border-radius: 50px;
-    //   font-size: 10px;
-      
-    //   display: flex;
-    //   flex-direction: column;
-    //   align-items: center;
-    //   justify-content: center;
-    // `
 
     return (
       <div className="BasicButton">
-        <div css={Click === false ? buttonStyle : clickedButtonStyle}
-             onClick={()=>{
-              setClick(!Click)
-             }}>
+        <li
+          onClick={() => handleClick(elementIndex)}
+          css={isSelected ? clickedButtonStyle : buttonStyle}
+        >
           {props.content}
-        </div>
+        </li>
       </div>
     );
   }
