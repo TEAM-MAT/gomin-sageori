@@ -1,0 +1,14 @@
+@font-face {
+    font-family: "tway_air", sans-serif;
+    src: local("../../fonts/tway_air.ttf");
+}
+
+@font-face {
+    font-family: "cafe24surround_air", sans-serif;
+    src: local("../../fonts/Cafe24SsurroundAir.ttf");
+}
+
+@font-face {
+    font-family: "pretendard", sans-serif;
+    src: local("../../fonts/Pretendard-Medium.otf");
+}

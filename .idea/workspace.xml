@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="517bf373-ca46-4d34-801b-2d09ab53e483" name="Changes" comment="토글 버튼 제작 완료">
+    <list default="true" id="517bf373-ca46-4d34-801b-2d09ab53e483" name="Changes" comment="메인 페이지 UI 제작">
+      <change afterPath="$PROJECT_DIR$/gomin-sageori_front/src/styles/base/font.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_front/src/UI/main/Intro.js" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_front/src/UI/main/Intro.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_front/src/UI/reusable/BasicButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_front/src/UI/reusable/BasicButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_front/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_front/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_front/src/pages/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_front/src/pages/Main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_front/src/styles/base/global-styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_front/src/styles/base/global-styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_front/src/styles/layout/Container.js" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_front/src/styles/layout/Container.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +20,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -40,6 +48,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -53,6 +62,9 @@
       <updated>1647703758702</updated>
       <workItem from="1647703762001" duration="11000" />
       <workItem from="1649066475186" duration="4412000" />
+      <workItem from="1649143854167" duration="711000" />
+      <workItem from="1649160453060" duration="4468000" />
+      <workItem from="1650601877927" duration="10720000" />
     </task>
     <task id="LOCAL-00001" summary="토글 버튼 제작 완료">
       <created>1649070339689</created>
@@ -61,7 +73,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649070339689</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="메인 페이지 UI 제작">
+      <created>1649143928599</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1649143928599</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -97,6 +116,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="토글 버튼 제작 완료" />
-    <option name="LAST_COMMIT_MESSAGE" value="토글 버튼 제작 완료" />
+    <MESSAGE value="메인 페이지 UI 제작" />
+    <option name="LAST_COMMIT_MESSAGE" value="메인 페이지 UI 제작" />
   </component>
 </project>

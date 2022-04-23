@@ -1,9 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import { jsx, css } from '@emotion/react'
 
-export const Container = css`
-display: flex;
-flex-direction: column;
-align-items: center;
-min-height: 100vh;
+const containerColStyle = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
+
+const containerRowStyle = css`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
+
+export {containerColStyle, containerRowStyle};

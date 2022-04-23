@@ -1,11 +1,11 @@
-import styled,{createGlobalStyle, css, keyframes } from 'styled-components';
-import { normalize } from 'styled-normalize'
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 
-export const GlobalStyle = createGlobalStyle`
-  ${normalize}
+const reset = css`
 
-  html {
-  font-family: sans-serif; /* 1 */
+  
+  
+html{
   -ms-text-size-adjust: 100%; /* 2 */
   -webkit-text-size-adjust: 100%; /* 2 */
 }
@@ -72,8 +72,19 @@ dfn {
 }
 
 h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
+  font-size: 1.8em;
+  margin: 0;
+}
+
+h2{
+  font-size: 1.2em;
+  margin: 0;  
+}
+
+p{
+  margin: 0;
+  font-size: 0.9em;
+  font-weight: 400;
 }
 
 mark {
@@ -238,4 +249,6 @@ td,
 th {
   padding: 0;
 }
-`
+`;
+
+export default reset;
