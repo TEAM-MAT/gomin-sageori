@@ -4,7 +4,6 @@ import { css } from '@emotion/react'
 import {containerColStyle, containerRowStyle} from "../styles/layout/Container";
 import BasicButton from "../UI/reusable/BasicButton";
 import ToggleButton from "../UI/reusable/ToggleButton";
-import Intro from "../UI/main/Intro";
 import {useState} from "react";
 
 function Main() {
@@ -55,3 +54,4 @@ function Main() {
   
   export default Main;
   
+
