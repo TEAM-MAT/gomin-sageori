@@ -2,9 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="517bf373-ca46-4d34-801b-2d09ab53e483" name="Changes" comment="메인 페이지 버튼 구현">
+      <change afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/controller/ApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/domain/Address.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/domain/RecommandParam.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/repository/AddressRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/repository/JpaAddressRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/repository/JpaMenuRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/repository/MenuRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/service/MenuService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/test/java/MAT/gominsageori/service/MenuServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/test/java/MAT/gominsageori/service/RecommendationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gomin-sageori_front/src/UI/main/Intro.js" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_front/src/UI/main/Intro.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gomin-sageori_front/src/pages/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_front/src/pages/Main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_Server/src/main/Resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/Resources/application.properties.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/SpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/SpringConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/domain/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/domain/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/domain/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/domain/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/domain/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/domain/Restaurant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/repository/JpaMemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/repository/JpaMemberRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/repository/JpaRestaurantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/repository/JpaRestaurantRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/repository/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/repository/MemberRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/repository/RestaurantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/repository/RestaurantRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/service/RestaurantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/main/java/MAT/gominsageori/service/RestaurantService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_Server/src/test/java/MAT/gominsageori/service/MemberServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/test/java/MAT/gominsageori/service/MemberServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_Server/src/test/java/MAT/gominsageori/service/RestaurantServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_Server/src/test/java/MAT/gominsageori/service/RestaurantServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +82,7 @@
       <workItem from="1649066475186" duration="4412000" />
       <workItem from="1649143854167" duration="711000" />
       <workItem from="1649160453060" duration="4468000" />
-      <workItem from="1650601877927" duration="11664000" />
+      <workItem from="1650601877927" duration="12104000" />
     </task>
     <task id="LOCAL-00001" summary="토글 버튼 제작 완료">
       <created>1649070339689</created>

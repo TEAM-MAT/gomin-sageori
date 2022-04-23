@@ -1,5 +1,6 @@
 package MAT.gominsageori.repository;
 
+import MAT.gominsageori.domain.Address;
 import MAT.gominsageori.domain.Member;
 import MAT.gominsageori.domain.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,4 +15,6 @@ public interface RestaurantRepository {
     Optional<Restaurant> findById(Long id);
     Optional<Restaurant> findByName(String name);
     List<Restaurant> findAll();
+    Optional<Restaurant> findRestaurantByAdd(Address address);
+    List<Restaurant> findRestaurantByLocation(String location);
 }
