@@ -1,13 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import Intro from "../UI/main/Intro";
-import Header from "../UI/reusable/Header";
+import Header from "../UI/main/Header";
 import {
  containerColStyle,
  containerRowStyle,
 } from "../styles/layout/Container";
 import BasicButton from "../UI/reusable/BasicButton";
 import ToggleButton from "../UI/reusable/ToggleButton";
+import ConfirmButton from "../UI/reusable/ConfirmButton";
 import { useState } from "react";
 
 function Main() {
@@ -31,6 +32,7 @@ function Main() {
   width: 90vw;
   justify-content: space-between;
  `;
+
  return (
   <div>
    <Header></Header>
@@ -53,6 +55,7 @@ function Main() {
        );
       })}
      </div>
+     <ConfirmButton />
     </div>
    </div>
   </div>
