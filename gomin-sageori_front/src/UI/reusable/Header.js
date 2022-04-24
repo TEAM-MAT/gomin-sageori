@@ -25,7 +25,7 @@ function Header() {
   justify-content: center;
 
   cursor: default;
-  text-weight: bold;
+  font-weight: bold;
  `;
 
  return (
