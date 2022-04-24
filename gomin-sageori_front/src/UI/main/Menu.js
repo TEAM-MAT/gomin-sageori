@@ -51,7 +51,7 @@ function Header() {
   top: 16.5px;
 
   background-color: white;
-  box-shadow: #f7964f80 3px 5px 10px 5px;
+  box-shadow: #f7964f80 0px 0px 10px 5px;
   border-radius: 25px;
 
   margin: 0 0 0 13px;
