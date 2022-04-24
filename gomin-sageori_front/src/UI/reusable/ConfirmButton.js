@@ -16,7 +16,7 @@ function ConfirmButton(props) {
   right: 0;
   margin: 1em 5vw;
 
-  background-color: #34a3f5;
+  background-color: #03a9f4;
   border-radius: 5px;
   font-size: 15.2px;
   border: solid 0.7px transparent;
@@ -29,7 +29,8 @@ function ConfirmButton(props) {
   cursor: pointer;
 
   &:hover {
-   border: solid 0.7px #3443f5;
+   background-color: #0277bd;
+   border: solid 0.7px #01579b;
   }
  `;
 
@@ -44,8 +45,8 @@ function ConfirmButton(props) {
  return (
   <div css={confirmWrapStyle}>
    <div css={buttonStyle}>
-    <Arrow />
     {props.content}
+    <Arrow />
    </div>
   </div>
  );

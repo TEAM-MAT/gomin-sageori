@@ -55,7 +55,7 @@ function Main() {
        );
       })}
      </div>
-     <ConfirmButton />
+     <ConfirmButton content={"바로가기"} />
     </div>
    </div>
   </div>
