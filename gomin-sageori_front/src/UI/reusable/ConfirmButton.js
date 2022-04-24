@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css } from "@emotion/react";
+import { css } from "@emotion/react";
 import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { ArrowLongRight } from "@emotion-icons/entypo";
