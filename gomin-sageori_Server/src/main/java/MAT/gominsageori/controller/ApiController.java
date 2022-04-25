@@ -26,7 +26,7 @@ public class ApiController {
 
     @ResponseBody
     @GetMapping("/recommendation")
-    public ResponseEntity<HashMap> Recommend(@RequestBody RecommandParam param){
+    public ResponseEntity<HashMap> Recommend(@ModelAttribute RecommandParam param){
         try{
             List<Restaurant> restaurant = restaurantService.recommandRestaurant(param);
             HashMap<String , String> payload = new HashMap<String , String>();
