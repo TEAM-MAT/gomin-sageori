@@ -3,7 +3,7 @@ import { css } from '@emotion/react'
 import '../../styles/base/font.css'
 
 function BasicButton(props) {
-    const { icon, content, isSelected, handleClick, elementIndex } = props;
+    const { key, isSelected, handleClick, elementIndex, isDisable } = props;
 
     const buttonStyle = css`
       width: 80px;
@@ -17,6 +17,8 @@ function BasicButton(props) {
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      
+      margin: 5px 0;
     `
 
     const clickedButtonStyle = css`
@@ -32,17 +34,28 @@ function BasicButton(props) {
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
+      margin: 5px 0;
     `
 
 
     return (
       <div className="BasicButton">
-        <li
-          onClick={() => handleClick(elementIndex)}
-          css={isSelected ? clickedButtonStyle : buttonStyle}
-        >
-          {props.content}
-        </li>
+        {/*if문 처리 수정*/}
+        {isDisable ?
+            <li
+                css={buttonStyle}
+            >
+                {props.content}
+            </li>
+        :
+            <li
+                onClick={() => handleClick(elementIndex)}
+                css={isSelected ? clickedButtonStyle : buttonStyle}
+            >
+                {props.content}
+            </li>
+          }
       </div>
     );
   }

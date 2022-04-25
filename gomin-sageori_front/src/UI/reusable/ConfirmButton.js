@@ -1,16 +1,24 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css } from "@emotion/react";
+import { css } from "@emotion/react";
 import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { ArrowLongRight } from "@emotion-icons/entypo";
 
-function BasicButton(props) {
+function ConfirmButton(props) {
+ const confirmWrapStyle = css`
+  width: 100%;
+  position: relative;
+ `;
  const buttonStyle = css`
   width: 80px;
   height: 25px;
-  background-color: #34a3f5;
+  position: absolute;
+  right: 0;
+  margin: 1em 5vw;
+
+  background-color: #03a9f4;
   border-radius: 5px;
-  font-size: 10px;
+  font-size: 15.2px;
   border: solid 0.7px transparent;
 
   display: flex;
@@ -21,7 +29,8 @@ function BasicButton(props) {
   cursor: pointer;
 
   &:hover {
-   border: solid 0.7px #3443f5;
+   background-color: #0277bd;
+   border: solid 0.7px #01579b;
   }
  `;
 
@@ -34,13 +43,13 @@ function BasicButton(props) {
  }, []);
 
  return (
-  <div className="ConfirmButton">
+  <div css={confirmWrapStyle}>
    <div css={buttonStyle}>
-    <Arrow />
     {props.content}
+    <Arrow />
    </div>
   </div>
  );
 }
 
-export default BasicButton;
+export default ConfirmButton;

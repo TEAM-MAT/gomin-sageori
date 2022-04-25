@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { jsx, css } from "@emotion/react";
-import styled from "@emotion/styled";
-import { MenuAltLeft } from "@emotion-icons/boxicons-regular";
+import Menu from "./Menu";
 
 function Header() {
  const divStyle = css`
@@ -13,24 +12,21 @@ function Header() {
   background-color: #fff;
  `;
 
- const MenuIcon = styled(MenuAltLeft)`
-  height: 56px;
- `;
-
  const titleStyle = css`
-  margin: 0;
+  margin: 0 0 0 31px;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 
   cursor: default;
-  text-weight: bold;
+  font-weight: bold;
+  font-size: 18px;
  `;
 
  return (
   <div css={divStyle} id="Header">
-   <MenuIcon />
+   <Menu />
    <h1 css={titleStyle}>GO-SA</h1>
   </div>
  );
