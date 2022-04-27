@@ -4,6 +4,9 @@ package MAT.gominsageori.controller;
 import MAT.gominsageori.domain.RecommandParam;
 import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.service.RestaurantService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,39 @@ public class ApiController {
     public ApiController(RestaurantService restaurantService) {
         this.restaurantService = restaurantService;
     }
+    @ApiOperation(
+            value = "식당 추천정보 조회"
+            , notes = "characteristic , location , franchise여부 , 알러지 정보를 받아 추천 식당을 받는다."
+    )
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(
+                            name = "characteristic"
+                            , value = "음식 특징 "
+                            , required = true
+                            , dataType = "string list"
+                            , paramType = "query"
+                            , defaultValue = "None"
+                            , example = "ex)?characteristic=soup,spicy / 가능 값 : [soup,spicy,sweet,hot,meat,noodle,rice,bread]"
+                    )
+                    ,
+                    @ApiImplicitParam(
+                            name = "location"
+                            , value = "식당위치"
+                            , required = true
+                            , dataType = "string , 신촌/서울대입구/숭실대"
+                            , paramType = "query"
+                            , defaultValue = "None"),
+                    @ApiImplicitParam(
+                            name = "franchise"
+                            , value = "프렌차이즈 여부"
+                            , required = true
+                            , dataType = "boolean"
+                            , paramType = "query"
+                            , defaultValue = "None")
+            }
+
+    )
 
     @ResponseBody
     @GetMapping("/recommendation")
