@@ -3,7 +3,7 @@ import { css } from '@emotion/react'
 import '../../styles/base/font.css'
 
 function BasicButton(props) {
-    const { key, isSelected, handleClick, elementIndex, isDisable } = props;
+    const { isSelected, handleClick, elementIndex, handleDisable, isDisable } = props;
 
     const buttonStyle = css`
       width: 80px;
@@ -38,19 +38,40 @@ function BasicButton(props) {
       margin: 5px 0;
     `
 
+    const buttonStyleTest = css`
+      width: 80px;
+      height: 25px;
+      background-color: #FFE9D3;
+      border-radius: 50px;
+      font-size: 10px;
+      color: red;
+      
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      margin: 5px 0;
+    `
 
     return (
       <div className="BasicButton">
         {/*if문 처리 수정*/}
-        {isDisable ?
+        {isDisable && elementIndex !== 0 ?
             <li
+                onClick={() => {
+                    handleDisable(elementIndex);
+                }}
                 css={buttonStyle}
             >
                 {props.content}
             </li>
         :
             <li
-                onClick={() => handleClick(elementIndex)}
+                onClick={() => {
+                    handleClick(elementIndex);
+                    handleDisable(elementIndex);
+                }}
                 css={isSelected ? clickedButtonStyle : buttonStyle}
             >
                 {props.content}

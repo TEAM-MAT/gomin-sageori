@@ -8,13 +8,12 @@ import {
 } from "../styles/layout/Container";
 import BasicButton from "../UI/reusable/BasicButton";
 import ToggleButton from "../UI/reusable/ToggleButton";
-import ConfirmButton from "../UI/reusable/ConfirmButton";
 import {useEffect, useState} from "react";
 
 
 function Main() {
     const preferArr =[ '없음', '국물이 있는', '국물이 없는', '매운', '달달한', '뜨거운', '차가운', '아이스크림', '고기가 있는', '고기가 없는', '술이 있는', '술이 없는', '면이 있는', '밥이 있는', '빵이 있는'];
-    const atmosphereArr =['시끌벅적한', '조용한', '혼밥하기 좋은', '친구와 가기 좋은', '없음'];
+    const atmosphereArr =['없음', '시끌벅적한', '조용한', '혼밥하기 좋은', '친구와 가기 좋은'];
     const allergyArr =['알레르기 없음', '매밀', '밀', '대두', '땅콩', '호두', '잣', '아황산류', '복숭아', '토마토', '난류', '우유', '새우', '고등어', '오징어', '게', '조개류', '돼지고기', '쇠고기', '닭고기'];
     const regionArr = ['숭실대입구', '서울대입구', '신촌'];
 
@@ -24,20 +23,31 @@ function Main() {
     const [isRegionSelect, setIsRegionSelect] = useState(Array(regionArr.length).fill(false));
 
     const [isPreferDisable, setIsPreferDisable] = useState(Array(preferArr.length).fill(false));
+    const [isAtmosphereDisable, setIsAtmosphereDisable] = useState(Array(atmosphereArr.length).fill(false));
+    const [isAllergyDisable, setIsAllergyDisable] = useState(Array(allergyArr.length).fill(false));
 
     const preferHandleClick = (idx) => {
         const newArr = [...isPreferSelect];
-        // 1, 2, 5, 6, 8, 9, 10, 11, 없음(0)
         newArr[idx] = !(newArr[idx]);
-        // index === 0안 경우 처리 마저 해야함!!
-        if (idx === 0) {
-            const newDisableArr = Array(preferArr.length).fill(true);
-            newDisableArr[0] = false;
-            setIsPreferDisable(newDisableArr);
-        }
-
         setIsPreferSelect(newArr);
     };
+
+    const preferHandleDisable = (idx) => {
+        // 1, 2, 5, 6, 8, 9, 10, 11, 없음(0)
+        console.log(isPreferDisable);
+        if (idx === 0 && isPreferDisable[0] === false) {
+            const newDisableArr = Array(preferArr.length).fill(true);
+            setIsPreferDisable(newDisableArr);
+        }
+        else if(idx === 0 && isPreferDisable[0] === true){
+            // 초기화
+            const newArr = Array(preferArr.length).fill(false);
+            setIsPreferSelect(newArr);
+
+            const newDisableArr = Array(preferArr.length).fill(false);
+            setIsPreferDisable(newDisableArr);
+        }
+    }
 
     const atmosphereHandleClick = (idx) => {
         const newArr = [...isAtmosphereSelect];
@@ -45,11 +55,44 @@ function Main() {
         setIsAtmosphereSelect(newArr);
     };
 
+    const atmosphereHandleDisable = (idx) => {
+        // 1, 2, 5, 6, 8, 9, 10, 11, 없음(0)
+        if (idx === 0 && isAtmosphereDisable[0] === false) {
+            const newDisableArr = Array(atmosphereArr.length).fill(true);
+            setIsAtmosphereDisable(newDisableArr);
+
+        }
+        else if (idx === 0 && isAtmosphereDisable[0] === true){
+            // 초기화
+            const newArr = Array(atmosphereArr.length).fill(false);
+            setIsAtmosphereSelect(newArr);
+
+            const newDisableArr = Array(atmosphereArr.length).fill(false);
+            setIsAtmosphereDisable(newDisableArr);
+        }
+    }
+
     const allergyHandleClick = (idx) => {
         const newArr = [...isAllergySelect];
         newArr[idx] = !(newArr[idx]);
         setIsAllergySelect(newArr);
     };
+
+    const allergyHandleDisable = (idx) => {
+        // 1, 2, 5, 6, 8, 9, 10, 11, 없음(0)
+        if (idx === 0 && isAllergyDisable[0] === false) {
+            const newDisableArr = Array(allergyArr.length).fill(true);
+            setIsAllergyDisable(newDisableArr);
+        }
+        else if (idx === 0 && isAllergyDisable[0] === true){
+            // 초기화
+            const newArr = Array(allergyArr.length).fill(false);
+            setIsAllergySelect(newArr);
+
+            const newDisableArr = Array(allergyArr.length).fill(false);
+            setIsAllergyDisable(newDisableArr);
+        }
+    }
 
     const regionHandleClick = (idx) => {
         const newRegionArr = Array(regionArr.length).fill(false);
@@ -104,7 +147,8 @@ function Main() {
                                   handleClick={preferHandleClick}
                                   elementIndex={index}
                                   content={elm}
-                                  isDiable={isPreferDisable[index]}
+                                  handleDisable={preferHandleDisable}
+                                  isDisable={isPreferDisable[index]}
                               />
                           );
                       })}
@@ -121,6 +165,8 @@ function Main() {
                                   handleClick={atmosphereHandleClick}
                                   elementIndex={index}
                                   content={elm}
+                                  handleDisable={atmosphereHandleDisable}
+                                  isDisable={isAtmosphereDisable[index]}
                               />
                           );
                       })}
@@ -137,6 +183,8 @@ function Main() {
                                   handleClick={allergyHandleClick}
                                   elementIndex={index}
                                   content={elm}
+                                  handleDisable={allergyHandleDisable}
+                                  isDisable={isAllergyDisable[index]}
                               />
                           );
                       })}
@@ -159,6 +207,8 @@ function Main() {
                                   handleClick={regionHandleClick}
                                   elementIndex={index}
                                   content={elm}
+                                  handleDisable={null}
+                                  isDisable={nulls}
                               />
                           );
                       })}
