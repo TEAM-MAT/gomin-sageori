@@ -57,10 +57,11 @@ public class RestaurantService {
     public List<Restaurant> recommandRestaurant(RecommandParam recommandParam) {
         Menu menu = alterRecommandParamToMenu(recommandParam);
         List<Restaurant> findRestaurant = findAllByLocation(recommandParam.getLocation());
-        //if(recommandParam.getFranchise()) // RecommandParam 프랜차이즈 값이 true일때 프랜차이즈 식당 필터링
-        //    FilteringFranchise(findRestaurant);
+        if(recommandParam.getFranchise()) { // RecommandParam 프랜차이즈 값이 true일때 프랜차이즈 식당 필터링
+            FilteringFranchise(findRestaurant);
+        }
         FilteringCharacteristic(findRestaurant,menu); // 대표 메뉴의 특징을 바탕으로 필터링
-        FilteringAllergy(findRestaurant,menu); // 알러지 정보를 바탕으로 필터링*/
+        //FilteringAllergy(findRestaurant,menu); // 알러지 정보를 바탕으로 필터링*/
         if(findRestaurant.isEmpty()) {
             throw new NoSuchElementException("반환할 리스트가 없습니다.");
         }
@@ -80,7 +81,7 @@ public class RestaurantService {
             if(str.equals("rice")) { menu.setRice(true); }
             if(str.equals("bread")) { menu.setBread(true); }
         }
-        for(String str : recommandParam.getAllergic()) {
+        /*for(String str : recommandParam.getAllergic()) {
             if(str.equals("매밀")) { menu.setHasBuckwheat(true); }
             if(str.equals("밀")) { menu.setHasWheat(true); }
             if(str.equals("대두")) { menu.setHasSoybean(true); }
@@ -101,6 +102,8 @@ public class RestaurantService {
             if(str.equals("소고기")) { menu.setHasBeef(true); }
             if(str.equals("닭고기")) { menu.setHasChicken(true); }
         }
+
+         */
         return menu;
     }
 
@@ -151,7 +154,7 @@ public class RestaurantService {
             }
         }
     }
-
+    /*
     public void FilteringAllergy(List<Restaurant> restaurants, Menu menu) {
         for(Iterator<Restaurant> restaurantIter = restaurants.iterator(); restaurantIter.hasNext();) {
             Restaurant cmpRestaurant = restaurantIter.next();
@@ -233,5 +236,7 @@ public class RestaurantService {
             }
         }
     }
+
+     */
 
 }
