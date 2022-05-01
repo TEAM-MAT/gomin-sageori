@@ -28,7 +28,7 @@ public class ApiController {
     }
     @ApiOperation(
             value = "식당 추천정보 조회"
-            , notes = "characteristic , location , franchise여부를 받아 추천 식당을 받는다."
+            , notes = "characteristic , location , franchise여부 , 알러지 정보를 받아 추천 식당을 받는다."
     )
     @ApiImplicitParams(
             {

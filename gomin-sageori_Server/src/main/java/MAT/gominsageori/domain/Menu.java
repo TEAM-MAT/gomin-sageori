@@ -39,9 +39,6 @@ public class Menu {
     @Column(columnDefinition = "boolean default false")
     private Boolean isBread = false;
 
-    /*
-    알러지 제외
-
     @Column(columnDefinition = "boolean default false")
     private Boolean hasBuckwheat = false;
 
@@ -98,7 +95,7 @@ public class Menu {
 
     @Column(columnDefinition = "boolean default false")
     private Boolean hasChicken = false;
-    */
+
     @ManyToMany(mappedBy = "menus")
     private List<Restaurant> restaurants = new ArrayList<>();
 
@@ -177,7 +174,7 @@ public class Menu {
     public void setBread(boolean bread) {
         isBread = bread;
     }
-    /*
+
     public boolean isHasBuckwheat() {
         return hasBuckwheat;
     }
@@ -329,6 +326,4 @@ public class Menu {
     public void setHasChicken(boolean hasChicken) {
         this.hasChicken = hasChicken;
     }
-
-     */
 }
