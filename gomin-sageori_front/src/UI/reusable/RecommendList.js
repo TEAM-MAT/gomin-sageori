@@ -6,7 +6,7 @@ function RecommendList(props) {
  const axios = require("axios");
  //식당 추천정보 조회
  axios
-  .get("/api/recommendation", {
+  .get("/api/api/recommendation", {
    params: {
     characteristic: "soup",
     franchise: false,
