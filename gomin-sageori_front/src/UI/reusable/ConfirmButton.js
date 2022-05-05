@@ -18,7 +18,7 @@ function ConfirmButton(props) {
 
   background-color: #03a9f4;
   border-radius: 5px;
-  font-size: 15.2px;
+  font-size: 0.95em;
   border: solid 0.7px transparent;
 
   display: flex;

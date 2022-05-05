@@ -8,6 +8,7 @@ import {
 } from "../styles/layout/Container";
 import BasicButton from "../UI/reusable/BasicButton";
 import ToggleButton from "../UI/reusable/ToggleButton";
+import ConfirmButton from "../UI/reusable/ConfirmButton";
 import { useEffect, useState } from "react";
 
 function Main() {
@@ -267,6 +268,9 @@ function Main() {
        );
       })}
      </div>
+    </div>
+    <div css={containerStyle}>
+     <ConfirmButton content="찾아보기" />
     </div>
    </div>
   </div>
