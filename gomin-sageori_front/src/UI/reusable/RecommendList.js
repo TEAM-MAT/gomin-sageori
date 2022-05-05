@@ -10,7 +10,7 @@ function RecommendList(props) {
    params: {
     characteristic: "soup",
     franchise: false,
-    location: "상도",
+    location: "숭입",
    },
   })
   .then((response) => console.log(response))
