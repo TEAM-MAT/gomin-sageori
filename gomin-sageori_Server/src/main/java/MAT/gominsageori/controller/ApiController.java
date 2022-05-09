@@ -6,6 +6,7 @@ import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.domain.recommendationDTO;
 import MAT.gominsageori.service.RestaurantService;
 import io.swagger.annotations.*;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,8 @@ public class ApiController {
     }
     @ApiOperation(
             value = "식당 추천정보 조회"
-            , notes = "characteristic , location , franchise여부를 받아 추천 식당을 받는다."
+            , notes = "characteristic , location , franchise여부를 받아 추천 식당을 받는다.",
+            response = recommendationDTO.class
     )
     @ApiImplicitParams(
             {
@@ -60,10 +62,14 @@ public class ApiController {
             }
 
     )
-    @ApiResponse(
-            code = 200,
-            response = recommendationDTO.class,
-            message = ""
+    @ApiResponses({
+            @ApiResponse(
+                    code = 200,
+                    response = recommendationDTO.class,
+                    message = ""
+            )
+        }
+
     )
 
     @ResponseBody
