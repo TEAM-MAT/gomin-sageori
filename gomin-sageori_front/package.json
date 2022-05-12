@@ -42,6 +42,9 @@
  "devDependencies": {
   "@emotion/babel-plugin": "^11.7.2",
   "@emotion/styled": "^11.8.1",
-  "emotion-icons": "^3.27.0"
+  "emotion-icons": "^3.27.0",
+  "eslint-config-prettier": "^8.5.0",
+  "eslint-plugin-prettier": "^4.0.0",
+  "prettier": "2.6.2"
  }
 }

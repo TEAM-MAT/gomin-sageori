@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="517bf373-ca46-4d34-801b-2d09ab53e483" name="Changes" comment="메인 구성 완료! (중복 처리 수정 필요)">
+    <list default="true" id="517bf373-ca46-4d34-801b-2d09ab53e483" name="Changes" comment="없음 버튼 처리 완료">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gomin-sageori_front/src/UI/reusable/BasicButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_front/src/UI/reusable/BasicButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gomin-sageori_front/src/UI/reusable/ConfirmButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_front/src/UI/reusable/ConfirmButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gomin-sageori_front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_front/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gomin-sageori_front/src/pages/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/gomin-sageori_front/src/pages/Main.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,7 +62,10 @@
       <workItem from="1650601877927" duration="14383000" />
       <workItem from="1650786085710" duration="2257000" />
       <workItem from="1650790008700" duration="39000" />
-      <workItem from="1650790070541" duration="8496000" />
+      <workItem from="1650790070541" duration="9613000" />
+      <workItem from="1650877332491" duration="9097000" />
+      <workItem from="1651154339243" duration="1796000" />
+      <workItem from="1651217585757" duration="2322000" />
     </task>
     <task id="LOCAL-00001" summary="토글 버튼 제작 완료">
       <created>1649070339689</created>
@@ -100,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650802518329</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="없음 버튼 처리 완료">
+      <created>1651045694079</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1651045694079</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,6 +149,7 @@
     <MESSAGE value="메인 페이지 버튼 구현" />
     <MESSAGE value="충돌 해결" />
     <MESSAGE value="메인 구성 완료! (중복 처리 수정 필요)" />
-    <option name="LAST_COMMIT_MESSAGE" value="메인 구성 완료! (중복 처리 수정 필요)" />
+    <MESSAGE value="없음 버튼 처리 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="없음 버튼 처리 완료" />
   </component>
 </project>
