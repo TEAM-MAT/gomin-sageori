@@ -27,3 +27,6 @@ gomin-sageori_Server/src/main/application.properties
 
 # Tools for Gitpod
 .gitpod.yml
+
+#가상환경
+/gomin/*

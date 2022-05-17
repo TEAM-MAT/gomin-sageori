@@ -8,7 +8,9 @@ import {
 } from "../styles/layout/Container";
 import BasicButton from "../UI/reusable/BasicButton";
 import ToggleButton from "../UI/reusable/ToggleButton";
+import ConfirmButton from "../UI/reusable/ConfirmButton";
 import { useEffect, useState } from "react";
+import RecommendList from "../UI/reusable/RecommendList";
 
 function Main() {
  const preferArr = [
@@ -82,6 +84,12 @@ function Main() {
   Array(allergyArr.length).fill(false)
  );
 
+ const [selectedPrefer, setSelectedPrefer] = useState([]);
+ const [selectedAtmosphere, setSelectedAtmosphere] = useState([]);
+ const [selectedAllergy, setSelectedAllergy] = useState([]);
+ const [selectedFranchise, setSelectedFranchise] = useState(false);
+ const [selectedRegion, setSelectedRegion] = useState("");
+
  const preferHandleClick = (idx) => {
   const newArr = [...isPreferSelect];
   newArr[idx] = !newArr[idx];
@@ -150,6 +158,17 @@ function Main() {
   const newRegionArr = Array(regionArr.length).fill(false);
   newRegionArr[idx] = true;
   setIsRegionSelect(newRegionArr);
+ };
+
+ const confirmHandleClick = () => {
+  let selectedPreferArr = [];
+  for (let [idx, selectedPrefer] of isPreferSelect.entries()) {
+   if (selectedPrefer) {
+    selectedPreferArr.push(preferArr[idx]);
+   }
+  }
+  setSelectedPrefer(selectedPreferArr);
+  console.log(selectedPrefer);
  };
 
  const h3Style = css`
@@ -267,6 +286,9 @@ function Main() {
        );
       })}
      </div>
+    </div>
+    <div css={containerStyle}>
+     <ConfirmButton content="찾아보기" handleClick={confirmHandleClick} />
     </div>
    </div>
   </div>

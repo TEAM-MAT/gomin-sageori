@@ -13,9 +13,7 @@ function RecommendList(props) {
     location: "숭입",
    },
   })
-  .then((response) => console.log(response))
-  .catch((e) => console.error(e))
-  .then(() => console.log("Load Completed"));
+  .then((response) => console.log(response));
 
  return <div className="RecommendList"></div>;
 }

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { ArrowLongRight } from "@emotion-icons/entypo";
 
-function ConfirmButton(props) {
+function ConfirmButton({ content, handleClick }) {
  const confirmWrapStyle = css`
   width: 100%;
   position: relative;
@@ -18,7 +18,7 @@ function ConfirmButton(props) {
 
   background-color: #03a9f4;
   border-radius: 5px;
-  font-size: 15.2px;
+  font-size: 0.95em;
   border: solid 0.7px transparent;
 
   display: flex;
@@ -38,14 +38,10 @@ function ConfirmButton(props) {
   height: 10px;
  `;
 
- useEffect(() => {
-  console.log("yes");
- }, []);
-
  return (
-  <div css={confirmWrapStyle}>
+  <div css={confirmWrapStyle} onClick={handleClick}>
    <div css={buttonStyle}>
-    {props.content}
+    {content}
     <Arrow />
    </div>
   </div>
