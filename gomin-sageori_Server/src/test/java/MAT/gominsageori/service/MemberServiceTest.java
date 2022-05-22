@@ -21,7 +21,7 @@ public class MemberServiceTest {
     void 회원가입() {
         //given
         Member member1 = new Member();
-        member1.setId("userId1");
+        member1.setPid("userId1");
         member1.setName("userName1");
         member1.setPwd("userPwd1");
         //when

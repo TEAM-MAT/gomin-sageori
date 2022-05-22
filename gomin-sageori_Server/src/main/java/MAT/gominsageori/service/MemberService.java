@@ -17,11 +17,11 @@ public class MemberService {
     public String join(Member member) {
         validateDuplicateMember(member);
         memberRepository.save(member);
-        return member.getId();
+        return member.getPid();
     }
 
     private void validateDuplicateMember(Member member) {
-        memberRepository.findById(member.getId())
+        memberRepository.findById(member.getPid())
                 .ifPresent(m -> {
                     throw new IllegalStateException("이미 존재하는 회원입니다.");
                 });
@@ -30,16 +30,16 @@ public class MemberService {
     public Optional<Member> findOne(String memberId) { return memberRepository.findById(memberId); }
 
     public String update(Member member) {
-        if(memberRepository.findById(member.getId()).isPresent()) {
+        if(memberRepository.findById(member.getPid()).isPresent()) {
             memberRepository.update(member);
-            return member.getId();
+            return member.getPid();
         }
         else
             return null;
     }
 
     public void delete(Member member) {
-        if(memberRepository.findById(member.getId()).isPresent()) {
+        if(memberRepository.findById(member.getPid()).isPresent()) {
             memberRepository.delete(member);
         }
     }
