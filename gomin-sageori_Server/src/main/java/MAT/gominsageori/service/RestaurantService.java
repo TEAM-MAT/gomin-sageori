@@ -1,7 +1,7 @@
 package MAT.gominsageori.service;
 
 import MAT.gominsageori.domain.Menu;
-import MAT.gominsageori.domain.RecommandParam;
+import MAT.gominsageori.transfer.RecommandParam;
 import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;

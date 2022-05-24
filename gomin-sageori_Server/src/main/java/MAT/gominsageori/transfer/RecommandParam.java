@@ -1,4 +1,4 @@
-package MAT.gominsageori.domain;
+package MAT.gominsageori.transfer;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;

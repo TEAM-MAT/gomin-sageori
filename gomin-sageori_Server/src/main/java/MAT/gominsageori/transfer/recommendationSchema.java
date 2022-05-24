@@ -1,4 +1,4 @@
-package MAT.gominsageori.domain;
+package MAT.gominsageori.transfer;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 @Schema(description = "레스토랑 추천 응답DTO. 상호명과 주소는 서로 매칭됨.")
 @Getter
 @Setter
-public class recommendationDTO {
+public class recommendationSchema {
     @Schema(description = "전체 추천목록 사이즈")
     private int size;
 
