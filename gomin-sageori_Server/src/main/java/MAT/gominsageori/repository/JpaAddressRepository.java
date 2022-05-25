@@ -29,7 +29,7 @@ public class JpaAddressRepository implements AddressRepository{
     public Address update(Address address) {
         Address newadd = em.find(Address.class , address.getId());
         newadd.setCity(address.getCity());
-        newadd.setRestaurant(address.getRestaurant());
+        //newadd.setRestaurant(address.getRestaurant());
         newadd.setDistrict(address.getDistrict());
         newadd.setRoad(address.getRoad());
         newadd.setbuildingnum(address.getBuilding_number());
