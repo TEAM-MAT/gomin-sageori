@@ -96,11 +96,11 @@ public class ApiController {
 
     @ResponseBody
     @GetMapping("/restaurant_info/{id}")
-    public ResponseEntity<RestaurantInfoSchema>restaurantInfo(@RequestParam Long id){
-        Optional <Restaurant> findResult = restaurantService.findOnebyId(id);
+    public ResponseEntity<RestaurantInfoSchema>restaurantInfo(@PathVariable Long id){
+        List <Restaurant> findResult = restaurantService.findOnebyId(id);
         RestaurantInfoSchema payload = new RestaurantInfoSchema();
-        if( findResult.isPresent() ){
-            payload.setRIschemaFromRestaurant(findResult.get());
+        if( !findResult.isEmpty()){
+            payload.setRIschemaFromRestaurant(findResult.get(0));
             return ResponseEntity.status(200).body(payload);
         }
         else{

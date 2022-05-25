@@ -25,9 +25,11 @@ public class JpaRestaurantRepository implements RestaurantRepository{
     }
 
     @Override
-    public Optional<Restaurant> findById(Long id) {
-        Restaurant restaurant = em.find(Restaurant.class , id);
-        return Optional.ofNullable(restaurant);
+    public List<Restaurant> findById(Long id) {
+        List<Restaurant> result = em.createQuery("SELECT r from Restaurant r where r.id = :id", Restaurant.class)
+                .setParameter("id", id)
+                .getResultList();
+        return result;
     }
 
     @Override

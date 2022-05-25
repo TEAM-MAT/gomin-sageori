@@ -90,6 +90,19 @@ public class Restaurant {
         return bestMenu;
     }
 
+    public Float getInternal_star(){return internal_star;}
+
+    public Float getExternal_star(){return external_star;}
+
+    public String getBusiness_date(){return business_date;}
+
+    public String getStartTime(){return startTime.toString();}
+
+    public String getFinTime(){return finTime.toString();}
+
+    public String getCall_number() {
+        return call_number;
+    }
 
     public void setFranchise(Boolean franchise) {
         Franchise = franchise;

@@ -47,7 +47,7 @@ public class RestaurantService {
     public List<Restaurant> findAll(){
         return restaurantRepository.findAll();
     }
-    public Optional<Restaurant> findOnebyId(Long restaurantId){
+    public List<Restaurant> findOnebyId(Long restaurantId){
         return restaurantRepository.findById(restaurantId);
     }
     public Optional<Restaurant> findOnebyName(String restaurantName){
