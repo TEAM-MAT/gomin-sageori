@@ -96,9 +96,25 @@ public class Restaurant {
 
     public String getBusiness_date(){return business_date;}
 
-    public String getStartTime(){return startTime.toString();}
+    public String getStartTime(){
+        if(this.startTime != null){
+            return startTime.toString();
+        }
+        else{
+            return "영업 " +
+                    "시작 시간 없음";
+        }
+    }
 
-    public String getFinTime(){return finTime.toString();}
+    public String getFinTime(){
+        if(finTime != null){
+            return finTime.toString();
+        }
+        else{
+            return "영업 종료 시간 없음";
+        }
+
+    }
 
     public String getCall_number() {
         return call_number;
