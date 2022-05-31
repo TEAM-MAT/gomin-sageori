@@ -61,7 +61,7 @@ public class RestaurantService {
             FilteringFranchise(findRestaurant);
         }
         FilteringCharacteristic(findRestaurant,menu); // 대표 메뉴의 특징을 바탕으로 필터링
-        //FilteringAllergy(findRestaurant,menu); // 알러지 정보를 바탕으로 필터링*/
+        //FilteringAllergy(findRestaurant,menu); // 알러지 정보를 바탕으로 필터링
         if(findRestaurant.isEmpty()) {
             throw new NoSuchElementException("반환할 리스트가 없습니다.");
         }
@@ -120,6 +120,10 @@ public class RestaurantService {
     public void FilteringCharacteristic(List<Restaurant> restaurants, Menu menu) {
         for(Iterator<Restaurant> restaurantIter = restaurants.iterator(); restaurantIter.hasNext();) {
             Restaurant cmpRestaurant = restaurantIter.next();
+            if(cmpRestaurant.getBestMenu()==null) {
+                restaurantIter.remove();
+                continue;
+            }
             if(menu.isSoup() && !cmpRestaurant.getBestMenu().isSoup()) {
                 restaurantIter.remove();
                 continue;
