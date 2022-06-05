@@ -36,6 +36,9 @@ public class Restaurant {
     @Column (nullable = true)
     private Time finTime; //영업 종료 시간
 
+    @Column (nullable = true)
+    private String business_date;
+
     @ManyToOne
     @JoinColumn(name = "bestMenu" , nullable = true)
     private Menu bestMenu;
@@ -51,7 +54,7 @@ public class Restaurant {
     @JoinTable(name = "restaurant_menu")
     private List<Menu> menus = new ArrayList<>();
 
-    @OneToOne(cascade = {CascadeType.PERSIST , CascadeType.REMOVE})
+    @OneToOne(cascade = {CascadeType.REFRESH , CascadeType.REMOVE})
     @JoinColumn(name = "RestaurantAdd")
     private Address address;
 

@@ -10,7 +10,6 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long addressnum;
 
-
     @Column
     private String City;
 
@@ -33,7 +32,6 @@ public class Address {
         return this.addressnum;
     }
 
-
     public String getfulladdress(){
         return this.City + this.district + this.road + this.addressnum + this.floor;
     }
@@ -52,7 +50,6 @@ public class Address {
     public String getBuilding_number(){return this.building_number;}
 
     public String getFloor(){return this.floor;}
-
 
     public String setCity(String city){
         this.City = city;
