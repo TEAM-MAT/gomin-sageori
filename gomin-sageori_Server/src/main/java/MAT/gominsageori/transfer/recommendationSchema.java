@@ -1,5 +1,7 @@
 package MAT.gominsageori.transfer;
 
+import MAT.gominsageori.domain.Address;
+import MAT.gominsageori.domain.Restaurant;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,13 +19,13 @@ public class recommendationSchema {
     private ArrayList<String> name = new ArrayList<>();
 
     @Schema(description = "추천 레스토랑 주소 리스트.")
-    private ArrayList<String> address = new ArrayList<>();
+    private ArrayList<Address> address = new ArrayList<>();
 
     public void setSize(int size) {
         this.size = size;
     }
 
-    public void setAddress(ArrayList<String> address) {
+    public void setAddress(ArrayList<Address> address) {
         this.address = address;
     }
 

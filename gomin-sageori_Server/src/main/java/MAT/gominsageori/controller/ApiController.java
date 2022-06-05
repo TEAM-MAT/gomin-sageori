@@ -1,6 +1,7 @@
 package MAT.gominsageori.controller;
 
 
+import MAT.gominsageori.domain.Address;
 import MAT.gominsageori.transfer.RecommandParam;
 import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.transfer.RestaurantInfoSchema;
@@ -75,11 +76,11 @@ public class ApiController {
             List<Restaurant> restaurant = restaurantService.recommandRestaurant(param);
             recommendationSchema payload = new recommendationSchema();
             ArrayList<String> names = new ArrayList<>();
-            ArrayList<String> address = new ArrayList<>();
+            ArrayList<Address> address = new ArrayList<>();
             for( int i = 0 ; i<restaurant.size() ; i++){
                 Restaurant tosend_restaurant = restaurant.get(i);
                 names.add(tosend_restaurant.getName());
-                address.add(tosend_restaurant.getFullAddress());
+                address.add(tosend_restaurant.getAddress());
             }
             payload.setSize(restaurant.size());
             payload.setName(names);
