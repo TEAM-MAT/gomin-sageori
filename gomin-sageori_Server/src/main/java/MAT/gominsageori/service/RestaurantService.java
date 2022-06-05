@@ -47,9 +47,22 @@ public class RestaurantService {
     public List<Restaurant> findAll(){
         return restaurantRepository.findAll();
     }
-    public List<Restaurant> findOnebyId(Long restaurantId){
-        return restaurantRepository.findById(restaurantId);
+
+    public HashMap<String, Object> findOnebyId(Long restaurantId){
+        Restaurant findResult = new Restaurant();
+        try{
+            findResult = restaurantRepository.findById(restaurantId);
+        } catch (Exception ex){
+            String payload = "no Result";
+            HashMap<String, Object> returning = new HashMap<>();
+            returning.put("result", "no Result");
+            return returning;
+        }
+        HashMap<String, Object> payLoad = new HashMap<>();
+        payLoad.put("result", findResult);
+        return payLoad;
     }
+
     public Optional<Restaurant> findOnebyName(String restaurantName){
         return restaurantRepository.findByName(restaurantName);
     }
