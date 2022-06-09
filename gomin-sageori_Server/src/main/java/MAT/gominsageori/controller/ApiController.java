@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,19 +96,18 @@ public class ApiController {
         }
     }
 
+    //식당 정보 API
     @ResponseBody
-    @GetMapping("/restaurant_info/{id}")
-    public ResponseEntity<RestaurantInfoSchema>restaurantInfo(@PathVariable Long id){
-        List <Restaurant> findResult = restaurantService.findOnebyId(id);
+    @GetMapping("/restaurant/{id}")
+    public ResponseEntity<Object> restaurantInfo(@PathVariable Long id){
+        HashMap<String, Object> findResult = restaurantService.findOneById(id);
         RestaurantInfoSchema payload = new RestaurantInfoSchema();
-        if( !findResult.isEmpty()){
-            payload.setRIschemaFromRestaurant(findResult.get(0));
-            return ResponseEntity.status(200).body(payload);
+        if (findResult.get("result") == "no Result") {
+            return ResponseEntity.status(404).body("no Restaurant Like that");
         }
-        else{
-            return ResponseEntity.status(204).body(new RestaurantInfoSchema());
-        }
-
+        Restaurant temp = (Restaurant) findResult.get("result");
+        payload.setRiSchemaFromRestaurant(temp);
+        return ResponseEntity.status(200).body(payload);
     }
 
 }

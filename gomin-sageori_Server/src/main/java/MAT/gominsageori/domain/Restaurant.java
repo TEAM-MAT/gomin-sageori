@@ -58,9 +58,6 @@ public class Restaurant {
     @JoinColumn(name = "RestaurantAdd")
     private Address address;
 
-    @Column (nullable = true)
-    private String business_date;
-
     public Long getId(){
         return id;
     }
