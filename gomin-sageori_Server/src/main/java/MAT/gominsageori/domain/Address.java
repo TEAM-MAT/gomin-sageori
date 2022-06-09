@@ -33,7 +33,7 @@ public class Address {
     }
 
     public String getfulladdress(){
-        return this.City + this.district + this.road + this.addressnum + this.floor;
+        return this.City + this.district + this.road + this.building_number + this.floor;
     }
 
     public String getCity(){
