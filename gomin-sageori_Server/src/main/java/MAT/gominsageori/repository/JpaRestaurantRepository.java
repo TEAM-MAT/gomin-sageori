@@ -26,7 +26,8 @@ public class JpaRestaurantRepository implements RestaurantRepository{
 
     @Override
     public Restaurant findById(Long id) throws Exception{
-        List<Restaurant> resultList = em.createQuery("SELECT r from Restaurant r where r.id = :id", Restaurant.class)
+        List<Restaurant> resultList = em.createQuery("SELECT r FROM " +
+                        "Restaurant r WHERE r.id = :id", Restaurant.class)
                 .setParameter("id", id)
                 .getResultList();
         if (resultList.isEmpty()) {
@@ -37,7 +38,8 @@ public class JpaRestaurantRepository implements RestaurantRepository{
 
     @Override
     public Optional<Restaurant> findByName(String name) {
-        List<Restaurant> result = em.createQuery("select r from Restaurant r where r.name = :name", Restaurant.class)
+        List<Restaurant> result = em.createQuery("SELECT r FROM Restaurant r " +
+                        "WHERE r.name = :name", Restaurant.class)
                 .setParameter("name", name)
                 .getResultList();
         return result.stream().findAny();
