@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Menu } from "@emotion-icons/boxicons-regular";
+import { MenuIcon } from "@emotion-icons/boxicons-regular";
 import { PersonCircle } from "@emotion-icons/bootstrap/";
 import { useState } from "react";
 
