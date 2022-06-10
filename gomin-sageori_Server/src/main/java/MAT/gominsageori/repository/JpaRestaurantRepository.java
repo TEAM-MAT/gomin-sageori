@@ -26,14 +26,13 @@ public class JpaRestaurantRepository implements RestaurantRepository{
 
     @Override
     public Restaurant findById(Long id) throws Exception{
-        List<Restaurant> resultList = em.createQuery("SELECT r FROM " +
-                        "Restaurant r WHERE r.id = :id", Restaurant.class)
-                .setParameter("id", id)
-                .getResultList();
-        if (resultList.isEmpty()) {
+        Restaurant result = em.find(Restaurant.class,id);
+        if (result == null) {
             throw new Exception("no Restaurant result");
         }
-        return resultList.get(0);
+        else {
+            return result;
+        }
     }
 
     @Override
