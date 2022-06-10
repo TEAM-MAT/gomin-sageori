@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface RestaurantRepository {
     Restaurant save(Restaurant restaurant);
-    Optional<Restaurant> findById(Long id);
+    Restaurant findById (Long id) throws Exception;
     Optional<Restaurant> findByName(String name);
     List<Restaurant> findAll();
     Optional<Restaurant> findRestaurantByAdd(Address address);

@@ -1,7 +1,7 @@
 package MAT.gominsageori.service;
 
 import MAT.gominsageori.domain.Menu;
-import MAT.gominsageori.domain.RecommandParam;
+import MAT.gominsageori.transfer.RecommandParam;
 import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +47,21 @@ public class RestaurantService {
     public List<Restaurant> findAll(){
         return restaurantRepository.findAll();
     }
-    public Optional<Restaurant> findOnebyId(Long restaurantId){
-        return restaurantRepository.findById(restaurantId);
+
+    public HashMap<String, Object> findOneById(Long restaurantId){
+        Restaurant findResult;
+        try{
+            findResult = restaurantRepository.findById(restaurantId);
+        } catch (Exception ex){
+            HashMap<String, Object> returning = new HashMap<>();
+            returning.put("result", ex.getMessage());
+            return returning;
+        }
+        HashMap<String, Object> payLoad = new HashMap<>();
+        payLoad.put("result", findResult);
+        return payLoad;
     }
+
     public Optional<Restaurant> findOnebyName(String restaurantName){
         return restaurantRepository.findByName(restaurantName);
     }
@@ -61,7 +73,7 @@ public class RestaurantService {
             FilteringFranchise(findRestaurant);
         }
         FilteringCharacteristic(findRestaurant,menu); // 대표 메뉴의 특징을 바탕으로 필터링
-        //FilteringAllergy(findRestaurant,menu); // 알러지 정보를 바탕으로 필터링*/
+        //FilteringAllergy(findRestaurant,menu); // 알러지 정보를 바탕으로 필터링
         if(findRestaurant.isEmpty()) {
             throw new NoSuchElementException("반환할 리스트가 없습니다.");
         }
@@ -120,6 +132,10 @@ public class RestaurantService {
     public void FilteringCharacteristic(List<Restaurant> restaurants, Menu menu) {
         for(Iterator<Restaurant> restaurantIter = restaurants.iterator(); restaurantIter.hasNext();) {
             Restaurant cmpRestaurant = restaurantIter.next();
+            if(cmpRestaurant.getBestMenu()==null) {
+                restaurantIter.remove();
+                continue;
+            }
             if(menu.isSoup() && !cmpRestaurant.getBestMenu().isSoup()) {
                 restaurantIter.remove();
                 continue;

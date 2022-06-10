@@ -29,7 +29,6 @@ public class JpaAddressRepository implements AddressRepository{
     public Address update(Address address) {
         Address newadd = em.find(Address.class , address.getId());
         newadd.setCity(address.getCity());
-        //newadd.setRestaurant(address.getRestaurant());
         newadd.setDistrict(address.getDistrict());
         newadd.setRoad(address.getRoad());
         newadd.setbuildingnum(address.getBuilding_number());
@@ -38,13 +37,5 @@ public class JpaAddressRepository implements AddressRepository{
         return newadd;
     }
 
-
-    @Override
-    public Optional<Address> findAddByRestaurant(Restaurant restaurant) {
-        List<Address>  add= em.createQuery("select a from Address a where a.restaurant = :restaurant", Address.class)
-                .setParameter("restaurant" , restaurant)
-                .getResultList();
-        return add.stream().findAny();
-    }
 
 }

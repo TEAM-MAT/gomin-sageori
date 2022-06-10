@@ -90,6 +90,36 @@ public class Restaurant {
         return bestMenu;
     }
 
+    public Float getInternal_star(){return internal_star;}
+
+    public Float getExternal_star(){return external_star;}
+
+    public String getBusiness_date(){return business_date;}
+
+    public String getStartTime(){
+        if(this.startTime != null){
+            return startTime.toString();
+        }
+        else{
+            return "영업 " +
+                    "시작 시간 없음";
+        }
+    }
+
+    public String getFinTime(){
+        if(finTime != null){
+            return finTime.toString();
+        }
+        else{
+            return "영업 종료 시간 없음";
+        }
+
+    }
+
+    public String getCall_number() {
+        return call_number;
+    }
+
     public void setFranchise(Boolean franchise) {
         Franchise = franchise;
     }

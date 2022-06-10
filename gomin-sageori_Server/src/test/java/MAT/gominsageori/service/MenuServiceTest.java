@@ -26,7 +26,7 @@ public class MenuServiceTest {
         Menu menu = new Menu();
         menu.setName("감자전");
         menu.setSweet(true);
-        menu.setHasEgg(true);
+        //menu.setHasEgg(true);
 
         menuService.addMenu(menu);
 
