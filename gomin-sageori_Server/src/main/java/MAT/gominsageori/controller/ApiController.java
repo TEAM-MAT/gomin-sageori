@@ -102,12 +102,14 @@ public class ApiController {
     public ResponseEntity<Object> restaurantInfo(@PathVariable Long id){
         HashMap<String, Object> findResult = restaurantService.findOneById(id);
         RestaurantInfoSchema payload = new RestaurantInfoSchema();
-        if (findResult.get("result") == "no Result") {
+        if (findResult.get("result").getClass() == String.class) {
             return ResponseEntity.status(404).body("no Restaurant Like that");
         }
-        Restaurant temp = (Restaurant) findResult.get("result");
-        payload.setRiSchemaFromRestaurant(temp);
-        return ResponseEntity.status(200).body(payload);
+        else{
+            Restaurant temp = (Restaurant) findResult.get("result");
+            payload.setRiSchemaFromRestaurant(temp);
+            return ResponseEntity.status(200).body(payload);
+        }
     }
 
 }
