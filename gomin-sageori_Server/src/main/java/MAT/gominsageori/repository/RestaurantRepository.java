@@ -17,4 +17,5 @@ public interface RestaurantRepository {
     List<Restaurant> findAll();
     Optional<Restaurant> findRestaurantByAdd(Address address);
     List<Restaurant> findRestaurantByLocation(String location);
+    List<Restaurant> findByLocationAndFranchise(String location, Boolean franchise);
 }

@@ -68,17 +68,15 @@ public class RestaurantService {
 
     public List<Restaurant> recommandRestaurant(RecommandParam recommandParam) {
         Menu menu = alterRecommandParamToMenu(recommandParam);
-        List<Restaurant> findRestaurant = findAllByLocation(recommandParam.getLocation());
-        if(recommandParam.getFranchise()) { // RecommandParam 프랜차이즈 값이 true일때 프랜차이즈 식당 필터링
-            FilteringFranchise(findRestaurant);
-        }
-        FilteringCharacteristic(findRestaurant,menu); // 대표 메뉴의 특징을 바탕으로 필터링
+        List<Restaurant> restaurantCandidates = restaurantRepository
+                .findByLocationAndFranchise(recommandParam.getLocation(), recommandParam.getFranchise());
+        FilteringCharacteristic(restaurantCandidates,menu); // 대표 메뉴의 특징을 바탕으로 필터링
         //FilteringAllergy(findRestaurant,menu); // 알러지 정보를 바탕으로 필터링
-        if(findRestaurant.isEmpty()) {
+        if(restaurantCandidates.isEmpty()) {
             throw new NoSuchElementException("반환할 리스트가 없습니다.");
         }
-        Collections.shuffle(findRestaurant);
-        return findRestaurant;
+        Collections.shuffle(restaurantCandidates);
+        return restaurantCandidates;
     }
 
     public Menu alterRecommandParamToMenu(RecommandParam recommandParam) {
@@ -114,20 +112,10 @@ public class RestaurantService {
             if(str.equals("소고기")) { menu.setHasBeef(true); }
             if(str.equals("닭고기")) { menu.setHasChicken(true); }
         }
-
          */
         return menu;
     }
 
-    public void FilteringFranchise(List<Restaurant> restaurants) {
-        for(Iterator<Restaurant> restaurantIter = restaurants.iterator(); restaurantIter.hasNext();) {
-            Restaurant cmpRestaurant = restaurantIter.next();
-            if(cmpRestaurant.getFranchise()==null) continue;
-            if(cmpRestaurant.getFranchise()) {
-                restaurantIter.remove();
-            }
-        }
-    }
 
     public void FilteringCharacteristic(List<Restaurant> restaurants, Menu menu) {
         for(Iterator<Restaurant> restaurantIter = restaurants.iterator(); restaurantIter.hasNext();) {
