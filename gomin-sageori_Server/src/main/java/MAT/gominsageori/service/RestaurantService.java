@@ -68,10 +68,13 @@ public class RestaurantService {
 
     public List<Restaurant> recommandRestaurant(RecommandParam recommandParam) {
         Menu menu = alterRecommandParamToMenu(recommandParam);
+
         List<Restaurant> restaurantCandidates = restaurantRepository
                 .findByLocationAndFranchise(recommandParam.getLocation(), recommandParam.getFranchise());
+
         FilteringCharacteristic(restaurantCandidates,menu); // 대표 메뉴의 특징을 바탕으로 필터링
         //FilteringAllergy(findRestaurant,menu); // 알러지 정보를 바탕으로 필터링
+
         if(restaurantCandidates.isEmpty()) {
             throw new NoSuchElementException("반환할 리스트가 없습니다.");
         }
