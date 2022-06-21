@@ -79,9 +79,9 @@ public class ApiController {
             ArrayList<String> names = new ArrayList<>();
             ArrayList<Address> address = new ArrayList<>();
             for( int i = 0 ; i<restaurant.size() ; i++){
-                Restaurant tosend_restaurant = restaurant.get(i);
-                names.add(tosend_restaurant.getName());
-                address.add(tosend_restaurant.getAddress());
+                Restaurant toSend_restaurant = restaurant.get(i);
+                names.add(toSend_restaurant.getName());
+                address.add(toSend_restaurant.getAddress());
             }
             payload.setSize(restaurant.size());
             payload.setName(names);

@@ -66,15 +66,15 @@ public class RestaurantService {
         return restaurantRepository.findByName(restaurantName);
     }
 
-    public List<Restaurant> recommandRestaurant(RecommandParam recommandParam) {
-        Menu menu = alterRecommandParamToMenu(recommandParam);
-
-        List<Restaurant> restaurantCandidates = restaurantRepository
-                .findByLocationAndFranchise(recommandParam.getLocation(), recommandParam.getFranchise());
-
-        FilteringCharacteristic(restaurantCandidates,menu); // 대표 메뉴의 특징을 바탕으로 필터링
-        //FilteringAllergy(findRestaurant,menu); // 알러지 정보를 바탕으로 필터링
-
+    public List<Restaurant> recommandRestaurant(RecommandParam recommandParam) throws Exception {
+        Menu menu = alterRecommandParamToMenu(recommandParam); // 추천 API에서 파라미터로 받은 내용을 Menu 객체에 옮겨담음.
+        List<Restaurant> restaurantCandidates;
+        try{
+            restaurantCandidates = restaurantRepository
+                    .recommendationQuery(recommandParam.getLocation(), recommandParam.getFranchise(), menu);
+        } catch (Exception e){
+            throw new NoSuchElementException("반환할 리스트가 없습니다.");
+        }
         if(restaurantCandidates.isEmpty()) {
             throw new NoSuchElementException("반환할 리스트가 없습니다.");
         }
@@ -94,156 +94,7 @@ public class RestaurantService {
             if(str.equals("rice")) { menu.setRice(true); }
             if(str.equals("bread")) { menu.setBread(true); }
         }
-        /*for(String str : recommandParam.getAllergic()) {
-            if(str.equals("매밀")) { menu.setHasBuckwheat(true); }
-            if(str.equals("밀")) { menu.setHasWheat(true); }
-            if(str.equals("대두")) { menu.setHasSoybean(true); }
-            if(str.equals("땅콩")) { menu.setHasPeanut(true); }
-            if(str.equals("호두")) { menu.setHasWalnut(true); }
-            if(str.equals("잣")) { menu.setHasPineNut(true); }
-            if(str.equals("아황산류")) { menu.setHasSulFurousAcid(true); }
-            if(str.equals("복숭아")) { menu.setHasPeach(true); }
-            if(str.equals("토마토")) { menu.setHasTomato(true); }
-            if(str.equals("난류")) { menu.setHasEgg(true); }
-            if(str.equals("우유")) { menu.setHasMilk(true); }
-            if(str.equals("새우")) { menu.setHasShrimp(true); }
-            if(str.equals("고등어")) { menu.setHasMackerel(true); }
-            if(str.equals("오징어")) { menu.setHasSquid(true); }
-            if(str.equals("게")) { menu.setHasCrab(true); }
-            if(str.equals("조개류")) { menu.setHasClam(true); }
-            if(str.equals("돼지고기")) { menu.setHasPork(true); }
-            if(str.equals("소고기")) { menu.setHasBeef(true); }
-            if(str.equals("닭고기")) { menu.setHasChicken(true); }
-        }
-         */
         return menu;
     }
-
-
-    public void FilteringCharacteristic(List<Restaurant> restaurants, Menu menu) {
-        for(Iterator<Restaurant> restaurantIter = restaurants.iterator(); restaurantIter.hasNext();) {
-            Restaurant cmpRestaurant = restaurantIter.next();
-            if(cmpRestaurant.getBestMenu()==null) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isSoup() && !cmpRestaurant.getBestMenu().isSoup()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isSpicy() && !cmpRestaurant.getBestMenu().isSpicy()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isSweet() && !cmpRestaurant.getBestMenu().isSweet()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHot() && !cmpRestaurant.getBestMenu().isHot()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isMeat() && !cmpRestaurant.getBestMenu().isMeat()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isNoodle() && !cmpRestaurant.getBestMenu().isNoodle()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isRice() && !cmpRestaurant.getBestMenu().isRice()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isBread() && !cmpRestaurant.getBestMenu().isBread()) {
-                restaurantIter.remove();
-                continue;
-            }
-        }
-    }
-    /*
-    public void FilteringAllergy(List<Restaurant> restaurants, Menu menu) {
-        for(Iterator<Restaurant> restaurantIter = restaurants.iterator(); restaurantIter.hasNext();) {
-            Restaurant cmpRestaurant = restaurantIter.next();
-            if(menu.isHasBuckwheat() && cmpRestaurant.getBestMenu().isHasBuckwheat()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasWheat() && cmpRestaurant.getBestMenu().isHasWheat()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasSoybean() && cmpRestaurant.getBestMenu().isHasSoybean()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasPeanut() && cmpRestaurant.getBestMenu().isHasPeanut()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasWalnut() && cmpRestaurant.getBestMenu().isHasWalnut()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasPineNut() && cmpRestaurant.getBestMenu().isHasPineNut()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasSulFurousAcid() && cmpRestaurant.getBestMenu().isHasSulFurousAcid()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasPeach() && cmpRestaurant.getBestMenu().isHasPeach()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasTomato() && cmpRestaurant.getBestMenu().isHasTomato()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasEgg() && cmpRestaurant.getBestMenu().isHasEgg()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasMilk() && cmpRestaurant.getBestMenu().isHasMilk()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasSquid() && cmpRestaurant.getBestMenu().isHasSquid()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasMackerel() && cmpRestaurant.getBestMenu().isHasMackerel()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasShrimp() && cmpRestaurant.getBestMenu().isHasShrimp()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasCrab() && cmpRestaurant.getBestMenu().isHasCrab()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasClam() && cmpRestaurant.getBestMenu().isHasClam()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasPork() && cmpRestaurant.getBestMenu().isHasPork()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasBeef() && cmpRestaurant.getBestMenu().isHasBeef()) {
-                restaurantIter.remove();
-                continue;
-            }
-            if(menu.isHasChicken() && cmpRestaurant.getBestMenu().isHasChicken()) {
-                restaurantIter.remove();
-                continue;
-            }
-        }
-    }
-
-     */
 
 }

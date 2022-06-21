@@ -1,6 +1,7 @@
 package MAT.gominsageori.repository;
 
 import MAT.gominsageori.domain.Address;
+import MAT.gominsageori.domain.Menu;
 import MAT.gominsageori.domain.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -72,12 +73,31 @@ public class JpaRestaurantRepository implements RestaurantRepository{
     }
 
     @Override
-    public List<Restaurant> findByLocationAndFranchise(String location, Boolean franchise){
+    public List<Restaurant> recommendationQuery(String location, Boolean franchise, Menu menu){
         return em.createQuery("SELECT r " +
                 "FROM Restaurant r " +
-                "WHERE r.address.location = :location and r.Franchise = :franchise", Restaurant.class)
+                        "WHERE " +
+                        "r.bestMenu IN " +
+                        "( SELECT m.id " +
+                        "FROM Menu m " +
+                        "WHERE m.isBread = :isBread AND " +
+                        "m.isMeat = :isMeat AND " +
+                        "m.isHot = :isHot AND " +
+                        "m.isNoodle = :isNoodle AND " +
+                        "m.isRice = :isRice AND " +
+                        "m.isSpicy = :isSpicy AND " +
+                        "m.isSweet = :isSweet) " +
+                        "AND r.address.location = :location " +
+                        "AND r.Franchise = :franchise", Restaurant.class)
                 .setParameter("location",location)
                 .setParameter("franchise",franchise)
+                .setParameter("isHot", menu.isHot())
+                .setParameter("isBread", menu.isBread())
+                .setParameter("isMeat", menu.isMeat())
+                .setParameter("isNoodle", menu.isNoodle())
+                .setParameter("isRice", menu.isRice())
+                .setParameter("isSpicy", menu.isSpicy())
+                .setParameter("isSweet", menu.isSweet())
                 .getResultList();
     }
 }
