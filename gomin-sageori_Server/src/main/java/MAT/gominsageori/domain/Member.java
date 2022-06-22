@@ -17,7 +17,10 @@ public class Member {
     private String name;
 
     @Column(nullable = false)
-    private String pwd;
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
 
     @ManyToMany
     @JoinColumn( name = "favoriteRestaurant" , nullable = true)
@@ -43,12 +46,16 @@ public class Member {
         this.name = name;
     }
 
+    public String getEmail() {return this.email;}
+
+    public void setEmail(String email) {this.email = email;}
+
     public String getPwd() {
-        return pwd;
+        return password;
     }
 
     public void setPwd(String pwd) {
-        this.pwd = pwd;
+        this.password = pwd;
     }
 
     public List<Restaurant> getFavoriteRestaurant(){
