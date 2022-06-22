@@ -12,4 +12,5 @@ public interface MemberRepository {
     Member update(Member member);
     void delete(Member member);
     List<Restaurant> getFavorites(Member member);
+    Optional<Member> findByEmail(String email);
 }

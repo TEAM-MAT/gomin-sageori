@@ -28,6 +28,17 @@ public class JpaMemberRepository implements MemberRepository {
     }
 
     @Override
+    public Optional<Member> findByEmail(String email) {
+        Optional<Member> member = em.createQuery("SELECT m " +
+                "FROM Member m " +
+                "WHERE m.email = :email",Member.class)
+                .setParameter("email", email)
+                .getResultStream()
+                .findFirst();
+        return member;
+    }
+
+    @Override
     public Member update(Member memberParam) {
         Member member = em.find(Member.class, memberParam.getId());
         member.setName(memberParam.getName());

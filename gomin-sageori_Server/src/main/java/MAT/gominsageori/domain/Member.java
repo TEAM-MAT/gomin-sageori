@@ -22,13 +22,16 @@ public class Member {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String salt;
+
     @ManyToMany
     @JoinColumn( name = "favoriteRestaurant" , nullable = true)
     private List<Restaurant> favoriteRestaurant;
 
     public String getUserId(){ return userId; }
 
-    public void setPid(String userId){ this.userId = userId; }
+    public void setUserId(String userId){ this.userId = userId; }
 
     public int getId() {
         return id;
@@ -57,6 +60,10 @@ public class Member {
     public void setPwd(String pwd) {
         this.password = pwd;
     }
+
+    public String getSalt() { return salt; }
+
+    public void setSalt(String salt) { this.salt = salt; }
 
     public List<Restaurant> getFavoriteRestaurant(){
         return this.favoriteRestaurant;

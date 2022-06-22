@@ -2,7 +2,10 @@ package MAT.gominsageori.service;
 
 import MAT.gominsageori.domain.Member;
 import MAT.gominsageori.repository.MemberRepository;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 import javax.transaction.Transactional;
+import java.util.HashMap;
 import java.util.Optional;
 
 
@@ -27,7 +30,17 @@ public class MemberService {
                 });
     }
 
-    public Optional<Member> findOne(String memberId) { return memberRepository.findByUserId(memberId); }
+    public Optional<Member> findOneByUserId(String userId) {
+        return memberRepository.findByUserId(userId);
+    }
+
+    public Optional<Member> findOneByEmail(String email) {
+        return memberRepository.findByEmail(email);
+    }
+
+    public void save(Member member) {
+        memberRepository.save(member);
+    }
 
     public String update(Member member) {
         if(memberRepository.findByUserId(member.getUserId()).isPresent()) {
@@ -42,5 +55,14 @@ public class MemberService {
         if(memberRepository.findByUserId(member.getUserId()).isPresent()) {
             memberRepository.delete(member);
         }
+    }
+
+    public HashMap<String, String> pwdEncryption(String password) {
+        String salt = BCrypt.gensalt();
+        String encodedPassword = BCrypt.hashpw(password,salt);
+        HashMap <String, String> payload = new HashMap<>();
+        payload.put("salt", salt);
+        payload.put("encodedPW", encodedPassword);
+        return payload;
     }
 }
