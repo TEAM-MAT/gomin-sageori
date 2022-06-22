@@ -2,9 +2,9 @@ package MAT.gominsageori.controller;
 
 
 import MAT.gominsageori.domain.Address;
+import MAT.gominsageori.service.MemberService;
 import MAT.gominsageori.transfer.RecommandParam;
 import MAT.gominsageori.domain.Restaurant;
-import MAT.gominsageori.transfer.RestaurantInfoSchema;
 import MAT.gominsageori.transfer.recommendationSchema;
 import MAT.gominsageori.service.RestaurantService;
 import io.swagger.annotations.*;
@@ -13,17 +13,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
-public class ApiController {
+@RequestMapping("/recommendation")
+public class RecommendationController {
     private RestaurantService restaurantService;
 
     @Autowired
-    public ApiController(RestaurantService restaurantService) {
+    public void RestaurantController(RestaurantService restaurantService) {
+        this.restaurantService = restaurantService;
+    }
+
+    @Autowired
+    public RecommendationController(RestaurantService restaurantService) {
         this.restaurantService = restaurantService;
     }
     @ApiOperation(
@@ -71,7 +74,7 @@ public class ApiController {
     )
 
     @ResponseBody
-    @GetMapping("/recommendation")
+    @GetMapping("/")
     public ResponseEntity<recommendationSchema> Recommend(@ModelAttribute RecommandParam param){
         try{
             List<Restaurant> restaurant = restaurantService.recommandRestaurant(param);
@@ -93,22 +96,6 @@ public class ApiController {
             recommendationSchema payload = new recommendationSchema();
             payload.setSize(0);
             return ResponseEntity.status(204).body(payload);
-        }
-    }
-
-    //식당 정보 API
-    @ResponseBody
-    @GetMapping("/restaurant/{id}")
-    public ResponseEntity<Object> restaurantInfo(@PathVariable Long id){
-        HashMap<String, Object> findResult = restaurantService.findOneById(id);
-        RestaurantInfoSchema payload = new RestaurantInfoSchema();
-        if (findResult.get("result").getClass() == String.class) {
-            return ResponseEntity.status(404).body("no Restaurant Like that");
-        }
-        else{
-            Restaurant temp = (Restaurant) findResult.get("result");
-            payload.setRiSchemaFromRestaurant(temp);
-            return ResponseEntity.status(200).body(payload);
         }
     }
 
