@@ -2,6 +2,7 @@ package MAT.gominsageori.controller;
 
 import MAT.gominsageori.domain.Member;
 import MAT.gominsageori.service.MemberService;
+import MAT.gominsageori.transfer.SignInParam;
 import MAT.gominsageori.transfer.SignUpParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/member")
@@ -22,7 +24,7 @@ public class MemberController {
 
     @ResponseBody
     @PostMapping("/{id}")
-    public ResponseEntity<String> signUp (@PathVariable String id, @ModelAttribute SignUpParam param) {
+    public ResponseEntity<String> signUp(@PathVariable String id, @ModelAttribute SignUpParam param) {
         Member member = new Member();
         if (!memberService.findOneByUserId(id).isEmpty() || !memberService.findOneByEmail(param.getEmail()).isPresent()) { //이미 동일 아이디 or email의 유저가 존재하면
             return ResponseEntity.status(409).body("Member with Id or Email already Exists");
@@ -45,6 +47,27 @@ public class MemberController {
             return ResponseEntity.status(500).body("internal error while handling");
         }
         return ResponseEntity.status(200).body(member.getUserId());
+    }
+
+    @ResponseBody
+    @PostMapping("/signIn")
+    public ResponseEntity<String> signIn(@ModelAttribute SignInParam param){
+        if (param.getUserId() == "" && param.getPassword() == "") {
+            return ResponseEntity.status(400).body("blank in id or password");
+        }
+        Optional<Member> findResult = memberService.findOneByUserId(param.getUserId());
+
+        if(findResult.isEmpty()) {
+            return ResponseEntity.status(403).body("fail");
+        }
+        Member member = findResult.get();
+        String encodedInput = memberService.loginPwdEncryption(param.getPassword(),member.getSalt());
+        if(encodedInput == member.getPwd()) {
+            return ResponseEntity.status(200).body("succeed");
+        }
+        else {
+            return ResponseEntity.status(403).body("fail");
+        }
     }
 
 }

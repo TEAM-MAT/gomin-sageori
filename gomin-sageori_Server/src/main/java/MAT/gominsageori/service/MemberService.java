@@ -65,4 +65,9 @@ public class MemberService {
         payload.put("encodedPW", encodedPassword);
         return payload;
     }
+
+    public String loginPwdEncryption(String password, String salt) {
+        String encodedPassword = BCrypt.hashpw(password,salt);
+        return encodedPassword;
+    }
 }
