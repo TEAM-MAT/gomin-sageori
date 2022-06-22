@@ -2,6 +2,7 @@ package MAT.gominsageori.controller;
 
 
 import MAT.gominsageori.domain.Address;
+import MAT.gominsageori.service.MemberService;
 import MAT.gominsageori.transfer.RecommandParam;
 import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.transfer.recommendationSchema;
@@ -18,6 +19,11 @@ import java.util.List;
 @RequestMapping("/recommendation")
 public class RecommendationController {
     private RestaurantService restaurantService;
+
+    @Autowired
+    public void RestaurantController(RestaurantService restaurantService) {
+        this.restaurantService = restaurantService;
+    }
 
     @Autowired
     public RecommendationController(RestaurantService restaurantService) {
