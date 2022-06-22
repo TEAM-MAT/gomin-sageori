@@ -11,7 +11,7 @@ public class Member {
     private int id;
 
     @Column(nullable = false)
-    private String pid;
+    private String userId;
 
     @Column(nullable = false)
     private String name;
@@ -23,9 +23,9 @@ public class Member {
     @JoinColumn( name = "favoriteRestaurant" , nullable = true)
     private List<Restaurant> favoriteRestaurant;
 
-    public String getPid(){ return pid; }
+    public String getUserId(){ return userId; }
 
-    public void setPid(String pid){ this.pid = pid; }
+    public void setPid(String userId){ this.userId = userId; }
 
     public int getId() {
         return id;
