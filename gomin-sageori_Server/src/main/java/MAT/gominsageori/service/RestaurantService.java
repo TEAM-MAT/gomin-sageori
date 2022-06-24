@@ -76,7 +76,7 @@ public class RestaurantService {
             throw new NoSuchElementException("반환할 리스트가 없습니다.");
         }
         if(restaurantCandidates.isEmpty()) {
-            throw new NoSuchElementException("반환할 리스트가 없습니다.2");
+            throw new NoSuchElementException("반환할 리스트가 없습니다.");
         }
         Collections.shuffle(restaurantCandidates);
         return restaurantCandidates;
