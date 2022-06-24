@@ -61,7 +61,7 @@ function Main() {
   ];
   const regionArr = ["숭실대입구", "서울대입구", "신촌"];
 
-  const [userSelection, userSelect] = useState({
+  const [userSelection, setUserSelection] = useState({
     prefer: "",
     atmosphere: "",
     allergy: "",
@@ -74,9 +74,10 @@ function Main() {
       ...userSelection,
       [key]: value,
     };
-    userSelect(newForm);
-    console.log(userSelection);
+    setUserSelection(newForm);
   };
+
+  const [isAllSelect, setIsAllSelect] = useState(false);
 
   const [isPreferSelect, setIsPreferSelect] = useState(
     Array(preferArr.length).fill(false)
@@ -110,7 +111,6 @@ function Main() {
 
   const preferHandleDisable = (idx) => {
     // 1, 2, 5, 6, 8, 9, 10, 11, 없음(0)
-    console.log(isPreferDisable);
     if (idx === 0 && isPreferDisable[0] === false) {
       const newDisableArr = Array(preferArr.length).fill(true);
       setIsPreferDisable(newDisableArr);
@@ -174,8 +174,6 @@ function Main() {
     setIsRegionSelect(newRegionArr);
     userSelectionChange("region", regionArr[idx]);
   };
-
-  const confirmHandleClick = () => {};
 
   const h3Style = css`
     font-size: 0.95em;
@@ -287,7 +285,7 @@ function Main() {
                   handleClick={regionHandleClick}
                   elementIndex={index}
                   content={elm}
-                  handleDisable={null}
+                  handleDisable={() => {}}
                   isDisable={null}
                 />
               );
@@ -295,7 +293,11 @@ function Main() {
           </div>
         </div>
         <div css={containerStyle}>
-          <ConfirmButton content="찾아보기" handleClick={confirmHandleClick} />
+          <ConfirmButton
+            content="찾아보기"
+            handleClick={() => setIsAllSelect(true)}
+          />
+          {isAllSelect ? <RecommendList data={userSelection} /> : <></>}
         </div>
       </div>
     </div>
