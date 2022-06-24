@@ -17,19 +17,18 @@ public class RestaurantService {
     private final RestaurantRepository restaurantRepository;
 
     @Autowired
-    public RestaurantService(RestaurantRepository restaurantRepository){
+    public RestaurantService(RestaurantRepository restaurantRepository) {
         this.restaurantRepository = restaurantRepository;
     }
     /**
      * 식당등록
      */
-    public Long register(Restaurant restaurant){
+    public Long register(Restaurant restaurant) {
         validateDuplicateRestaurant(restaurant);
         restaurantRepository.save(restaurant);
         return restaurant.getId();
-
     }
-    private void validateDuplicateRestaurant(Restaurant restaurant){
+    private void validateDuplicateRestaurant(Restaurant restaurant) {
         restaurantRepository.findByName(restaurant.getName())
                 .ifPresent(r -> {
                     throw new IllegalStateException("이미 존재하는 식당입니다.");
@@ -48,11 +47,11 @@ public class RestaurantService {
         return restaurantRepository.findAll();
     }
 
-    public HashMap<String, Object> findOneById(Long restaurantId){
+    public HashMap<String, Object> findOneById(Long restaurantId) {
         Restaurant findResult;
-        try{
+        try {
             findResult = restaurantRepository.findById(restaurantId);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             HashMap<String, Object> returning = new HashMap<>();
             returning.put("result", ex.getMessage());
             return returning;
@@ -62,21 +61,22 @@ public class RestaurantService {
         return payLoad;
     }
 
-    public Optional<Restaurant> findOnebyName(String restaurantName){
+    public Optional<Restaurant> findOnebyName(String restaurantName) {
         return restaurantRepository.findByName(restaurantName);
     }
 
     public List<Restaurant> recommandRestaurant(RecommandParam recommandParam) throws Exception {
         Menu menu = alterRecommandParamToMenu(recommandParam); // 추천 API에서 파라미터로 받은 내용을 Menu 객체에 옮겨담음.
         List<Restaurant> restaurantCandidates;
-        try{
+        try {
+            System.out.println(recommandParam.getLocation() + recommandParam.getFranchise() + menu.isMeat() + menu.isHot());
             restaurantCandidates = restaurantRepository
                     .recommendationQuery(recommandParam.getLocation(), recommandParam.getFranchise(), menu);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new NoSuchElementException("반환할 리스트가 없습니다.");
         }
         if(restaurantCandidates.isEmpty()) {
-            throw new NoSuchElementException("반환할 리스트가 없습니다.");
+            throw new NoSuchElementException("반환할 리스트가 없습니다.2");
         }
         Collections.shuffle(restaurantCandidates);
         return restaurantCandidates;
@@ -96,5 +96,4 @@ public class RestaurantService {
         }
         return menu;
     }
-
 }

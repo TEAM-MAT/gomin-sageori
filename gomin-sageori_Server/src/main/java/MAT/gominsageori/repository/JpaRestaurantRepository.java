@@ -78,7 +78,7 @@ public class JpaRestaurantRepository implements RestaurantRepository{
                 "FROM Restaurant r " +
                         "WHERE " +
                         "r.bestMenu IN " +
-                        "( SELECT m.id " +
+                        "(SELECT m.id " +
                         "FROM Menu m " +
                         "WHERE m.isBread = :isBread AND " +
                         "m.isMeat = :isMeat AND " +
@@ -88,7 +88,7 @@ public class JpaRestaurantRepository implements RestaurantRepository{
                         "m.isSpicy = :isSpicy AND " +
                         "m.isSweet = :isSweet) " +
                         "AND r.address.location = :location " +
-                        "AND r.Franchise = :franchise", Restaurant.class)
+                        "AND r.franchise = :franchise", Restaurant.class)
                 .setParameter("location",location)
                 .setParameter("franchise",franchise)
                 .setParameter("isHot", menu.isHot())

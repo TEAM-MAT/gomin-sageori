@@ -8,7 +8,7 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String pid;
@@ -23,20 +23,39 @@ public class Member {
     @JoinColumn( name = "favoriteRestaurant" , nullable = true)
     private List<Restaurant> favoriteRestaurant;
 
-    public String getPid(){ return pid; }
-
-    public void setPid(String pid){ this.pid = pid; }
-
-    public int getId() {
-        return id;
+    public String getPid() {
+        if(this.pid != null) {
+            return pid;
+        }
+        else {
+            throw new IllegalStateException("No pid data");
+        }
     }
 
-    public void setId(int id) {
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+
+    public Long getId() {
+        if(this.id != null) {
+            return id;
+        }
+        else {
+            throw new IllegalStateException("No id data");
+        }
+    }
+
+    public void setId(Long id) {
         this.id = id;
     }
 
     public String getName() {
-        return name;
+        if(this.name != null) {
+            return name;
+        }
+        else {
+            throw new IllegalStateException("No name data");
+        }
     }
 
     public void setName(String name) {
@@ -44,15 +63,25 @@ public class Member {
     }
 
     public String getPwd() {
-        return pwd;
+        if(this.pwd != null) {
+            return pwd;
+        }
+        else {
+            throw new IllegalStateException("No pwd data");
+        }
     }
 
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
 
-    public List<Restaurant> getFavoriteRestaurant(){
-        return this.favoriteRestaurant;
+    public List<Restaurant> getFavoriteRestaurant() {
+        if(this.favoriteRestaurant != null && !this.favoriteRestaurant.isEmpty()) {
+            return this.favoriteRestaurant;
+        }
+        else {
+            throw new IllegalStateException("favoriteRestaurant is empty");
+        }
     }
 
     public void SetFavorites(List<Restaurant> favorites){

@@ -8,11 +8,11 @@ import java.util.List;
 @Table(name = "Menu")
 public class Menu {
     @Id
-    @Column(name = "menu_id")
+    @Column(name = "menuId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false , unique = false)
     private String name;
 
     @Column(columnDefinition = "boolean default false")
@@ -102,11 +102,21 @@ public class Menu {
     private List<Restaurant> restaurants = new ArrayList<>();
 
     public Long getId() {
-        return id;
+        if(this.id != null) {
+            return id;
+        }
+        else {
+            throw new IllegalStateException("No id data");
+        }
     }
 
     public String getName() {
-        return name;
+        if(this.name != null) {
+            return name;
+        }
+        else {
+            throw new IllegalStateException("No name data");
+        }
     }
 
     public void setName(String name) {
@@ -114,7 +124,12 @@ public class Menu {
     }
 
     public boolean isSoup() {
-        return isSoup;
+        if(this.isSoup != null) {
+            return isSoup;
+        }
+        else {
+            return false;
+        }
     }
 
     public void setSoup(boolean soup) {
@@ -122,7 +137,12 @@ public class Menu {
     }
 
     public boolean isSpicy() {
-        return isSpicy;
+        if(this.isSpicy != null) {
+            return isSpicy;
+        }
+        else {
+            return false;
+        }
     }
 
     public void setSpicy(boolean spicy) {
@@ -130,7 +150,12 @@ public class Menu {
     }
 
     public boolean isSweet() {
-        return isSweet;
+        if(this.isSweet != null) {
+            return isSweet;
+        }
+        else {
+            return false;
+        }
     }
 
     public void setSweet(boolean sweet) {
@@ -138,7 +163,12 @@ public class Menu {
     }
 
     public boolean isHot() {
-        return isHot;
+        if(this.isHot != null) {
+            return isHot;
+        }
+        else {
+            return false;
+        }
     }
 
     public void setHot(boolean hot) {
@@ -146,7 +176,12 @@ public class Menu {
     }
 
     public boolean isMeat() {
-        return isMeat;
+        if(this.isMeat != null) {
+            return isMeat;
+        }
+        else {
+            return false;
+        }
     }
 
     public void setMeat(boolean meat) {
@@ -154,7 +189,12 @@ public class Menu {
     }
 
     public boolean isNoodle() {
-        return isNoodle;
+        if(this.isNoodle != null) {
+            return isNoodle;
+        }
+        else {
+            return false;
+        }
     }
 
     public void setNoodle(boolean noodle) {
@@ -162,7 +202,12 @@ public class Menu {
     }
 
     public boolean isRice() {
-        return isRice;
+        if(this.isRice != null) {
+            return isRice;
+        }
+        else {
+            return false;
+        }
     }
 
     public void setRice(boolean rice) {
@@ -170,7 +215,12 @@ public class Menu {
     }
 
     public boolean isBread() {
-        return isBread;
+        if(this.isBread != null) {
+            return isBread;
+        }
+        else {
+            return false;
+        }
     }
 
     public void setBread(boolean bread) {
@@ -328,6 +378,5 @@ public class Menu {
     public void setHasChicken(boolean hasChicken) {
         this.hasChicken = hasChicken;
     }
-
  */
 }

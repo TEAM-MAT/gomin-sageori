@@ -14,10 +14,10 @@ public class RestaurantInfoSchema {
     private String name;
 
     @Schema(description = "식당 외부평점")
-    private Float ex_star;
+    private Float externalStar;
 
     @Schema(description = "식당 내부평점")
-    private Float in_star;
+    private Float internalStar;
 
     @Schema(description = "영업 시작시간")
     private String startTime;
@@ -26,7 +26,7 @@ public class RestaurantInfoSchema {
     private String finTime;
 
     @Schema(description = "영업 요일")
-    private String business_day;
+    private String businessDay;
 
     @Schema(description = "식당 전화번호")
     private String callNumber;
@@ -40,12 +40,12 @@ public class RestaurantInfoSchema {
     public void setRiSchemaFromRestaurant(Restaurant restaurant){
         try{
             this.name = restaurant.getName();
-            this.ex_star = restaurant.getExternal_star();
-            this.in_star = restaurant.getInternal_star();
-            this.business_day = restaurant.getBusiness_date();
+            this.externalStar = restaurant.getExternalStar();
+            this.internalStar = restaurant.getInternalStar();
+            this.businessDay = restaurant.getBusinessDate();
             this.startTime = restaurant.getStartTime();
             this.finTime = restaurant.getFinTime();
-            this.callNumber = restaurant.getCall_number();
+            this.callNumber = restaurant.getCallNumber();
             this.bestMenu = restaurant.getBestMenu().getName();
             this.address = restaurant.getAddress();
         }
