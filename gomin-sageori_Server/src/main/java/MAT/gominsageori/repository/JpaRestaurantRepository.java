@@ -80,12 +80,12 @@ public class JpaRestaurantRepository implements RestaurantRepository{
                         "r.bestMenu IN " +
                         "( SELECT m.id " +
                         "FROM Menu m " +
-                        "WHERE m.isBread = :isBread AND " +
-                        "m.isMeat = :isMeat AND " +
-                        "m.isHot = :isHot AND " +
-                        "m.isNoodle = :isNoodle AND " +
-                        "m.isRice = :isRice AND " +
-                        "m.isSpicy = :isSpicy AND " +
+                        "WHERE (m.isBread = true and :isBread = true) OR " +
+                        "m.isMeat = :isMeat OR " +
+                        "m.isHot = :isHot OR " +
+                        "m.isNoodle = :isNoodle OR " +
+                        "m.isRice = :isRice OR " +
+                        "m.isSpicy = :isSpicy OR " +
                         "m.isSweet = :isSweet) " +
                         "AND r.address.location = :location " +
                         "AND r.Franchise = :franchise", Restaurant.class)
