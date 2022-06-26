@@ -1,23 +1,23 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import "../../styles/base/font.css";
+// import { css } from '@emotion/react';
+import '../../styles/base/font.css';
 
 function RecommendList(props) {
-  const axios = require("axios");
+  const axios = require('axios');
   //식당 추천정보 조회
   var response = axios
-    .get("/api/recommendation", {
+    .get('/recommendation', {
       params: {
-        characteristic: "soup",
+        characteristic: 'soup',
         franchise: false,
-        location: "숭입",
+        location: '숭입',
       },
     })
-    .then((response) => {
+    .then(response => {
       console.log(response);
       return response;
     });
-  console.log(props.data);
+  console.log(props.data, response);
 
   return (
     <div className="RecommendList">

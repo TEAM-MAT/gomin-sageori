@@ -37,28 +37,28 @@ function Main() {
     "혼밥하기 좋은",
     "친구와 가기 좋은",
   ];
-  const allergyArr = [
-    "알레르기 없음",
-    "매밀",
-    "밀",
-    "대두",
-    "땅콩",
-    "호두",
-    "잣",
-    "아황산류",
-    "복숭아",
-    "토마토",
-    "난류",
-    "우유",
-    "새우",
-    "고등어",
-    "오징어",
-    "게",
-    "조개류",
-    "돼지고기",
-    "쇠고기",
-    "닭고기",
-  ];
+  // const allergyArr = [
+  //   "알레르기 없음",
+  //   "매밀",
+  //   "밀",
+  //   "대두",
+  //   "땅콩",
+  //   "호두",
+  //   "잣",
+  //   "아황산류",
+  //   "복숭아",
+  //   "토마토",
+  //   "난류",
+  //   "우유",
+  //   "새우",
+  //   "고등어",
+  //   "오징어",
+  //   "게",
+  //   "조개류",
+  //   "돼지고기",
+  //   "쇠고기",
+  //   "닭고기",
+  // ];
   const regionArr = ["숭실대입구", "서울대입구", "신촌"];
 
   const [userSelection, setUserSelection] = useState({
@@ -85,9 +85,9 @@ function Main() {
   const [isAtmosphereSelect, setIsAtmosphereSelect] = useState(
     Array(atmosphereArr.length).fill(false)
   );
-  const [isAllergySelect, setIsAllergySelect] = useState(
-    Array(allergyArr.length).fill(false)
-  );
+  // const [isAllergySelect, setIsAllergySelect] = useState(
+  //   Array(allergyArr.length).fill(false)
+  // );
   const [isRegionSelect, setIsRegionSelect] = useState(
     Array(regionArr.length).fill(false)
   );
@@ -98,9 +98,9 @@ function Main() {
   const [isAtmosphereDisable, setIsAtmosphereDisable] = useState(
     Array(atmosphereArr.length).fill(false)
   );
-  const [isAllergyDisable, setIsAllergyDisable] = useState(
-    Array(allergyArr.length).fill(false)
-  );
+  // const [isAllergyDisable, setIsAllergyDisable] = useState(
+  //   Array(allergyArr.length).fill(false)
+  // );
 
   const preferHandleClick = (idx) => {
     const newArr = [...isPreferSelect];
@@ -146,27 +146,27 @@ function Main() {
     }
   };
 
-  const allergyHandleClick = (idx) => {
-    const newArr = [...isAllergySelect];
-    newArr[idx] = !newArr[idx];
-    setIsAllergySelect(newArr);
-    userSelectionChange("allergy", allergyArr[idx]);
-  };
+  // const allergyHandleClick = (idx) => {
+  //   const newArr = [...isAllergySelect];
+  //   newArr[idx] = !newArr[idx];
+  //   setIsAllergySelect(newArr);
+  //   userSelectionChange("allergy", allergyArr[idx]);
+  // };
 
-  const allergyHandleDisable = (idx) => {
-    // 1, 2, 5, 6, 8, 9, 10, 11, 없음(0)
-    if (idx === 0 && isAllergyDisable[0] === false) {
-      const newDisableArr = Array(allergyArr.length).fill(true);
-      setIsAllergyDisable(newDisableArr);
-    } else if (idx === 0 && isAllergyDisable[0] === true) {
-      // 초기화
-      const newArr = Array(allergyArr.length).fill(false);
-      setIsAllergySelect(newArr);
+  // const allergyHandleDisable = (idx) => {
+  //   // 1, 2, 5, 6, 8, 9, 10, 11, 없음(0)
+  //   if (idx === 0 && isAllergyDisable[0] === false) {
+  //     const newDisableArr = Array(allergyArr.length).fill(true);
+  //     setIsAllergyDisable(newDisableArr);
+  //   } else if (idx === 0 && isAllergyDisable[0] === true) {
+  //     // 초기화
+  //     const newArr = Array(allergyArr.length).fill(false);
+  //     setIsAllergySelect(newArr);
 
-      const newDisableArr = Array(allergyArr.length).fill(false);
-      setIsAllergyDisable(newDisableArr);
-    }
-  };
+  //     const newDisableArr = Array(allergyArr.length).fill(false);
+  //     setIsAllergyDisable(newDisableArr);
+  //   }
+  // };
 
   const regionHandleClick = (idx) => {
     const newRegionArr = Array(regionArr.length).fill(false);
@@ -250,7 +250,7 @@ function Main() {
             })}
           </div>
         </div>
-        <div css={containerStyle}>
+        {/* <div css={containerStyle}>
           <h3 css={h3Style}>알레르기 정보를 선택해주세요</h3>
           <div css={buttonWrapStyle}>
             {allergyArr.map((elm, index) => {
@@ -267,7 +267,7 @@ function Main() {
               );
             })}
           </div>
-        </div>
+        </div> */}
         <div css={containerStyle}>
           <h3 css={h3Style}>프랜차이즈를 선택 대상에 포함시킬까요?</h3>
           <div css={toggleButtonWrapStyle}>
