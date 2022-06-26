@@ -10,10 +10,6 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long addressnum;
 
-    @OneToOne
-    @JoinColumn( name = "address_restaurant" , nullable = false)
-    private Restaurant restaurant;
-
     @Column
     private String City;
 
@@ -36,12 +32,8 @@ public class Address {
         return this.addressnum;
     }
 
-    public Restaurant getRestaurant(){
-        return this.restaurant;
-    }
-
     public String getfulladdress(){
-        return this.City + this.district + this.road + this.addressnum + this.floor;
+        return this.City + this.district + this.road + this.building_number + this.floor;
     }
 
     public String getCity(){
@@ -58,10 +50,6 @@ public class Address {
     public String getBuilding_number(){return this.building_number;}
 
     public String getFloor(){return this.floor;}
-
-    public void setRestaurant(Restaurant restaurant){
-        this.restaurant = restaurant;
-    }
 
     public String setCity(String city){
         this.City = city;

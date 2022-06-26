@@ -36,6 +36,9 @@ public class Restaurant {
     @Column (nullable = true)
     private Time finTime; //영업 종료 시간
 
+    @Column (nullable = true)
+    private String business_date;
+
     @ManyToOne
     @JoinColumn(name = "bestMenu" , nullable = true)
     private Menu bestMenu;
@@ -51,7 +54,7 @@ public class Restaurant {
     @JoinTable(name = "restaurant_menu")
     private List<Menu> menus = new ArrayList<>();
 
-    @OneToOne(cascade = {CascadeType.PERSIST , CascadeType.REMOVE})
+    @OneToOne(cascade = {CascadeType.REFRESH , CascadeType.REMOVE})
     @JoinColumn(name = "RestaurantAdd")
     private Address address;
 
@@ -85,6 +88,36 @@ public class Restaurant {
 
     public Menu getBestMenu() {
         return bestMenu;
+    }
+
+    public Float getInternal_star(){return internal_star;}
+
+    public Float getExternal_star(){return external_star;}
+
+    public String getBusiness_date(){return business_date;}
+
+    public String getStartTime(){
+        if(this.startTime != null){
+            return startTime.toString();
+        }
+        else{
+            return "영업 " +
+                    "시작 시간 없음";
+        }
+    }
+
+    public String getFinTime(){
+        if(finTime != null){
+            return finTime.toString();
+        }
+        else{
+            return "영업 종료 시간 없음";
+        }
+
+    }
+
+    public String getCall_number() {
+        return call_number;
     }
 
     public void setFranchise(Boolean franchise) {

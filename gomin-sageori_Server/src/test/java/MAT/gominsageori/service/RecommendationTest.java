@@ -1,7 +1,7 @@
 package MAT.gominsageori.service;
 
 import MAT.gominsageori.domain.Menu;
-import MAT.gominsageori.domain.RecommandParam;
+import MAT.gominsageori.transfer.RecommandParam;
 import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.repository.RestaurantRepository;
 import org.junit.jupiter.api.Test;
@@ -23,10 +23,10 @@ public class RecommendationTest {
         String location = "신촌";
         List<Restaurant> find_restaurants = restaurantService.findAllByLocation(location);
         Menu wantEatMenu = new Menu();
-        wantEatMenu.setName("메뉴샘플"); wantEatMenu.setSoup(true); wantEatMenu.setSpicy(true); wantEatMenu.setHot(true); wantEatMenu.setHasSquid(true);
+        wantEatMenu.setName("메뉴샘플"); wantEatMenu.setSoup(true); wantEatMenu.setHot(true);
 
         restaurantService.FilteringCharacteristic(find_restaurants,wantEatMenu);
-        restaurantService.FilteringAllergy(find_restaurants,wantEatMenu);
+        //restaurantService.FilteringAllergy(find_restaurants,wantEatMenu);
 
         for(Restaurant restaurantIter : find_restaurants) {
             System.out.println(restaurantIter.getName());
@@ -37,14 +37,14 @@ public class RecommendationTest {
     void 추천_테스트2() {
         RecommandParam recommandParam = new RecommandParam();
         recommandParam.setLocation("신촌");
-        recommandParam.setFranchise(true);
+        //recommandParam.setFranchise(true);
 
         List<String> menuCharacters = new ArrayList<>();
-        menuCharacters.add("hot");
+        menuCharacters.add("hot"); menuCharacters.add("soup"); menuCharacters.add("meat");
         recommandParam.setCharacteristic(menuCharacters);
 
-        List<String> menuAllergy = new ArrayList<>();
-        recommandParam.setAllergic(menuAllergy);
+        //List<String> menuAllergy = new ArrayList<>();
+        //recommandParam.setAllergic(menuAllergy);
 
         List<Restaurant> findRestaurants = restaurantService.recommandRestaurant(recommandParam);
 

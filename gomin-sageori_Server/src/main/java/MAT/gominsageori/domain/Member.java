@@ -7,7 +7,11 @@ import java.util.List;
 public class Member {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(nullable = false)
+    private String pid;
 
     @Column(nullable = false)
     private String name;
@@ -19,11 +23,15 @@ public class Member {
     @JoinColumn( name = "favoriteRestaurant" , nullable = true)
     private List<Restaurant> favoriteRestaurant;
 
-    public String getId() {
+    public String getPid(){ return pid; }
+
+    public void setPid(String pid){ this.pid = pid; }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
