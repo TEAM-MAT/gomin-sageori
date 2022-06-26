@@ -69,7 +69,6 @@ public class RestaurantService {
         Menu menu = alterRecommandParamToMenu(recommandParam); // 추천 API에서 파라미터로 받은 내용을 Menu 객체에 옮겨담음.
         List<Restaurant> restaurantCandidates;
         try {
-            System.out.println(recommandParam.getLocation() + recommandParam.getFranchise() + menu.isMeat() + menu.isHot());
             restaurantCandidates = restaurantRepository
                     .recommendationQuery(recommandParam.getLocation(), recommandParam.getFranchise(), menu);
         } catch (Exception e) {
