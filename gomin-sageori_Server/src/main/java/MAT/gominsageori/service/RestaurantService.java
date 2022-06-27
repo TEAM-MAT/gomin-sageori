@@ -68,13 +68,15 @@ public class RestaurantService {
 
     public List<Restaurant> recommandRestaurant(RecommandParam recommandParam) throws Exception {
         Menu menu = alterRecommandParamToMenu(recommandParam); // 추천 API에서 파라미터로 받은 내용을 Menu 객체에 옮겨담음.
-        String filteringQuery = makeMenuFilteringQuery(menu);
-        System.out.println(filteringQuery);
         List<Restaurant> restaurantCandidates;
         try{
+            String menuFilteringQuery = makeMenuFilteringQuery(menu); //menu 필터링 쿼리를 입력받은 조건으로부터 만듦.
             restaurantCandidates = restaurantRepository
-                    .recommendationQuery(recommandParam.getLocation(), recommandParam.getFranchise(), menu, filteringQuery);
+                    .recommendationQuery(recommandParam.getLocation(), recommandParam.getFranchise(), menuFilteringQuery);
         } catch (Exception e){
+            if(e.getMessage() == "검색할 특징이 없음") {
+                throw new Exception("검색할 특징이 없음");
+            }
             throw new NoSuchElementException("반환할 리스트가 없습니다.");
         }
         if(restaurantCandidates.size() == 0) {
@@ -99,6 +101,7 @@ public class RestaurantService {
         return menu;
     }
 
+    //입력받은 조건에서 메뉴를 필터링하는 쿼리를 만듦.
     public String makeMenuFilteringQuery(Menu menu) throws Exception{
         String filteringQuery = "SELECT m.id " +
                 "FROM Menu m " +
@@ -166,7 +169,7 @@ public class RestaurantService {
             count += 1;
         }
         filteringQuery += " )";
-        if (count == 0) { //하나의 특징도 검색이 안들어갔으면
+        if (count == 0) { //하나의 특징도 검색이 안들어갔으면 exception.
             throw new Exception("검색할 특징이 없음");
         }
         else {
