@@ -121,6 +121,7 @@ public class RestaurantService {
                 filteringQuery += " AND ";
             }
             filteringQuery += meatFilter;
+            count += 1;
         }
         if (menu.isHot()) {
             if (count != 0 ){
