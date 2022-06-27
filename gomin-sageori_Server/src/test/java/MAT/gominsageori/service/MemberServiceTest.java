@@ -21,7 +21,7 @@ public class MemberServiceTest {
     void 회원가입() {
         //given
         Member member1 = new Member();
-        member1.setId("userId1");
+        member1.setPid("userId1");
         member1.setName("userName1");
         member1.setPwd("userPwd1");
         //when
@@ -34,11 +34,11 @@ public class MemberServiceTest {
     @Test
     void 중복_회원_예외() {
         Member member1 = new Member();
-        member1.setId("userId");;
+        member1.setPid("userId");;
         member1.setName("userName");
         member1.setPwd("userPwd");
         Member member2 = new Member();
-        member2.setId("userId");
+        member2.setPid("userId");
         member2.setName("userName");
         member2.setPwd("userPwd");
 
@@ -50,7 +50,7 @@ public class MemberServiceTest {
     @Test
     void 회원_정보_수정() {
         Member member1 = new Member();
-        member1.setId("userId2");
+        member1.setPid("userId2");
         member1.setName("userName3");
         member1.setPwd("userPwd3");
 
@@ -65,7 +65,7 @@ public class MemberServiceTest {
     @Test
     void 회원_삭제() {
         Member member = new Member();
-        member.setId("userId2");
+        member.setPid("userId2");
         member.setName("userName2");
         member.setPwd("userPwd2");
 
