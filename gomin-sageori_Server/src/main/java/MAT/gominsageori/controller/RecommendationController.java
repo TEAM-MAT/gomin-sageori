@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -78,18 +79,19 @@ public class RecommendationController {
     @GetMapping("")
     public ResponseEntity<recommendationSchema> Recommend(@ModelAttribute RecommandParam param){
         try{
-            List<Restaurant> restaurant = restaurantService.recommandRestaurant(param);
+            List<Restaurant> restaurants = restaurantService.recommandRestaurant(param);
             recommendationSchema payload = new recommendationSchema();
-            ArrayList<String> names = new ArrayList<>();
-            ArrayList<Address> address = new ArrayList<>();
-            for( int i = 0 ; i<restaurant.size() ; i++){
-                Restaurant toSend_restaurant = restaurant.get(i);
-                names.add(toSend_restaurant.getName());
-                address.add(toSend_restaurant.getAddress());
+            for( int i = 0 ; i<restaurants.size() ; i++){
+                HashMap<String, Object> temp = new HashMap<>();
+                Restaurant toSend_restaurant = restaurants.get(i);
+                String name = toSend_restaurant.getName();
+                Address address = toSend_restaurant.getAddress();
+                temp.put("name", name);
+                temp.put("id", toSend_restaurant.getId());
+                temp.put("address", address);
+                payload.addRestaurant(temp);
             }
-            payload.setSize(restaurant.size());
-            payload.setName(names);
-            payload.setAddress(address);
+            payload.setSize(restaurants.size());
             return ResponseEntity.status(200).body(payload);
         }
         //추천 알고리즘 호출 및 리턴값 받기
@@ -99,5 +101,5 @@ public class RecommendationController {
             return ResponseEntity.status(204).body(payload);
         }
     }
-    
+
 }
