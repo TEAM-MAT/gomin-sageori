@@ -25,7 +25,7 @@ public class RecommendationTest {
         Menu wantEatMenu = new Menu();
         wantEatMenu.setName("메뉴샘플"); wantEatMenu.setSoup(true); wantEatMenu.setHot(true);
 
-        restaurantService.FilteringCharacteristic(find_restaurants,wantEatMenu);
+        //restaurantService.FilteringCharacteristic(find_restaurants,wantEatMenu);
         //restaurantService.FilteringAllergy(find_restaurants,wantEatMenu);
 
         for(Restaurant restaurantIter : find_restaurants) {
@@ -37,19 +37,22 @@ public class RecommendationTest {
     void 추천_테스트2() {
         RecommandParam recommandParam = new RecommandParam();
         recommandParam.setLocation("신촌");
-        //recommandParam.setFranchise(true);
+        recommandParam.setFranchise(false);
 
         List<String> menuCharacters = new ArrayList<>();
-        menuCharacters.add("hot"); menuCharacters.add("soup"); menuCharacters.add("meat");
+        menuCharacters.add("hot"); menuCharacters.add("meat");
         recommandParam.setCharacteristic(menuCharacters);
 
         //List<String> menuAllergy = new ArrayList<>();
         //recommandParam.setAllergic(menuAllergy);
 
-        List<Restaurant> findRestaurants = restaurantService.recommandRestaurant(recommandParam);
-
-        for(Restaurant restaurantIter : findRestaurants) {
-            System.out.println(restaurantIter.getName());
+        try {
+            List<Restaurant> findRestaurants = restaurantService.recommandRestaurant(recommandParam);
+            for(Restaurant restaurantIter : findRestaurants) {
+                System.out.println(restaurantIter.getName());
+            }
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -72,32 +72,18 @@ public class JpaRestaurantRepository implements RestaurantRepository{
                 .getResultList();
     }
 
+    //특징으로부터 해당 특징들은 만족하는 메뉴들을 먼저 뽑은 뒤, 해당 메뉴들 중에 대표메뉴가 존재하는 식당을 필터링.
     @Override
-    public List<Restaurant> recommendationQuery(String location, Boolean franchise, Menu menu){
+    public List<Restaurant> recommendationQuery(String location, Boolean franchise, String menuFilteringQuery){
         return em.createQuery("SELECT r " +
                 "FROM Restaurant r " +
                         "WHERE " +
                         "r.bestMenu IN " +
-                        "( SELECT m.id " +
-                        "FROM Menu m " +
-                        "WHERE m.isBread = :isBread AND " +
-                        "m.isMeat = :isMeat AND " +
-                        "m.isHot = :isHot AND " +
-                        "m.isNoodle = :isNoodle AND " +
-                        "m.isRice = :isRice AND " +
-                        "m.isSpicy = :isSpicy AND " +
-                        "m.isSweet = :isSweet) " +
+                        "( " + menuFilteringQuery + ")" +
                         "AND r.address.location = :location " +
                         "AND r.Franchise = :franchise", Restaurant.class)
                 .setParameter("location",location)
                 .setParameter("franchise",franchise)
-                .setParameter("isHot", menu.isHot())
-                .setParameter("isBread", menu.isBread())
-                .setParameter("isMeat", menu.isMeat())
-                .setParameter("isNoodle", menu.isNoodle())
-                .setParameter("isRice", menu.isRice())
-                .setParameter("isSpicy", menu.isSpicy())
-                .setParameter("isSweet", menu.isSweet())
                 .getResultList();
     }
 }

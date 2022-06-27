@@ -7,29 +7,23 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-@Schema(description = "레스토랑 추천 응답DTO. 상호명과 주소는 서로 매칭됨.")
+@Schema(description = "레스토랑 추천 응답DTO.")
 @Getter
 @Setter
 public class recommendationSchema {
     @Schema(description = "전체 추천목록 사이즈")
     private int size;
 
-    @Schema(description = "추천 레스토랑 상호명 리스트")
-    private ArrayList<String> name = new ArrayList<>();
-
-    @Schema(description = "추천 레스토랑 주소 리스트.")
-    private ArrayList<Address> address = new ArrayList<>();
+    @Schema(description = "추천 레스토랑 상호명, 주소,id 리스트 각 정보는 배열[0].address와 같이 접근.")
+    private ArrayList<HashMap<String, Object>> restaurants = new ArrayList<>();
 
     public void setSize(int size) {
         this.size = size;
     }
 
-    public void setAddress(ArrayList<Address> address) {
-        this.address = address;
-    }
-
-    public void setName(ArrayList<String> name) {
-        this.name = name;
+    public void addRestaurant(HashMap restaurant) {
+        restaurants.add(restaurant);
     }
 }
