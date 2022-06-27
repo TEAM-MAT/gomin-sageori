@@ -80,13 +80,14 @@ public class JpaRestaurantRepository implements RestaurantRepository{
                         "r.bestMenu IN " +
                         "( SELECT m.id " +
                         "FROM Menu m " +
-                        "WHERE (m.isBread = true and :isBread = true) OR " +
-                        "m.isMeat = :isMeat OR " +
-                        "m.isHot = :isHot OR " +
-                        "m.isNoodle = :isNoodle OR " +
-                        "m.isRice = :isRice OR " +
-                        "m.isSpicy = :isSpicy OR " +
-                        "m.isSweet = :isSweet) " +
+                        "WHERE ((:isBread = false) OR (m.isBread = true AND :isBread = true)) AND " +
+                        "((:isMeat = false) OR (m.isMeat = true AND :isMeat = true)) AND " +
+                        "((:isHot = false) OR (m.isHot = true AND :isHot = true)) AND " +
+                        "((:isNoodle = false) OR (m.isNoodle = true AND :isNoodle = true)) AND " +
+                        "((:isRice = false) OR (m.isRice = true AND :isRice = true)) AND " +
+                        "((:isSpicy = false) OR (m.isSpicy = true AND :isSpicy = true)) AND " +
+                        "((:isSweet = false) OR (m.isSweet = true AND :isSweet = true)) AND" +
+                        "((:isSoup = false) OR (m.isSoup = true AND :isSoup = true))) " +
                         "AND r.address.location = :location " +
                         "AND r.Franchise = :franchise", Restaurant.class)
                 .setParameter("location",location)
@@ -98,6 +99,7 @@ public class JpaRestaurantRepository implements RestaurantRepository{
                 .setParameter("isRice", menu.isRice())
                 .setParameter("isSpicy", menu.isSpicy())
                 .setParameter("isSweet", menu.isSweet())
+                .setParameter("isSoup", menu.isSoup())
                 .getResultList();
     }
 }
