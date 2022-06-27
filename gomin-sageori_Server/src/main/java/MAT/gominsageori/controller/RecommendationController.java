@@ -2,6 +2,7 @@ package MAT.gominsageori.controller;
 
 
 import MAT.gominsageori.domain.Address;
+import MAT.gominsageori.domain.Menu;
 import MAT.gominsageori.service.MemberService;
 import MAT.gominsageori.transfer.RecommandParam;
 import MAT.gominsageori.domain.Restaurant;
@@ -98,5 +99,5 @@ public class RecommendationController {
             return ResponseEntity.status(204).body(payload);
         }
     }
-
+    
 }
