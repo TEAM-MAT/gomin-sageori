@@ -74,7 +74,7 @@ public class RecommendationController {
     )
 
     @ResponseBody
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<recommendationSchema> Recommend(@ModelAttribute RecommandParam param){
         try{
             List<Restaurant> restaurant = restaurantService.recommandRestaurant(param);
