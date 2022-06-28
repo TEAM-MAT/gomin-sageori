@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import './font.css';
+import { css } from "@emotion/react";
+import "./font.css";
 
 const reset = css`
   html {

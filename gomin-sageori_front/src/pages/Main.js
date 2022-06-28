@@ -69,10 +69,18 @@ function Main() {
     region: "",
   });
 
-  const userSelectionChange = (key, value) => {
+  const preferSelectionChange = (value) => {
     const newForm = {
       ...userSelection,
-      [key]: value,
+      prefer: value,
+    };
+    setUserSelection(newForm);
+  };
+
+  const regionSelectionChange = (value) => {
+    const newForm = {
+      ...userSelection,
+      region: value,
     };
     setUserSelection(newForm);
   };
@@ -106,7 +114,7 @@ function Main() {
     const newArr = [...isPreferSelect];
     newArr[idx] = !newArr[idx];
     setIsPreferSelect(newArr);
-    userSelectionChange("prefer", preferArr[idx]);
+    preferSelectionChange(preferArr[idx]);
   };
 
   const preferHandleDisable = (idx) => {
@@ -172,7 +180,7 @@ function Main() {
     const newRegionArr = Array(regionArr.length).fill(false);
     newRegionArr[idx] = true;
     setIsRegionSelect(newRegionArr);
-    userSelectionChange("region", regionArr[idx]);
+    regionSelectionChange(regionArr[idx]);
   };
 
   const h3Style = css`
@@ -205,6 +213,7 @@ function Main() {
 
   const scrollStyle = css`
     overflow: scroll;
+    height: 100vh;
   `;
 
   return (
@@ -295,9 +304,11 @@ function Main() {
         <div css={containerStyle}>
           <ConfirmButton
             content="찾아보기"
-            handleClick={() => setIsAllSelect(true)}
+            handleClick={() => {
+              setIsAllSelect(true);
+            }}
           />
-          {isAllSelect ? <RecommendList data={userSelection} /> : <></>}
+          <RecommendList data={userSelection} isAllSelect={isAllSelect} />
         </div>
       </div>
     </div>
