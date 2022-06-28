@@ -1,9 +1,5 @@
 /** @jsxImportSource @emotion/react */
-<<<<<<< HEAD
 import { css } from "@emotion/react";
-=======
-import { jsx, css } from "@emotion/react";
->>>>>>> main
 
 const containerColStyle = css`
   display: flex;
