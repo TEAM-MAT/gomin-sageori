@@ -52,7 +52,7 @@ public class MemberController {
     @ResponseBody
     @PostMapping("/signin")
     public ResponseEntity<String> signIn(@RequestBody SignInParam param){
-        if (param.getUserId() == "" && param.getPassword() == "") {
+        if (param.getUserId().equals("") && param.getPassword().equals("")) {
             return ResponseEntity.status(400).body("blank in id or password");
         }
         Optional<Member> findResult = memberService.findOneByUserId(param.getUserId());
