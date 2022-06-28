@@ -11,19 +11,19 @@ public class Member {
     private Long id;
 
     @Column(nullable = false)
-    private String userId;
+    private String userId = "";
 
     @Column(nullable = false)
-    private String name;
+    private String name = "";
 
     @Column(nullable = false)
-    private String email;
+    private String email = "";
 
     @Column(nullable = false)
-    private String password;
+    private String password = "";
 
     @Column(nullable = false)
-    private String salt;
+    private String salt = "";
 
     @ManyToMany
     @JoinColumn( name = "favoriteRestaurant" , nullable = true)

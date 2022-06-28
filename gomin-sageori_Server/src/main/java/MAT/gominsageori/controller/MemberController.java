@@ -51,7 +51,7 @@ public class MemberController {
 
     @ResponseBody
     @PostMapping("/signin")
-    public ResponseEntity<String> signIn(@ModelAttribute SignInParam param){
+    public ResponseEntity<String> signIn(@RequestBody SignInParam param){
         if (param.getUserId() == "" && param.getPassword() == "") {
             return ResponseEntity.status(400).body("blank in id or password");
         }
@@ -62,7 +62,7 @@ public class MemberController {
         }
         Member member = findResult.get();
         String encodedInput = memberService.loginPwdEncryption(param.getPassword(),member.getSalt());
-        if(encodedInput == member.getPwd()) {
+        if(encodedInput.equals(member.getPwd())) {
             return ResponseEntity.status(200).body("succeed");
         }
         else {
