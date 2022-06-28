@@ -10,8 +10,8 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
- <React.StrictMode>
-  <Global styles={reset} />
-  <App />
- </React.StrictMode>
+  <React.StrictMode>
+    <Global styles={reset} />
+    <App />
+  </React.StrictMode>
 );
