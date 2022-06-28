@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/restaurant")
+@RequestMapping("/api/restaurant")
 public class RestaurantController {
     private RestaurantService restaurantService;
 
