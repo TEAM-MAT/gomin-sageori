@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/recommendation")
+@RequestMapping("/api/recommendation")
 public class RecommendationController {
     private RestaurantService restaurantService;
 
