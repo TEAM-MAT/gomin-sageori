@@ -1,12 +1,13 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-const SetupProxy = app => {
-  app.use(
-    createProxyMiddleware('/api', {
-      target: 'http://localhost:8080',
-      changeOrigin: true,
-    }),
-  );
-};
+const SetUpProxy = (app) => {
+    app.use(
+        createProxyMiddleware("/api", {
+            //domain
+            target: "http://localhost:8080",
+            changeOrigin: true,
+        })
+    );
+}
 
-export default SetupProxy;
+export default SetUpProxy;
