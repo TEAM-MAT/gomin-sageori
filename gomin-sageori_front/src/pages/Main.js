@@ -82,9 +82,9 @@ function Main() {
   const [isPreferSelect, setIsPreferSelect] = useState(
     Array(preferArr.length).fill(false)
   );
-  const [isAtmosphereSelect, setIsAtmosphereSelect] = useState(
-    Array(atmosphereArr.length).fill(false)
-  );
+  // const [isAtmosphereSelect, setIsAtmosphereSelect] = useState(
+  //   Array(atmosphereArr.length).fill(false)
+  // );
   // const [isAllergySelect, setIsAllergySelect] = useState(
   //   Array(allergyArr.length).fill(false)
   // );
@@ -95,9 +95,9 @@ function Main() {
   const [isPreferDisable, setIsPreferDisable] = useState(
     Array(preferArr.length).fill(false)
   );
-  const [isAtmosphereDisable, setIsAtmosphereDisable] = useState(
-    Array(atmosphereArr.length).fill(false)
-  );
+  // const [isAtmosphereDisable, setIsAtmosphereDisable] = useState(
+  //   Array(atmosphereArr.length).fill(false)
+  // );
   // const [isAllergyDisable, setIsAllergyDisable] = useState(
   //   Array(allergyArr.length).fill(false)
   // );
@@ -124,27 +124,27 @@ function Main() {
     }
   };
 
-  const atmosphereHandleClick = (idx) => {
-    const newArr = [...isAtmosphereSelect];
-    newArr[idx] = !newArr[idx];
-    setIsAtmosphereSelect(newArr);
-    userSelectionChange("atmosphere", atmosphereArr[idx]);
-  };
+  // const atmosphereHandleClick = (idx) => {
+  //   const newArr = [...isAtmosphereSelect];
+  //   newArr[idx] = !newArr[idx];
+  //   setIsAtmosphereSelect(newArr);
+  //   userSelectionChange("atmosphere", atmosphereArr[idx]);
+  // };
 
-  const atmosphereHandleDisable = (idx) => {
-    // 1, 2, 5, 6, 8, 9, 10, 11, 없음(0)
-    if (idx === 0 && isAtmosphereDisable[0] === false) {
-      const newDisableArr = Array(atmosphereArr.length).fill(true);
-      setIsAtmosphereDisable(newDisableArr);
-    } else if (idx === 0 && isAtmosphereDisable[0] === true) {
-      // 초기화
-      const newArr = Array(atmosphereArr.length).fill(false);
-      setIsAtmosphereSelect(newArr);
+  // const atmosphereHandleDisable = (idx) => {
+  //   // 1, 2, 5, 6, 8, 9, 10, 11, 없음(0)
+  //   if (idx === 0 && isAtmosphereDisable[0] === false) {
+  //     const newDisableArr = Array(atmosphereArr.length).fill(true);
+  //     setIsAtmosphereDisable(newDisableArr);
+  //   } else if (idx === 0 && isAtmosphereDisable[0] === true) {
+  //     // 초기화
+  //     const newArr = Array(atmosphereArr.length).fill(false);
+  //     setIsAtmosphereSelect(newArr);
 
-      const newDisableArr = Array(atmosphereArr.length).fill(false);
-      setIsAtmosphereDisable(newDisableArr);
-    }
-  };
+  //     const newDisableArr = Array(atmosphereArr.length).fill(false);
+  //     setIsAtmosphereDisable(newDisableArr);
+  //   }
+  // };
 
   // const allergyHandleClick = (idx) => {
   //   const newArr = [...isAllergySelect];
@@ -232,7 +232,7 @@ function Main() {
             })}
           </div>
         </div>
-        <div css={containerStyle}>
+        {/* <div css={containerStyle}>
           <h3 css={h3Style}>원하는 분위기를 선택해주세요</h3>
           <div css={buttonWrapStyle}>
             {atmosphereArr.map((elm, index) => {
@@ -249,7 +249,7 @@ function Main() {
               );
             })}
           </div>
-        </div>
+        </div> */}
         {/* <div css={containerStyle}>
           <h3 css={h3Style}>알레르기 정보를 선택해주세요</h3>
           <div css={buttonWrapStyle}>
