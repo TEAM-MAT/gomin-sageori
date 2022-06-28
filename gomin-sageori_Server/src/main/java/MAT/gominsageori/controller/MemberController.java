@@ -29,7 +29,7 @@ public class MemberController {
         if (memberService.findOneByUserId(param.getUserId()).isPresent() || memberService.findOneByEmail(param.getEmail()).isPresent()) { //이미 동일 아이디 or email의 유저가 존재하면
             return ResponseEntity.status(409).body("Member with Id or Email already Exists");
         }
-        if (param.getUserId() == "" || param.getEmail() == "" || param.getName() == "") {
+        if (param.getUserId().equals("")|| param.getEmail().equals("") || param.getName().equals("")) {
             return ResponseEntity.status(400).body("No name or Email or id given");
         }
         member.setUserId(param.getUserId());
