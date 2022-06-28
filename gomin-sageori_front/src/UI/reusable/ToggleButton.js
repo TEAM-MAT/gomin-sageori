@@ -1,80 +1,80 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css } from '@emotion/react'
-import { useState, useEffect } from 'react';
+import { jsx, css } from "@emotion/react";
+import { useState, useEffect } from "react";
 
 function BasicButton(props) {
+  const [Toggle, setToggle] = useState();
 
-    const [Toggle, setToggle] = useState();
+  const buttonBGStyle = css`
+    width: 168px;
+    height: 39px;
+    background: #fff7f1;
+    font-size: 15px;
+    color: #f7964f;
+    box-shadow: inset 2px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
 
-    const buttonBGStyle = css`
-      width: 168px;
-      height: 39px;
-      background: #FFF7F1;
-      font-size: 15px;
-      color: #F7964F;
-      box-shadow: inset 2px 2px 10px rgba(0, 0, 0, 0.1);
-      border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  `;
 
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    `
+  const toggledButtonStyle = css`
+    width: 95px;
+    height: 39px;
+    background: #ffe6d5;
+    font-size: 15px;
+    color: #f7964f;
+    border: 0.7px solid #f7964f;
+    border-radius: 50px;
 
-    const toggledButtonStyle = css`
-      width: 95px;
-      height: 39px;
-      background: #FFE6D5;
-      font-size: 15px;
-      color: #F7964F;
-      border: 0.7px solid #F7964F;
-      border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      
-      transform: translateX(82px);
-      transition: all .2s ease;
+    transform: translateX(82px);
+    transition: all 0.2s ease;
 
-      cursor: pointer;
-    `
+    cursor: pointer;
+  `;
 
-    const buttonStyle = css`
-      width: 95px;
-      height: 39px;
+  const buttonStyle = css`
+    width: 95px;
+    height: 39px;
 
-      background: #FFE6D5;
-      border: 0.7px solid #F7964F;
-      border-radius: 50px;
-      
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    background: #ffe6d5;
+    border: 0.7px solid #f7964f;
+    border-radius: 50px;
 
-      transform: translateX(0px);
-      transition: all .2s ease;
-      
-      cursor: pointer;
-    `
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    useEffect(() => {
-        console.log('yes');
-    }, []);
+    transform: translateX(0px);
+    transition: all 0.2s ease;
 
-    return (
-        <div className="BasicButton">
-            <div css={buttonBGStyle}>
-                <div css={Toggle === false ? buttonStyle : toggledButtonStyle}
-                     onClick={()=>{
-                         setToggle(!Toggle)
-                     }}>
-                    {Toggle === false ? props.content : props.toggledContent}
-                </div>
-            </div>
+    cursor: pointer;
+  `;
+
+  useEffect(() => {
+    console.log("yes");
+  }, []);
+
+  return (
+    <div className="BasicButton">
+      <div css={buttonBGStyle}>
+        <div
+          css={Toggle === false ? buttonStyle : toggledButtonStyle}
+          onClick={() => {
+            setToggle(!Toggle);
+          }}>
+          {Toggle === false ? props.content : props.toggledContent}
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default BasicButton;

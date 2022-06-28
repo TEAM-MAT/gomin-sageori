@@ -27,14 +27,14 @@ public class JpaAddressRepository implements AddressRepository{
 
     @Override
     public Address update(Address address) {
-        Address newadd = em.find(Address.class , address.getId());
-        newadd.setCity(address.getCity());
-        newadd.setDistrict(address.getDistrict());
-        newadd.setRoad(address.getRoad());
-        newadd.setbuildingnum(address.getBuilding_number());
-        newadd.setFloor(address.getFloor());
-        newadd.setLocation(address.getLocation());
-        return newadd;
+        Address newAdd = em.find(Address.class , address.getId());
+        newAdd.setCity(address.getCity());
+        newAdd.setDistrict(address.getDistrict());
+        newAdd.setRoad(address.getRoad());
+        newAdd.setBuildingNum(address.getBuildingNumber());
+        newAdd.setFloor(address.getFloor());
+        newAdd.setLocation(address.getLocation());
+        return newAdd;
     }
 
 
