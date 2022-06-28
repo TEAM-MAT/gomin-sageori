@@ -23,16 +23,16 @@ public class MemberController {
     }
 
     @ResponseBody
-    @PostMapping("/{id}")
-    public ResponseEntity<String> signUp(@PathVariable String id, @ModelAttribute SignUpParam param) {
+    @PostMapping("/signup")
+    public ResponseEntity<String> signUp(@RequestBody SignUpParam param) {
         Member member = new Member();
-        if (!memberService.findOneByUserId(id).isEmpty() || !memberService.findOneByEmail(param.getEmail()).isPresent()) { //이미 동일 아이디 or email의 유저가 존재하면
+        if (memberService.findOneByUserId(param.getUserId()).isPresent() || memberService.findOneByEmail(param.getEmail()).isPresent()) { //이미 동일 아이디 or email의 유저가 존재하면
             return ResponseEntity.status(409).body("Member with Id or Email already Exists");
         }
-        if (id == "" || param.getEmail() == "" || param.getName() == "") {
+        if (param.getUserId() == "" || param.getEmail() == "" || param.getName() == "") {
             return ResponseEntity.status(400).body("No name or Email or id given");
         }
-        member.setUserId(id);
+        member.setUserId(param.getUserId());
         member.setEmail(param.getEmail());
         member.setName(param.getName());
 
@@ -50,7 +50,7 @@ public class MemberController {
     }
 
     @ResponseBody
-    @PostMapping("/signIn")
+    @PostMapping("/signin")
     public ResponseEntity<String> signIn(@ModelAttribute SignInParam param){
         if (param.getUserId() == "" && param.getPassword() == "") {
             return ResponseEntity.status(400).body("blank in id or password");

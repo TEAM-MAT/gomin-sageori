@@ -2,7 +2,9 @@ package MAT.gominsageori.service;
 
 import MAT.gominsageori.domain.Member;
 import MAT.gominsageori.repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.transaction.Transactional;
 import java.util.HashMap;
@@ -11,6 +13,7 @@ import java.util.Optional;
 
 @Transactional
 public class MemberService {
+
     private final MemberRepository memberRepository;
 
     public MemberService(MemberRepository memberRepository) {

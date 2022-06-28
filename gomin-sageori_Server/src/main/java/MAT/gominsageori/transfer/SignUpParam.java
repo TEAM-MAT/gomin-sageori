@@ -11,6 +11,10 @@ public class SignUpParam {
     @ApiModelProperty(
             name = "signUpParameter"
     )
+
+    @ApiParam(value = "유저id")
+    private String userId;
+
     @ApiParam(value = "name")
     private String name;
 

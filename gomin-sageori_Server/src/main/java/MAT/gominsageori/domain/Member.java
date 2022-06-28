@@ -29,17 +29,17 @@ public class Member {
     @JoinColumn( name = "favoriteRestaurant" , nullable = true)
     private List<Restaurant> favoriteRestaurant;
 
-    public String getPid() {
-        if(this.pid != null) {
-            return pid;
+    public String getUserId() {
+        if(this.userId != null) {
+            return userId;
         }
         else {
-            throw new IllegalStateException("No pid data");
+            throw new IllegalStateException("No user id data");
         }
     }
 
-    public void setPid(String pid) {
-        this.pid = pid;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public Long getId() {
@@ -68,13 +68,17 @@ public class Member {
         this.name = name;
     }
 
-    public String getEmail() {return this.email;}
+    public String getEmail() {
+        return this.email;
+    }
 
-    public void setEmail(String email) {this.email = email;}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getPwd() {
-        if(this.pwd != null) {
-            return pwd;
+        if(this.password != null) {
+            return password;
         }
         else {
             throw new IllegalStateException("No pwd data");
@@ -91,6 +95,14 @@ public class Member {
         else {
             throw new IllegalStateException("favoriteRestaurant is empty");
         }
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getSalt() {
+        return this.salt;
     }
 
     public void SetFavorites(List<Restaurant> favorites){
