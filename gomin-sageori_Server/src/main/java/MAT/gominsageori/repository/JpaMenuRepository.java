@@ -29,7 +29,9 @@ public class JpaMenuRepository implements MenuRepository{
 
     @Override
     public Optional<Menu> findByName(String name) {
-        List<Menu> result = em.createQuery("select m from Menu m where m.name = :name", Menu.class)
+        List<Menu> result = em.createQuery("SELECT m " +
+                        "FROM Menu m " +
+                        "WHERE m.name = :name", Menu.class)
                 .setParameter("name", name)
                 .getResultList();
         return result.stream().findAny();
@@ -37,7 +39,8 @@ public class JpaMenuRepository implements MenuRepository{
 
     @Override
     public List<Menu> findAll() {
-        return em.createQuery("select m from Member m", Menu.class)
+        return em.createQuery("SELECT m " +
+                        "FROM Member m", Menu.class)
                 .getResultList();
     }
 

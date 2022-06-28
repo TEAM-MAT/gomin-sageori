@@ -18,37 +18,36 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column( nullable= false , unique = false , length = 50)
+    @Column(nullable= false , unique = false , length = 50)
     private String name;
 
-    @Column (nullable = true)
-    private Boolean Franchise; // 프랜차이즈 여부
+    @Column(nullable = true)
+    private Boolean franchise; // 프랜차이즈 여부
 
-    @Column (nullable = true)
-    private Float external_star; //외부 평점
+    @Column(nullable = true)
+    private Float externalStar; //외부 평점
 
-    @Column (nullable = true)
-    private Float internal_star; //내부 평점
+    @Column(nullable = true)
+    private Float internalStar; //내부 평점
 
-    @Column (nullable = true)
+    @Column(nullable = true)
     private Time startTime; //영업시작시간
 
-    @Column (nullable = true)
+    @Column(nullable = true)
     private Time finTime; //영업 종료 시간
 
-    @Column (nullable = true)
-    private String business_date;
+    @Column(nullable = true)
+    private String businessDate;
 
     @ManyToOne
     @JoinColumn(name = "bestMenu" , nullable = true)
     private Menu bestMenu;
 
-    @Column (nullable= true)
-    private String restaurant_type;
+    @Column(nullable= true)
+    private String restaurantType;
 
-    @Column (nullable = true)
-    private String call_number;
-
+    @Column(nullable = true)
+    private String callNumber;
 
     @ManyToMany
     @JoinTable(name = "restaurant_menu")
@@ -59,15 +58,30 @@ public class Restaurant {
     private Address address;
 
     public Long getId(){
-        return id;
+        if(this.id != null){
+            return id;
+        }
+        else{
+            throw new IllegalStateException("No id data");
+        }
     }
 
     public String getName(){
-        return name;
+        if(this.name != null){
+            return name;
+        }
+        else{
+            throw new IllegalStateException("No name data");
+        }
     }
 
     public Address getAddress() {
-        return address;
+        if(this.address != null){
+            return address;
+        }
+        else{
+            throw new IllegalStateException("No Address data");
+        }
     }
 
     public void setAddress(Address address) {
@@ -78,50 +92,89 @@ public class Restaurant {
         this.name = name;
     }
 
-    public String getFullAddress(){
-        return this.address.getfulladdress();
+    public String getFullAddress() {
+        if(this.address != null) {
+            return this.address.getFullAddress();
+        }
+        else {
+            return "주소 정보 없음";
+        }
     }
 
     public Boolean getFranchise() {
-        return Franchise;
+        if(this.franchise != null) {
+            return franchise;
+        }
+        else {
+            return false;
+        }
     }
 
     public Menu getBestMenu() {
-        return bestMenu;
+        if(this.bestMenu != null) {
+            return bestMenu;
+        }
+        else {
+            throw new IllegalStateException("No menu data");
+        }
     }
 
-    public Float getInternal_star(){return internal_star;}
+    public Float getInternalStar() {
+        if(this.internalStar != null) {
+            return internalStar;
+        }
+        else {
+            return 0F;
+        }
+    }
 
-    public Float getExternal_star(){return external_star;}
+    public Float getExternalStar() {
+        if(this.externalStar != null) {
+            return externalStar;
+        }
+        else {
+            return 0F;
+        }
+    }
 
-    public String getBusiness_date(){return business_date;}
+    public String getBusinessDate() {
+        if(this.businessDate != null) {
+            return businessDate;
+        }
+        else {
+            return "영업일 정보 없음";
+        }
+    }
 
-    public String getStartTime(){
-        if(this.startTime != null){
+    public String getStartTime() {
+        if(this.startTime != null) {
             return startTime.toString();
         }
-        else{
-            return "영업 " +
-                    "시작 시간 없음";
+        else {
+            return "영업 시작 시간 없음";
         }
     }
 
-    public String getFinTime(){
-        if(finTime != null){
+    public String getFinTime() {
+        if(this.finTime != null) {
             return finTime.toString();
         }
-        else{
+        else {
             return "영업 종료 시간 없음";
         }
-
     }
 
-    public String getCall_number() {
-        return call_number;
+    public String getCallNumber() {
+        if(this.callNumber != null) {
+            return callNumber;
+        }
+        else {
+            return "전화번호 없음";
+        }
     }
 
     public void setFranchise(Boolean franchise) {
-        Franchise = franchise;
+        this.franchise = franchise;
     }
 
     public void setBestMenu(Menu bestMenu) {

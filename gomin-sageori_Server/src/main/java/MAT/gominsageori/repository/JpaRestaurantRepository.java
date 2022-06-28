@@ -81,7 +81,7 @@ public class JpaRestaurantRepository implements RestaurantRepository{
                         "r.bestMenu IN " +
                         "( " + menuFilteringQuery + ")" +
                         "AND r.address.location = :location " +
-                        "AND r.Franchise = :franchise", Restaurant.class)
+                        "AND r.franchise = :franchise", Restaurant.class)
                 .setParameter("location",location)
                 .setParameter("franchise",franchise)
                 .getResultList();

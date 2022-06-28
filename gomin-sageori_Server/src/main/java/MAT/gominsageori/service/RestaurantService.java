@@ -17,19 +17,18 @@ public class RestaurantService {
     private final RestaurantRepository restaurantRepository;
 
     @Autowired
-    public RestaurantService(RestaurantRepository restaurantRepository){
+    public RestaurantService(RestaurantRepository restaurantRepository) {
         this.restaurantRepository = restaurantRepository;
     }
     /**
      * 식당등록
      */
-    public Long register(Restaurant restaurant){
+    public Long register(Restaurant restaurant) {
         validateDuplicateRestaurant(restaurant);
         restaurantRepository.save(restaurant);
         return restaurant.getId();
-
     }
-    private void validateDuplicateRestaurant(Restaurant restaurant){
+    private void validateDuplicateRestaurant(Restaurant restaurant) {
         restaurantRepository.findByName(restaurant.getName())
                 .ifPresent(r -> {
                     throw new IllegalStateException("이미 존재하는 식당입니다.");
@@ -48,11 +47,11 @@ public class RestaurantService {
         return restaurantRepository.findAll();
     }
 
-    public HashMap<String, Object> findOneById(Long restaurantId){
+    public HashMap<String, Object> findOneById(Long restaurantId) {
         Restaurant findResult;
-        try{
+        try {
             findResult = restaurantRepository.findById(restaurantId);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             HashMap<String, Object> returning = new HashMap<>();
             returning.put("result", ex.getMessage());
             return returning;
@@ -62,7 +61,7 @@ public class RestaurantService {
         return payLoad;
     }
 
-    public Optional<Restaurant> findOnebyName(String restaurantName){
+    public Optional<Restaurant> findOnebyName(String restaurantName) {
         return restaurantRepository.findByName(restaurantName);
     }
 
@@ -100,7 +99,6 @@ public class RestaurantService {
         }
         return menu;
     }
-
     //입력받은 조건에서 메뉴를 필터링하는 쿼리를 만듦.
     public String makeMenuFilteringQuery(Menu menu) throws Exception{
         String filteringQuery = "SELECT m.id " +
