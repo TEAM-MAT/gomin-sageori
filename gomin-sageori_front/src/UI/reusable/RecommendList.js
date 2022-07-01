@@ -3,35 +3,27 @@
 import "../../styles/base/font.css";
 import { useState, useEffect } from "react";
 
-function RecommendList(userSelection, isAllSelect) {
-  //식당 추천정보 조회
-  const [recommendResult, setRecommendResult] = useState([]);
-  useEffect(() => {
-    if (isAllSelect) {
-      console.log("!!");
-      const axios = require("axios");
-      axios
-        .get("/api/recommendation", {
-          params: {
-            characteristic: "spicy,noodle",
-            franchise: false,
-            location: "신촌",
-          },
-        })
-        .then((response) => {
-          console.log(response.data.restaurants);
-          setRecommendResult(response.data.restaurants);
-        });
-    } else {
-      <div className="RecommendList"></div>;
-    }
-  }, [isAllSelect]);
+function RecommendList(props) {
+    const [bestMenu, setBestMenu] = useState([]);
+    useEffect( () => {
+        const axios = require("axios");
+        axios
+            .get("/api/restaurant" + props.id)
+            .then((response) => {
+                console.log(response.data);
+            });
+    }, [])
   return (
-    <div className="RecommendList">
-      {recommendResult.map((index, r) => (
-        <span key={index}>{r.address.city}</span>
-      ))}
-    </div>
+      <div className="RecommendList">
+          <div>
+              {/*image*/}
+          </div>
+          <div>
+              {bestMenu.map((key, index) => {
+                  <div>{key}</div>
+              })}
+          </div>
+      </div>
   );
 }
 

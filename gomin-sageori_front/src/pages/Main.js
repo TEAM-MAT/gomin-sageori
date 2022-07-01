@@ -11,8 +11,16 @@ import ToggleButton from "../UI/reusable/ToggleButton";
 import ConfirmButton from "../UI/reusable/ConfirmButton";
 import { useEffect, useState } from "react";
 import RecommendList from "../UI/reusable/RecommendList";
+import {Link} from "react-router-dom";
+import useStore from "../state/store";
+import axios from "axios";
 
 function Main() {
+  const {recommendResult, setRecommendResult} = useStore();
+  // const setRecommendResult = useStore((state) => state.setRecommendResult);
+  // const recommendResult = useStore((state) => state.recommendResult);
+
+  // const setIsAllSelect = useStore((state) => state.setIsAllSelect(true));
   const preferArr = [
     "없음",
     "국물이 있는",
@@ -84,8 +92,6 @@ function Main() {
     };
     setUserSelection(newForm);
   };
-
-  const [isAllSelect, setIsAllSelect] = useState(false);
 
   const [isPreferSelect, setIsPreferSelect] = useState(
     Array(preferArr.length).fill(false)
@@ -215,7 +221,6 @@ function Main() {
     overflow: scroll;
     height: 100vh;
   `;
-
   return (
     <div css={scrollStyle}>
       {/*<Header></Header>*/}
@@ -302,13 +307,15 @@ function Main() {
           </div>
         </div>
         <div css={containerStyle}>
-          <ConfirmButton
-            content="찾아보기"
-            handleClick={() => {
-              setIsAllSelect(true);
-            }}
-          />
-          <RecommendList data={userSelection} isAllSelect={isAllSelect} />
+          <Link to="/recommend">
+            <ConfirmButton
+                content="찾아보기"
+                // handleClick={setIsAllSelect}
+                onClick={() => {
+                  setRecommendResult();
+                }}
+            />
+          </Link>
         </div>
       </div>
     </div>
