@@ -4,6 +4,7 @@ import MAT.gominsageori.domain.Member;
 import MAT.gominsageori.service.MemberService;
 import MAT.gominsageori.transfer.SignInParam;
 import MAT.gominsageori.transfer.SignUpParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,11 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+    @ApiOperation(
+            value = "회원가입"
+            , notes = "id,email,name,password를 받아 회원가입을 수행(request body, JSON)",
+            response = String.class
+    )
     @ResponseBody
     @PostMapping("/signup")
     public ResponseEntity<String> signUp(@RequestBody SignUpParam param) {
