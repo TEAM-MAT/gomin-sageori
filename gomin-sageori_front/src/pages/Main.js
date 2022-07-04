@@ -11,12 +11,12 @@ import ToggleButton from "../UI/reusable/ToggleButton";
 import ConfirmButton from "../UI/reusable/ConfirmButton";
 import { useEffect, useState } from "react";
 import RecommendList from "../UI/reusable/RecommendList";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import useStore from "../state/store";
 import axios from "axios";
 
 function Main() {
-  const {recommendResult, setRecommendResult} = useStore();
+  const { recommendResult, setRecommendResult } = useStore();
   // const setRecommendResult = useStore((state) => state.setRecommendResult);
   // const recommendResult = useStore((state) => state.recommendResult);
 
@@ -117,9 +117,16 @@ function Main() {
   // );
 
   const preferHandleClick = (idx) => {
-    const newArr = [...isPreferSelect];
-    newArr[idx] = !newArr[idx];
-    setIsPreferSelect(newArr);
+    if (
+      isPreferSelect.filter((p) => p === true).length >= 3 &&
+      isPreferSelect[idx] === false
+    ) {
+    } else {
+      const newArr = [...isPreferSelect];
+      newArr[idx] = !newArr[idx];
+      setIsPreferSelect(newArr);
+    }
+
     preferSelectionChange(preferArr[idx]);
   };
 
@@ -128,11 +135,20 @@ function Main() {
     if (idx === 0 && isPreferDisable[0] === false) {
       const newDisableArr = Array(preferArr.length).fill(true);
       setIsPreferDisable(newDisableArr);
+      const newArr = Array(preferArr.length).fill(false);
+      newArr[0] = true;
+      setIsPreferSelect(newArr);
     } else if (idx === 0 && isPreferDisable[0] === true) {
       // 초기화
       const newArr = Array(preferArr.length).fill(false);
       setIsPreferSelect(newArr);
 
+      const newDisableArr = Array(preferArr.length).fill(false);
+      setIsPreferDisable(newDisableArr);
+    } else if (isPreferDisable[0] === true) {
+      const newArr = Array(preferArr.length).fill(false);
+      newArr[idx] = true;
+      setIsPreferSelect(newArr);
       const newDisableArr = Array(preferArr.length).fill(false);
       setIsPreferDisable(newDisableArr);
     }
@@ -309,11 +325,11 @@ function Main() {
         <div css={containerStyle}>
           <Link to="/recommend">
             <ConfirmButton
-                content="찾아보기"
-                // handleClick={setIsAllSelect}
-                onClick={() => {
-                  setRecommendResult();
-                }}
+              content="찾아보기"
+              // handleClick={setIsAllSelect}
+              onClick={() => {
+                setRecommendResult();
+              }}
             />
           </Link>
         </div>
