@@ -3,6 +3,7 @@ package MAT.gominsageori.controller;
 import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.service.RestaurantService;
 import MAT.gominsageori.transfer.RestaurantInfoSchema;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,11 @@ import java.util.List;
 @RequestMapping("/api/restaurant")
 public class RestaurantController {
     private RestaurantService restaurantService;
+
+    @Autowired
+    public void RestaurantController(RestaurantService restaurantService) {
+        this.restaurantService = restaurantService;
+    }
 
     @GetMapping("/")
     public ResponseEntity<List<Restaurant>> restaurant()
