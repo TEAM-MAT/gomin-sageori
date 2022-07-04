@@ -37,3 +37,11 @@ gomin-sageori_Server/src/main/application.properties
 # 가상환경
 /gomin/* 
 >>>>>>> Stashed changes
+gomin-sageori_Server/src/main/.DS_Store
+gomin-sageori_Server/src/main/java/.DS_Store
+gomin-sageori_Server/src/main/java/MAT/gominsageori/.DS_Store
+gomin-sageori_Server/src/main/java/MAT/.DS_Store
+gomin-sageori_Server/src/.DS_Store
+gomin-sageori_Server/src/main/resources/.DS_Store
+gomin-sageori_Server/.DS_Store
+.DS_Store
