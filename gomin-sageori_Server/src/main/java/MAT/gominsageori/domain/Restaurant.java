@@ -57,6 +57,9 @@ public class Restaurant {
     @JoinColumn(name = "RestaurantAdd")
     private Address address;
 
+    @Column(nullable = true)
+    private int imageCount = 0;
+
     public Long getId(){
         if(this.id != null){
             return id;
