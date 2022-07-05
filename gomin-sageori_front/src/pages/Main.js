@@ -325,11 +325,14 @@ function Main() {
         <div css={containerStyle}>
           <Link to="/recommend">
             <ConfirmButton
-              content="찾아보기"
-              // handleClick={setIsAllSelect}
-              onClick={() => {
-                setRecommendResult();
-              }}
+                content="찾아보기"
+                handleClick={
+                  () => {
+                    // setIsAllSelect();
+                    console.log('실행');
+                    setRecommendResult();
+                  }
+                  }
             />
           </Link>
         </div>
