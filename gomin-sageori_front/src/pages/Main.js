@@ -22,6 +22,7 @@ function Main() {
   // const recommendResult = useStore((state) => state.recommendResult);
 
   // const setIsAllSelect = useStore((state) => state.setIsAllSelect(true));
+  const { isPreferMaxSelect, toggleIsPreferMaxSelect } = useStore();
   const preferArr = [
     "없음",
     "국물이 있는",
@@ -39,13 +40,13 @@ function Main() {
     "밥이 있는",
     "빵이 있는",
   ];
-  const atmosphereArr = [
-    "없음",
-    "시끌벅적한",
-    "조용한",
-    "혼밥하기 좋은",
-    "친구와 가기 좋은",
-  ];
+  // const atmosphereArr = [
+  //   "없음",
+  //   "시끌벅적한",
+  //   "조용한",
+  //   "혼밥하기 좋은",
+  //   "친구와 가기 좋은",
+  // ];
   // const allergyArr = [
   //   "알레르기 없음",
   //   "매밀",
@@ -117,15 +118,22 @@ function Main() {
   //   Array(allergyArr.length).fill(false)
   // );
 
+  const MAXIMUM_PREFER_SELECT = 3;
+
   const preferHandleClick = (idx) => {
+    //3개 초과 클릭 시
+    console.log("Max", isPreferMaxSelect);
     if (
-      isPreferSelect.filter((p) => p === true).length >= 3 &&
+      isPreferSelect.filter((p) => p === true).length >=
+        MAXIMUM_PREFER_SELECT &&
       isPreferSelect[idx] === false
     ) {
+      toggleIsPreferMaxSelect(true);
     } else {
       const newArr = [...isPreferSelect];
       newArr[idx] = !newArr[idx];
       setIsPreferSelect(newArr);
+      toggleIsPreferMaxSelect(false);
     }
 
     preferSelectionChange(preferArr[idx]);
@@ -238,6 +246,9 @@ function Main() {
     overflow: scroll;
     height: 100vh;
   `;
+
+  
+
   return (
     <div css={scrollStyle}>
       {/*<Header></Header>*/}
@@ -335,6 +346,7 @@ function Main() {
           </Link>
         </div>
       </div>
+      {/* Alert 작성중 */}
       <Alert />
     </div>
   );
