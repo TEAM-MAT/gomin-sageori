@@ -9,6 +9,7 @@ import {
 import BasicButton from "../UI/reusable/BasicButton";
 import ToggleButton from "../UI/reusable/ToggleButton";
 import ConfirmButton from "../UI/reusable/ConfirmButton";
+import Alert from "../UI/reusable/Alert";
 import { useEffect, useState } from "react";
 import RecommendList from "../UI/reusable/RecommendList";
 import { Link } from "react-router-dom";
@@ -334,6 +335,7 @@ function Main() {
           </Link>
         </div>
       </div>
+      <Alert />
     </div>
   );
 }
