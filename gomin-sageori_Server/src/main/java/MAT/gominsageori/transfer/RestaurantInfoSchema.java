@@ -40,6 +40,9 @@ public class RestaurantInfoSchema {
     @Schema(description = "이미지 개수, 식당id_이미지번호.jpg로 접근하면됨.")
     private int imageCount;
 
+    @Schema(description = "naver 지도 URL")
+    private String naverMapUrl;
+
     public void setRiSchemaFromRestaurant(Restaurant restaurant){
         try{
             this.name = restaurant.getName();
@@ -52,6 +55,7 @@ public class RestaurantInfoSchema {
             this.bestMenu = restaurant.getBestMenu().getName();
             this.address = restaurant.getAddress();
             this.imageCount = restaurant.getImageCount();
+            this.naverMapUrl = restaurant.getNaverMapUrl();
         }
         catch(Exception e){
             System.out.println(e);

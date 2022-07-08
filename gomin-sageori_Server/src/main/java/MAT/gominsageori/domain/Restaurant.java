@@ -58,6 +58,9 @@ public class Restaurant {
     private Address address;
 
     @Column(nullable = true)
+    private String naverMapUrl = "";
+
+    @Column(nullable = true)
     private int imageCount = 0;
 
     public Long getId(){
