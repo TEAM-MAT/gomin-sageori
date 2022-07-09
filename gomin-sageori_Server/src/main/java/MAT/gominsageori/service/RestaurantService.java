@@ -168,7 +168,8 @@ public class RestaurantService {
         }
         filteringQuery += " )";
         if (count == 0) { //하나의 특징도 검색이 안들어갔으면 exception.
-            throw new Exception("검색할 특징이 없음");
+            filteringQuery = "SELECT m FROM Menu m ";
+            return filteringQuery;
         }
         else {
             return filteringQuery;

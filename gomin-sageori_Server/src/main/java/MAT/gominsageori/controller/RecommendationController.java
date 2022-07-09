@@ -23,7 +23,7 @@ public class RecommendationController {
     private RestaurantService restaurantService;
 
     @Autowired
-    public void RestaurantController(RestaurantService restaurantService) {
+    public void RecommendationController(RestaurantService restaurantService) {
         this.restaurantService = restaurantService;
     }
 
