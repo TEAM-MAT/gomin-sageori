@@ -1,14 +1,18 @@
 package MAT.gominsageori.auth;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Date;
@@ -41,7 +45,27 @@ public class JwtTokenProvider {
     }
 
     public Authentication getAuthentication(String token) {
+        UserDetails userDetails = userDetailsService
+                .loadUserByUsername(this.getUserId(token));
+        return new UsernamePasswordAuthenticationToken(userDetails,"");
+    }
 
+    public String getUserId(String token) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+    }
+
+    public String resolveToken(HttpServletRequest request) {
+        return request.getHeader("X-AUTH-TOKEN");
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            Jws <Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+            return !claims.getBody().getExpiration().before(new Date());
+            //만료 시각이 지금 시간보다 이전인지를 보는 것이므로, 역으로 유효하면 1을 리턴하기 위해 not연산
+        } catch(Exception e) {
+            return false;
+        }
     }
 
 }
