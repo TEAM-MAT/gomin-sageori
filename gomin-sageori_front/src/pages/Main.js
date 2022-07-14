@@ -17,6 +17,7 @@ import useStore from "../state/store";
 import axios from "axios";
 
 function Main() {
+  const { userSelection, setUserSelection } = useStore();
   const { recommendResult, setRecommendResult } = useStore();
   // const setRecommendResult = useStore((state) => state.setRecommendResult);
   // const recommendResult = useStore((state) => state.recommendResult);
@@ -71,20 +72,27 @@ function Main() {
   // ];
   const regionArr = ["숭실대입구", "서울대입구", "신촌"];
 
-  const [userSelection, setUserSelection] = useState({
-    prefer: "",
-    atmosphere: "",
-    allergy: "",
-    franchise: false,
-    region: "",
-  });
+  // const [userSelection, setUserSelection] = useState({
+  //   prefer: "",
+  //   atmosphere: "",
+  //   allergy: "",
+  //   franchise: false,
+  //   region: "",
+  // });
 
   const preferSelectionChange = (value) => {
+    const oldSet = userSelection.prefer;
+    if (oldSet.has(value)) {
+      oldSet.delete(value);
+    } else {
+      oldSet.add(value);
+    }
     const newForm = {
       ...userSelection,
-      prefer: value,
+      prefer: oldSet,
     };
     setUserSelection(newForm);
+    console.log(userSelection.prefer);
   };
 
   const regionSelectionChange = (value) => {
@@ -93,6 +101,7 @@ function Main() {
       region: value,
     };
     setUserSelection(newForm);
+    console.log(userSelection);
   };
 
   const [isPreferSelect, setIsPreferSelect] = useState(
@@ -122,21 +131,26 @@ function Main() {
 
   const preferHandleClick = (idx) => {
     //3개 초과 클릭 시
-    console.log("Max", isPreferMaxSelect);
     if (
       isPreferSelect.filter((p) => p === true).length >=
         MAXIMUM_PREFER_SELECT &&
       isPreferSelect[idx] === false
     ) {
       toggleIsPreferMaxSelect(true);
+    } else if (
+      isPreferSelect.filter((p) => p === true).length >=
+        MAXIMUM_PREFER_SELECT &&
+      isPreferSelect[idx] === true
+    ) {
+      toggleIsPreferMaxSelect(false);
+      preferSelectionChange(preferArr[idx]);
     } else {
       const newArr = [...isPreferSelect];
       newArr[idx] = !newArr[idx];
       setIsPreferSelect(newArr);
       toggleIsPreferMaxSelect(false);
+      preferSelectionChange(preferArr[idx]);
     }
-
-    preferSelectionChange(preferArr[idx]);
   };
 
   const preferHandleDisable = (idx) => {
@@ -214,6 +228,11 @@ function Main() {
     regionSelectionChange(regionArr[idx]);
   };
 
+  const notCompleteSelect =
+    userSelection.prefer.size < 1 ||
+    userSelection.prefer.has("없음") ||
+    userSelection.region === "";
+
   const h3Style = css`
     font-size: 0.95em;
     font-weight: 400;
@@ -246,8 +265,6 @@ function Main() {
     overflow: scroll;
     height: 100vh;
   `;
-
-  
 
   return (
     <div css={scrollStyle}>
@@ -337,20 +354,21 @@ function Main() {
         <div css={containerStyle}>
           <Link to="/recommend">
             <ConfirmButton
-                content="찾아보기"
-                handleClick={
-                  () => {
-                    // setIsAllSelect();
-                    console.log('실행');
-                    setRecommendResult();
-                  }
-                  }
+              content="찾아보기"
+              handleClick={(e) => {
+                if (notCompleteSelect) {
+                  e.preventDefault();
+                } else {
+                  console.log("실행");
+                  setRecommendResult(userSelection);
+                }
+              }}
             />
           </Link>
         </div>
       </div>
       {/* Alert 작성중 */}
-      <Alert />
+      {/* <Alert /> */}
     </div>
   );
 }
