@@ -14,7 +14,6 @@ import { useEffect, useState } from "react";
 import RecommendList from "../UI/reusable/RecommendList";
 import { Link } from "react-router-dom";
 import useStore from "../state/store";
-import axios from "axios";
 
 function Main() {
   const { userSelection, setUserSelection } = useStore();
@@ -24,22 +23,17 @@ function Main() {
 
   // const setIsAllSelect = useStore((state) => state.setIsAllSelect(true));
   const { isPreferMaxSelect, toggleIsPreferMaxSelect } = useStore();
+
   const preferArr = [
-    "없음",
-    "국물이 있는",
-    "국물이 없는",
-    "매운",
-    "달달한",
-    "뜨거운",
-    "차가운",
-    "아이스크림",
-    "고기가 있는",
-    "고기가 없는",
-    "술이 있는",
-    "술이 없는",
-    "면이 있는",
-    "밥이 있는",
-    "빵이 있는",
+    ["없음", ""],
+    ["국물이 있는", "soup"],
+    ["매운", "spicy"],
+    ["달달한", "sweet"],
+    ["뜨거운", "hot"],
+    ["고기가 있는", "meat"],
+    ["면이 있는", "noodle"],
+    ["밥이 있는", "rice"],
+    ["빵이 있는", "bread"],
   ];
   // const atmosphereArr = [
   //   "없음",
@@ -70,15 +64,7 @@ function Main() {
   //   "쇠고기",
   //   "닭고기",
   // ];
-  const regionArr = ["숭실대입구", "서울대입구", "신촌"];
-
-  // const [userSelection, setUserSelection] = useState({
-  //   prefer: "",
-  //   atmosphere: "",
-  //   allergy: "",
-  //   franchise: false,
-  //   region: "",
-  // });
+  const regionArr = ["숭입", "설입", "신촌"];
 
   const preferSelectionChange = (value) => {
     const oldSet = userSelection.prefer;
@@ -92,7 +78,6 @@ function Main() {
       prefer: oldSet,
     };
     setUserSelection(newForm);
-    console.log(userSelection.prefer);
   };
 
   const regionSelectionChange = (value) => {
@@ -101,7 +86,6 @@ function Main() {
       region: value,
     };
     setUserSelection(newForm);
-    console.log(userSelection);
   };
 
   const [isPreferSelect, setIsPreferSelect] = useState(
@@ -143,13 +127,13 @@ function Main() {
       isPreferSelect[idx] === true
     ) {
       toggleIsPreferMaxSelect(false);
-      preferSelectionChange(preferArr[idx]);
+      preferSelectionChange(preferArr[idx][1]);
     } else {
       const newArr = [...isPreferSelect];
       newArr[idx] = !newArr[idx];
       setIsPreferSelect(newArr);
       toggleIsPreferMaxSelect(false);
-      preferSelectionChange(preferArr[idx]);
+      preferSelectionChange(preferArr[idx][1]);
     }
   };
 
@@ -229,9 +213,7 @@ function Main() {
   };
 
   const notCompleteSelect =
-    userSelection.prefer.size < 1 ||
-    userSelection.prefer.has("없음") ||
-    userSelection.region === "";
+    userSelection.prefer.size < 1 || userSelection.region === "";
 
   const h3Style = css`
     font-size: 0.95em;
@@ -283,7 +265,7 @@ function Main() {
                   isSelected={isPreferSelect[index]}
                   handleClick={preferHandleClick}
                   elementIndex={index}
-                  content={elm}
+                  content={elm[0]}
                   handleDisable={preferHandleDisable}
                   isDisable={isPreferDisable[index]}
                 />
@@ -361,6 +343,13 @@ function Main() {
                 } else {
                   console.log("실행");
                   setRecommendResult(userSelection);
+                  setUserSelection({
+                    prefer: new Set(),
+                    atmosphere: "",
+                    allergy: "",
+                    franchise: false,
+                    region: "",
+                  });
                 }
               }}
             />

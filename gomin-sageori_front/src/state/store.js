@@ -12,15 +12,17 @@ const useStore = create((set) => ({
   },
   setUserSelection: (p) => set(() => ({ userSelection: p })),
   recommendResult: [],
-  async setRecommendResult() {
+  async setRecommendResult(sel) {
     console.log("1");
+    const preferStr = Array.from(sel.prefer).join(",");
+    console.log(sel.region);
     const axios = require("axios");
     await axios
       .get("/api/recommendation", {
         params: {
-          characteristic: "spicy,noodle",
-          franchise: false,
-          location: "신촌",
+          characteristic: preferStr,
+          franchise: sel.franchise,
+          location: sel.region,
         },
       })
       .then((response) => {
