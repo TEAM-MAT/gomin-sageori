@@ -95,7 +95,7 @@ function RecommendList(props) {
     `
 
     const infoStyle = css`
-      color: #474747;
+      color: #656565;
       margin-top: 3px;
       margin-bottom: 3px;
       margin-left: 5px;

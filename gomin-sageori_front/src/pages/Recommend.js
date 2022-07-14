@@ -26,22 +26,31 @@ function Recommend() {
     return (
         <div className="Recommend">
             <div css={conWrap}>
+                {/*<BestRecommend id={recommendResult[0].id} name={recommendResult[0].name}/>*/}
                 {
                     recommendBool
                     ?
                     recommendResult.map((key, index) => {
-                        return(
-                            <>
-                            key == 0
-                            ?
-                            <BestRecommend key={index} id={key.id} name={key.name}/>
-                            :
-                            <RecommendList key={index} id={key.id} name={key.name}/>
-                            {/*<div key={index} css={testStyle}>*/}
-                            {/*    {key.address}*/}
-                            {/*</div>*/}
-                            </>
-                        )
+                        if (index != 0){
+                            return(
+                                <>
+                                    <RecommendList key={index} id={key.id} name={key.name}/>
+                                    {/*<div key={index} css={testStyle}>*/}
+                                    {/*    {key.address}*/}
+                                    {/*</div>*/}
+                                </>
+                            )
+                        }
+                        else {
+                            return(
+                                <>
+                                    <BestRecommend key={index} id={key.id} name={key.name}/>
+                                    {/*<div key={index} css={testStyle}>*/}
+                                    {/*    {key.address}*/}
+                                    {/*</div>*/}
+                                </>
+                            )
+                        }
                     })
                     :
                     <div>Loading</div>
