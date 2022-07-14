@@ -1,5 +1,6 @@
 package MAT.gominsageori.controller;
 
+import MAT.gominsageori.auth.JwtTokenProvider;
 import MAT.gominsageori.domain.Member;
 import MAT.gominsageori.service.MemberService;
 import MAT.gominsageori.transfer.SignInParam;
@@ -10,16 +11,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/member")
 public class MemberController {
     private final MemberService memberService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, JwtTokenProvider jwtTokenProvider) {
+        this.jwtTokenProvider = jwtTokenProvider;
         this.memberService = memberService;
     }
 
@@ -41,6 +46,10 @@ public class MemberController {
         member.setUserId(param.getUserId());
         member.setEmail(param.getEmail());
         member.setName(param.getName());
+
+        List<String> tempRoles = new ArrayList<>();
+        tempRoles.add("user");
+        member.setRoles(tempRoles);
 
         String pwdBeforeEncryption = param.getPassword();
         HashMap<String,String> saltAndPw = memberService.pwdEncryption(pwdBeforeEncryption);
@@ -68,8 +77,8 @@ public class MemberController {
         }
         Member member = findResult.get();
         String encodedInput = memberService.loginPwdEncryption(param.getPassword(),member.getSalt());
-        if(encodedInput.equals(member.getPwd())) {
-            return ResponseEntity.status(200).body("succeed");
+        if(encodedInput.equals(member.getPassword())) {
+            return ResponseEntity.status(200).body(jwtTokenProvider.createToken(member.getUserId(), member.getRoles()));
         }
         else {
             return ResponseEntity.status(403).body("fail");

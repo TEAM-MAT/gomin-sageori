@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Component
@@ -32,9 +33,9 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String createToken(String userId, String email) {
+    public String createToken(String userId, List<String> roles) {
         Claims claims = Jwts.claims().setSubject(userId);
-        claims.put("email",email);
+        claims.put("roles",roles);
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims)
@@ -47,7 +48,7 @@ public class JwtTokenProvider {
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = userDetailsService
                 .loadUserByUsername(this.getUserId(token));
-        return new UsernamePasswordAuthenticationToken(userDetails,"");
+        return new UsernamePasswordAuthenticationToken(userDetails,"",userDetails.getAuthorities());
     }
 
     public String getUserId(String token) {

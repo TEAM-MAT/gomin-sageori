@@ -2,6 +2,7 @@ package MAT.gominsageori.repository;
 
 import MAT.gominsageori.domain.Member;
 import MAT.gominsageori.domain.Restaurant;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 import java.util.Optional;
