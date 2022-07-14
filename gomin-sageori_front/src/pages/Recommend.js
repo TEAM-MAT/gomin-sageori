@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import useStore from "../state/store";
 import {useEffect, useState} from "react";
 import RecommendList from "../UI/reusable/RecommendList";
+import BestRecommend from "../UI/recommend/BestRecommend";
 
 function Recommend() {
     const recommendResult = useStore((state) => state.recommendResult);
@@ -31,6 +32,10 @@ function Recommend() {
                     recommendResult.map((key, index) => {
                         return(
                             <>
+                            key == 0
+                            ?
+                            <BestRecommend key={index} id={key.id} name={key.name}/>
+                            :
                             <RecommendList key={index} id={key.id} name={key.name}/>
                             {/*<div key={index} css={testStyle}>*/}
                             {/*    {key.address}*/}
