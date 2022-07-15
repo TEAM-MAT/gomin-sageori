@@ -12,7 +12,7 @@ import ConfirmButton from "../UI/reusable/ConfirmButton";
 import Alert from "../UI/reusable/Alert";
 import { useEffect, useState } from "react";
 import RecommendList from "../UI/reusable/RecommendList";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import useStore from "../state/store";
 
 function Main() {
@@ -333,8 +333,7 @@ function Main() {
             })}
           </div>
         </div>
-        <div css={containerStyle}>
-          <Link to="/recommend">
+          <NavLink to="/recommend">
             <ConfirmButton
               content="찾아보기"
               handleClick={(e) => {
@@ -353,8 +352,8 @@ function Main() {
                 }
               }}
             />
-          </Link>
-        </div>
+          </NavLink>
+
       </div>
       {/* Alert 작성중 */}
       {/* <Alert /> */}
