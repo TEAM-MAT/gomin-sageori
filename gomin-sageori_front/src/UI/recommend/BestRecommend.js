@@ -15,7 +15,7 @@ function BestRecommend(props) {
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
     const [externalStar, setExternalStar] = useState("");
-
+    const [naverURL, setNaverURL] = useState("");
 
     useEffect( () => {
         const axios = require("axios");
@@ -30,6 +30,7 @@ function BestRecommend(props) {
                 setStartTime(response.data.startTime);
                 setEndTime(response.data.finTime);
                 setExternalStar(response.data.externalStar);
+                setNaverURL(response.data.naverMapUrl);
             });
     }, [])
 
@@ -181,7 +182,8 @@ function BestRecommend(props) {
     `
     return (
         <div css={wrapStyle}
-             className="RecommendList">
+             className="RecommendList"
+             onClick={() => window.open(naverURL, '_blank')}>
             <div css={imageStyle}>
                 {/*image*/}
             </div>
