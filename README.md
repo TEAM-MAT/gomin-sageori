@@ -14,7 +14,7 @@ From 2022-03 ~ 개발중
 
 <img src="https://huchu.link/vm3gPjx" height= 500px />
 
-### 팀원
+### 팀원  
 
 Back-End : [박상철](https://github.com/sangcheol12), [심원준](https://github.com/makemyway-kr)
 
