@@ -1,7 +1,11 @@
 package MAT.gominsageori.controller;
 
 import MAT.gominsageori.domain.Member;
+import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.service.MemberService;
+import MAT.gominsageori.service.RestaurantService;
+import MAT.gominsageori.transfer.AddFavoritesParam;
+import MAT.gominsageori.transfer.FavoritesParam;
 import MAT.gominsageori.transfer.SignInParam;
 import MAT.gominsageori.transfer.SignUpParam;
 import io.swagger.annotations.ApiOperation;
@@ -9,17 +13,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/member")
 public class MemberController {
     private final MemberService memberService;
+    private final RestaurantService restaurantService;
 
     @Autowired
-    public MemberController(MemberService memberService) {
+    public MemberController(MemberService memberService, RestaurantService restaurantService) {
         this.memberService = memberService;
+        this.restaurantService = restaurantService;
     }
 
     @ApiOperation(
@@ -55,7 +60,7 @@ public class MemberController {
     }
 
     @ResponseBody
-    @PostMapping("/signin")
+    @PostMapping("/favorites/signin")
     public ResponseEntity<String> signIn(@RequestBody SignInParam param){
         if (param.getUserId().equals("") && param.getPassword().equals("")) {
             return ResponseEntity.status(400).body("blank in id or password");
@@ -75,4 +80,62 @@ public class MemberController {
         }
     }
 
+    @ApiOperation(
+            value = "즐겨찾기"
+            , notes = "MemberId와 restaurantId 값을 받아 즐겨찾기 추가",
+            response = String.class
+    )
+    @ResponseBody
+    @PostMapping("/favorites/add")
+    public ResponseEntity<String> addFavorites(@RequestBody AddFavoritesParam param) {
+        Optional<Member> member = memberService.findOneById(param.getMemberId());
+        try {
+            Set<Restaurant> restaurants = restaurantService.findSpecificDataById(param.getNewFavorites());
+            memberService.saveFavorites(member.get(),restaurants);
+            return ResponseEntity.status(200).body(member.get().getUserId());
+        }
+        catch(Exception e) {
+            return ResponseEntity.status(400).body("No data found corresponding to the requested URI.");
+        }
+    }
+
+    @ApiOperation(
+            value = "즐겨찾기"
+            , notes = "MemberId와 restaurantId 값을 받아 즐겨찾기 조회",
+            response = String.class
+    )
+    @ResponseBody
+    @GetMapping("/{id}")
+    public ResponseEntity<FavoritesParam> getFavoritesList(@PathVariable("id") Long id) {
+        FavoritesParam favoritesParam = new FavoritesParam();
+        Optional<Member> member = memberService.findOneById(id);
+        try {
+            Set<Restaurant> restaurants = memberService.getFavoritesList(member.get());
+            List<Restaurant> restaurantList = new ArrayList<>(restaurants);
+
+            int totalCount = 0;
+            for(Restaurant iter : restaurantList) {
+                totalCount++;
+            }
+
+            favoritesParam.setUserfavorites(restaurantList);
+            favoritesParam.setCount(totalCount);
+            return ResponseEntity.status(200).body(favoritesParam);
+        }
+        catch (Exception e) {
+            favoritesParam.setCount(0);
+            return ResponseEntity.status(204).body(favoritesParam);
+        }
+    }
+
+    @ApiOperation(
+            value = "즐겨찾기"
+            , notes = "MemberId와 restaurantId 값을 받아 즐겨찾기 삭제",
+            response = String.class
+    )
+    @ResponseBody
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteFavorites() {
+        return ResponseEntity.status(200).body("작성 예정");
+    }
 }

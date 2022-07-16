@@ -39,7 +39,7 @@ public class RestaurantService {
         return restaurantRepository.findRestaurantByLocation(location);
     }
 
-    public Set<Restaurant> findSpecificDataById(String selectedIds) {
+    public Set<Restaurant> findSpecificDataById(String selectedIds) throws Exception {
         Set<Restaurant> restaurants = new HashSet<>();
         String[] restaurantsId = selectedIds.split(",");
         for(String iter : restaurantsId) {
@@ -47,7 +47,7 @@ public class RestaurantService {
                 restaurants.add(restaurantRepository.findById(Long.parseLong(iter)));
             }
             catch (Exception e) {
-                System.out.println(e.getMessage());
+                throw new Exception("no Restaurant result");
             }
         }
         return restaurants;
