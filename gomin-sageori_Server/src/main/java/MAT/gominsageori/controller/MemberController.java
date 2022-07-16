@@ -64,6 +64,11 @@ public class MemberController {
         return ResponseEntity.status(200).body(member.getUserId());
     }
 
+    @ApiOperation(
+            value = "로그인"
+            , notes = "userId , password를 받아 로그인 수행. (request body, JSON), JWT토큰을 리턴해줌. 실패 시 400 status code리턴",
+            response = String.class
+    )
     @ResponseBody
     @PostMapping("/signin")
     public ResponseEntity<String> signIn(@RequestBody SignInParam param){
@@ -81,7 +86,7 @@ public class MemberController {
             return ResponseEntity.status(200).body(jwtTokenProvider.createToken(member.getUserId(), member.getRoles()));
         }
         else {
-            return ResponseEntity.status(403).body("fail");
+            return ResponseEntity.status(400).body("fail");
         }
     }
 
