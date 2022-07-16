@@ -3,14 +3,10 @@ package MAT.gominsageori.service;
 import MAT.gominsageori.domain.Member;
 import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.transaction.Transactional;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Transactional
@@ -35,6 +31,10 @@ public class MemberService {
                 });
     }
 
+    public Optional<Member> findOneById(Long id) {
+        return memberRepository.findById(id);
+    }
+
     public Optional<Member> findOneByUserId(String userId) {
         return memberRepository.findByUserId(userId);
     }
@@ -56,13 +56,18 @@ public class MemberService {
             return null;
     }
 
-    public Member saveFavorites(Member member, List<Restaurant> restaurants) {
+    public Member saveFavorites(Member member, Set<Restaurant> restaurants) {
         memberRepository.setFavorites(member, restaurants);
         return member;
     }
 
-    // TODO 문자열로 식당ID 받으면 해당 식당 리스트로 반환해주는 함수
-    // TODO 식당 LIST를 SET으로 변경
+    public Set<Restaurant> getFavoritesList(Member member) throws Exception {
+        Set<Restaurant> favoritesList = memberRepository.getFavorites(member);
+        if(favoritesList.size() == 0) {
+            throw new NoSuchElementException("반환할 리스트가 없습니다.");
+        }
+        return favoritesList;
+    }
 
     public void delete(Member member) {
         if(memberRepository.findByUserId(member.getUserId()).isPresent()) {

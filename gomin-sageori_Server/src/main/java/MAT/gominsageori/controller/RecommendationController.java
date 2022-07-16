@@ -2,8 +2,6 @@ package MAT.gominsageori.controller;
 
 
 import MAT.gominsageori.domain.Address;
-import MAT.gominsageori.domain.Menu;
-import MAT.gominsageori.service.MemberService;
 import MAT.gominsageori.transfer.RecommandParam;
 import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.transfer.recommendationSchema;
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

@@ -2,6 +2,7 @@ package MAT.gominsageori.domain;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Member {
@@ -27,7 +28,7 @@ public class Member {
 
     @ManyToMany
     @JoinColumn( name = "favoriteRestaurant" , nullable = true)
-    private List<Restaurant> favoriteRestaurant;
+    private Set<Restaurant> favoriteRestaurant;
 
     public String getUserId() {
         if(this.userId != null) {
@@ -89,7 +90,7 @@ public class Member {
         this.password = pwd;
     }
 
-    public List<Restaurant> getFavoriteRestaurant() {
+    public Set<Restaurant> getFavoriteRestaurant() {
         if(this.favoriteRestaurant != null && !this.favoriteRestaurant.isEmpty()) {
             return this.favoriteRestaurant;
         }
@@ -106,7 +107,7 @@ public class Member {
         return this.salt;
     }
 
-    public void setFavorites(List<Restaurant> favorites){
+    public void setFavorites(Set<Restaurant> favorites){
         this.favoriteRestaurant = favorites;
     }
 }

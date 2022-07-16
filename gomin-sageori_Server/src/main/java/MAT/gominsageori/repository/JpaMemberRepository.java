@@ -4,8 +4,8 @@ import MAT.gominsageori.domain.Member;
 import MAT.gominsageori.domain.Restaurant;
 
 import javax.persistence.EntityManager;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class JpaMemberRepository implements MemberRepository {
 
@@ -64,16 +64,18 @@ public class JpaMemberRepository implements MemberRepository {
     }
 
     @Override
-    public Member setFavorites(Member memberParam, List<Restaurant> restaurants) {
+    public Member setFavorites(Member memberParam, Set<Restaurant> newFavorites) {
         Member member = em.find(Member.class, memberParam.getId());
-        member.setFavorites(restaurants);
+        Set<Restaurant> oldFavorites = member.getFavoriteRestaurant();
+        oldFavorites.addAll(newFavorites);
+        member.setFavorites(oldFavorites);
         return member;
     }
 
     @Override
-    public List<Restaurant> getFavorites(Member memberParam) {
+    public Set<Restaurant> getFavorites(Member memberParam) {
         Member member = em.find(Member.class, memberParam.getId());
-        List<Restaurant> restaurants = member.getFavoriteRestaurant();
+        Set<Restaurant> restaurants = member.getFavoriteRestaurant();
         return restaurants;
     }
 }

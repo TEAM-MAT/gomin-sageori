@@ -1,7 +1,6 @@
 package MAT.gominsageori.repository;
 
 import MAT.gominsageori.domain.Address;
-import MAT.gominsageori.domain.Menu;
 import MAT.gominsageori.domain.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

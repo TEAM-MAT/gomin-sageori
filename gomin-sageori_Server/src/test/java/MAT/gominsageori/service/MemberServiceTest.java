@@ -7,11 +7,10 @@ import MAT.gominsageori.repository.RestaurantRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -80,10 +79,24 @@ public class MemberServiceTest {
     }
 
     @Test
-    @Commit
+    //@Commit
     void 즐겨찾기_추가() {
-        Optional<Member> member = memberService.findOneByUserId("james");
-        List<Restaurant> restaurants = restaurantService.findAll();
+        Optional<Member> member = memberService.findOneByUserId("sam");
+        Set<Restaurant> restaurants = restaurantService.findSpecificDataById("2");
         memberService.saveFavorites(member.get(),restaurants);
+    }
+
+    @Test
+    void 즐겨찾기_조회() {
+        Optional<Member> member = memberService.findOneById(1L);
+        try {
+            Set<Restaurant> restaurants = memberService.getFavoritesList(member.get());
+            for(Restaurant iter : restaurants) {
+                System.out.println(iter.getName());
+            }
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
