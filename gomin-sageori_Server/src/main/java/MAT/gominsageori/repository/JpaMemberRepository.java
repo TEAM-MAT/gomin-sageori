@@ -33,8 +33,8 @@ public class JpaMemberRepository implements MemberRepository {
                 "FROM Member m " +
                 "WHERE m.userId = :userId")
                 .setParameter("userId", userId)
-                .getResultStream()
-                .findAny();
+                .getResultList()
+                .stream().findAny();
     }
 
     @Override

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
+@Table(name = "member")
 public class Member implements UserDetails {
 
     @Id
@@ -34,7 +35,7 @@ public class Member implements UserDetails {
     private String salt = "";
 
     @Column(nullable = false)
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
 
     @ManyToMany

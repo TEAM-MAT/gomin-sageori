@@ -7,9 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Transactional
 public class CustomUserDetailService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
