@@ -47,12 +47,13 @@ public class JpaMemberRepository implements MemberRepository {
                 .findAny();
     }
 
+
     @Override
     public Member update(Member memberParam) {
         Member member = em.find(Member.class, memberParam.getId());
         member.setName(memberParam.getName());
         member.setPwd(memberParam.getPwd());
-        member.SetFavorites(memberParam.getFavoriteRestaurant());
+        member.setFavorites(memberParam.getFavoriteRestaurant());
         return member;
     }
 
@@ -63,8 +64,16 @@ public class JpaMemberRepository implements MemberRepository {
     }
 
     @Override
-    public List<Restaurant> getFavorites(Member memberparam){
-        List <Restaurant> result = memberparam.getFavoriteRestaurant();
-        return result;
+    public Member setFavorites(Member memberParam, List<Restaurant> restaurants) {
+        Member member = em.find(Member.class, memberParam.getId());
+        member.setFavorites(restaurants);
+        return member;
+    }
+
+    @Override
+    public List<Restaurant> getFavorites(Member memberParam) {
+        Member member = em.find(Member.class, memberParam.getId());
+        List<Restaurant> restaurants = member.getFavoriteRestaurant();
+        return restaurants;
     }
 }

@@ -88,6 +88,7 @@ public class Member {
     public void setPwd(String pwd) {
         this.password = pwd;
     }
+
     public List<Restaurant> getFavoriteRestaurant() {
         if(this.favoriteRestaurant != null && !this.favoriteRestaurant.isEmpty()) {
             return this.favoriteRestaurant;
@@ -105,7 +106,7 @@ public class Member {
         return this.salt;
     }
 
-    public void SetFavorites(List<Restaurant> favorites){
+    public void setFavorites(List<Restaurant> favorites){
         this.favoriteRestaurant = favorites;
     }
 }

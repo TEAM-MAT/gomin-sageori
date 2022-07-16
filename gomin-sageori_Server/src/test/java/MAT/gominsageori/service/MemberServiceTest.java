@@ -1,12 +1,18 @@
 package MAT.gominsageori.service;
 
 import MAT.gominsageori.domain.Member;
+import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.repository.MemberRepository;
-import org.assertj.core.api.Assertions;
+import MAT.gominsageori.repository.RestaurantRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -16,6 +22,9 @@ public class MemberServiceTest {
 
     @Autowired MemberService memberService;
     @Autowired MemberRepository memberRepository;
+
+    @Autowired RestaurantService restaurantService;
+    @Autowired RestaurantRepository restaurantRepository;
 
     @Test
     void 회원가입() {
@@ -70,4 +79,11 @@ public class MemberServiceTest {
         memberService.delete(member);
     }
 
+    @Test
+    @Commit
+    void 즐겨찾기_추가() {
+        Optional<Member> member = memberService.findOneByUserId("james");
+        List<Restaurant> restaurants = restaurantService.findAll();
+        memberService.saveFavorites(member.get(),restaurants);
+    }
 }
