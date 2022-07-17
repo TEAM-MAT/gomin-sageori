@@ -87,7 +87,7 @@ public class MemberServiceTest {
         Optional<Member> member = memberService.findOneByUserId("sam");
         try {
             List<Long> selectedIds = new ArrayList<>();
-            Set<Restaurant> restaurants = restaurantService.findSpecificDataById(selectedIds);
+            Set<Restaurant> restaurants = restaurantService.findRestaurantInfoFromListById(selectedIds);
             memberService.saveFavorites(member.get(),restaurants);
         }
         catch(Exception e) {
@@ -127,7 +127,7 @@ public class MemberServiceTest {
         }
         try {
             List<Long> selectedIds = new ArrayList<>();
-            Set<Restaurant> restaurants = restaurantService.findSpecificDataById(selectedIds);
+            Set<Restaurant> restaurants = restaurantService.findRestaurantInfoFromListById(selectedIds);
             memberService.deleteFavorites(member.get(),restaurants);
             System.out.println("삭제되었음");
         }

@@ -39,7 +39,7 @@ public class RestaurantService {
         return restaurantRepository.findRestaurantByLocation(location);
     }
 
-    public Set<Restaurant> findSpecificDataById(List<Long> selectedIds) throws Exception {
+    public Set<Restaurant> findRestaurantInfoFromListById(List<Long> selectedIds) throws Exception {
         Set<Restaurant> restaurants = new HashSet<>();
         for(Long iter : selectedIds) {
             try {

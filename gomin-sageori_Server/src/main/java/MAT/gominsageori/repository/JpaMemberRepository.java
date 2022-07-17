@@ -4,6 +4,7 @@ import MAT.gominsageori.domain.Member;
 import MAT.gominsageori.domain.Restaurant;
 
 import javax.persistence.EntityManager;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.Spliterator;
@@ -67,9 +68,14 @@ public class JpaMemberRepository implements MemberRepository {
     @Override
     public Member setFavorites(Member memberParam, Set<Restaurant> newFavorites) {
         Member member = em.find(Member.class, memberParam.getId());
-        Set<Restaurant> oldFavorites = member.getFavoriteRestaurant();
-        oldFavorites.addAll(newFavorites);
-        member.setFavorites(oldFavorites);
+        Set<Restaurant> oldFavorites = new HashSet<>();
+        try{
+            oldFavorites = member.getFavoriteRestaurant();
+            oldFavorites.addAll(newFavorites);
+            member.setFavorites(oldFavorites);
+        } catch (Exception e){
+            member.setFavorites(newFavorites);
+        }
         return member;
     }
 
@@ -86,6 +92,13 @@ public class JpaMemberRepository implements MemberRepository {
         Set<Restaurant> oldFavories = member.getFavoriteRestaurant();
         oldFavories.removeAll(restaurants);
         member.setFavorites(oldFavories);
+        return Optional.of(member);
+    }
+
+    @Override
+    public Optional<Member> deleteAllFavorites(Member memberParam) {
+        Member member = em.find(Member.class, memberParam.getId());
+        member.getFavoriteRestaurant().clear();
         return Optional.of(member);
     }
 }

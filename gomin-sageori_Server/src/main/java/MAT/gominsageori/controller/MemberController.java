@@ -10,7 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.ArrayList;
+
 
 @RestController
 @RequestMapping("/api/member")
@@ -79,12 +84,12 @@ public class MemberController {
 
     @ApiOperation(
             value = "즐겨찾기 추가"
-            , notes = "MemberId와 추가할 favorites 배열을 통해 즐겨찾기 추가 (URL : api/member/favorites/add)",
+            , notes = "MemberId와 추가할 favorites 리스트를 통해 즐겨찾기 추가 (URL : api/member/favorites)",
             response = String.class
     )
     @ResponseBody
-    @PostMapping("/favorites/add")
-    public ResponseEntity<String> addFavorites(@RequestBody AddDeleteFavoritesParam param) {
+    @PostMapping("/favorites")
+    public ResponseEntity<String> addFavorites(@RequestBody FavoritesAddParam param) {
         Optional<Member> member = null;
         try {
             member = memberService.findOneById(param.getMemberId());
@@ -92,7 +97,7 @@ public class MemberController {
             return ResponseEntity.status(400).body(e.getMessage()); // URI로 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
         }
         try {
-            Set<Restaurant> restaurants = restaurantService.findSpecificDataById(param.getFavorites());
+            Set<Restaurant> restaurants = restaurantService.findRestaurantInfoFromListById(param.getFavorites());
             memberService.saveFavorites(member.get(),restaurants);
             return ResponseEntity.status(200).body(member.get().getUserId());
         } catch (Exception e) {
@@ -103,12 +108,12 @@ public class MemberController {
     @ApiOperation(
             value = "즐겨찾기 조회"
             , notes = "MemberId 값을 받아 즐겨찾기 조회 (ex : api/member/favorites/1)",
-            response = FavoritesParam.class
+            response = FavoritesReturnParam.class
     )
     @ResponseBody
     @GetMapping("favorites/{id}")
-    public ResponseEntity<FavoritesParam> getFavoritesList(@PathVariable("id") Long id) {
-        FavoritesParam favoritesParam = new FavoritesParam();
+    public ResponseEntity<FavoritesReturnParam> getFavoritesList(@PathVariable("id") Long id) {
+        FavoritesReturnParam favoritesParam = new FavoritesReturnParam();
         Optional<Member> member = null;
         try {
             member = memberService.findOneById(id);
@@ -135,12 +140,12 @@ public class MemberController {
 
     @ApiOperation(
             value = "즐겨찾기 수정"
-            , notes = "MemberId와 추가할 favorites 배열, 제거할 favorites 배열을 통해 즐겨찾기 수정 (URL : api/member/favorites/modify)",
+            , notes = "MemberId와 추가할 favorites 리스트, 제거할 favorites 리스트를 통해 즐겨찾기 수정 (URL : api/member/favorites)",
             response = String.class
     )
     @ResponseBody
-    @PutMapping("/favorites/modify")
-    public ResponseEntity<String> modifyFavorites(@RequestBody ModifyFavoritesParam param) {
+    @PutMapping("/favorites")
+    public ResponseEntity<String> modifyFavorites(@RequestBody FavoritesModifyParam param) {
         Optional<Member> member = null;
         try {
             member = memberService.findOneById(param.getMemberId());
@@ -148,8 +153,8 @@ public class MemberController {
             return ResponseEntity.status(400).body(e.getMessage()); // URI로 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
         }
         try {
-            Set<Restaurant> addRestaurants = restaurantService.findSpecificDataById(param.getAddFavorites());
-            Set<Restaurant> deleteRestaurants = restaurantService.findSpecificDataById(param.getDeleteFavorites());
+            Set<Restaurant> addRestaurants = restaurantService.findRestaurantInfoFromListById(param.getAddFavorites());
+            Set<Restaurant> deleteRestaurants = restaurantService.findRestaurantInfoFromListById(param.getDeleteFavorites());
             memberService.modifyFavorites(member.get(),addRestaurants,deleteRestaurants);
             return ResponseEntity.status(200).body(member.get().getUserId());
         } catch (Exception e) {
@@ -159,24 +164,19 @@ public class MemberController {
 
     @ApiOperation(
             value = "즐겨찾기 삭제"
-            , notes = "MemberId와 제거할 favorites 배열을 통해 즐겨찾기 삭제 (URL : api/member/favorites/delete)",
+            , notes = "MemberId를 받아 즐겨찾기 리스트 전체 삭제 (ex : api/member/favorites/1)",
             response = String.class
     )
     @ResponseBody
-    @DeleteMapping("/favorites/delete")
-    public ResponseEntity<String> deleteFavorites(@RequestBody AddDeleteFavoritesParam param) {
+    @DeleteMapping("/favorites/{id}")
+    public ResponseEntity<String> deleteFavorites(@PathVariable("id") Long id) {
         Optional<Member> member = null;
         try {
-            member = memberService.findOneById(param.getMemberId());
+            member = memberService.findOneById(id);
         } catch (Exception e) {
             return ResponseEntity.status(400).body(e.getMessage()); // URI로 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
         }
-        try {
-            Set<Restaurant> restaurants = restaurantService.findSpecificDataById(param.getFavorites());
-            memberService.deleteFavorites(member.get(),restaurants);
-            return ResponseEntity.status(200).body(member.get().getUserId());
-        } catch (Exception e) {
-            return ResponseEntity.status(400).body("No data found corresponding to the requested URI"); // URI로 넘어온 데이터에 해당하는 ID의 레스토랑이 없을 시 Exception
-        }
+        memberService.deleteAllFavorites(member.get());
+        return ResponseEntity.status(200).body(member.get().getUserId());
     }
 }

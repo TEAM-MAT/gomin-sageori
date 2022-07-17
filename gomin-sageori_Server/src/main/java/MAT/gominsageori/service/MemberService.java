@@ -6,7 +6,10 @@ import MAT.gominsageori.repository.MemberRepository;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.HashMap;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.Set;
 
 
 @Transactional
@@ -75,6 +78,11 @@ public class MemberService {
 
     public Member deleteFavorites(Member member, Set<Restaurant> restaurants) {
         memberRepository.deleteFavorites(member,restaurants);
+        return member;
+    }
+
+    public Member deleteAllFavorites(Member member) {
+        memberRepository.deleteAllFavorites(member);
         return member;
     }
 
