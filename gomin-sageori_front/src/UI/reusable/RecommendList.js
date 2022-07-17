@@ -35,15 +35,15 @@ function RecommendList(props) {
 
     const checkTime = (start, end) => {
         // 현재 시간
-        let today = new Date();
+        const today = new Date();
 
-        let hours = today.getHours();
-        let minutes = today.getMinutes();
+        const hours = today.getHours();
+        const minutes = today.getMinutes();
 
-        let startHours = Number(start.slice(0, 2));
+        const startHours = Number(start.slice(0, 2));
 
-        let endHours = Number(end.slice(0, 2));
-        let endMinutes = Number(end.slice(3, 5));
+        const endHours = Number(end.slice(0, 2));
+        const endMinutes = Number(end.slice(3, 5));
 
         if (startHours <= hours && hours <= endHours && minutes < endMinutes){
             return "영업중";
