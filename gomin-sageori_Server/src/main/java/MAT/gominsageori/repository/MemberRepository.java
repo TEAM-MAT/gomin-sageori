@@ -16,4 +16,5 @@ public interface MemberRepository {
     Member setFavorites(Member member, Set<Restaurant> restaurants);
     Set<Restaurant> getFavorites(Member member);
     Optional<Member> findByEmail(String email);
+    Optional<Member> deleteFavorites(Member memberParam, Set<Restaurant> restaurants);
 }

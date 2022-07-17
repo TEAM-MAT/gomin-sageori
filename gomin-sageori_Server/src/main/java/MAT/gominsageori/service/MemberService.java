@@ -31,8 +31,12 @@ public class MemberService {
                 });
     }
 
-    public Optional<Member> findOneById(Long id) {
-        return memberRepository.findById(id);
+    public Optional<Member> findOneById(Long id) throws Exception {
+        Optional<Member> member = memberRepository.findById(id);
+        if (!member.isPresent()) {
+            throw new NoSuchElementException("No data for that member");
+        }
+        return member;
     }
 
     public Optional<Member> findOneByUserId(String userId) {
@@ -67,6 +71,17 @@ public class MemberService {
             throw new NoSuchElementException("반환할 리스트가 없습니다.");
         }
         return favoritesList;
+    }
+
+    public Member deleteFavorites(Member member, Set<Restaurant> restaurants) {
+        memberRepository.deleteFavorites(member,restaurants);
+        return member;
+    }
+
+    public Member modifyFavorites(Member member, Set<Restaurant> addRestaurants, Set<Restaurant> deleteRestaurants) {
+        memberRepository.setFavorites(member, addRestaurants);
+        memberRepository.deleteFavorites(member, deleteRestaurants);
+        return member;
     }
 
     public void delete(Member member) {

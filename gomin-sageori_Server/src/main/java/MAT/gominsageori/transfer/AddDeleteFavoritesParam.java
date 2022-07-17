@@ -3,11 +3,13 @@ package MAT.gominsageori.transfer;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
-public class AddFavoritesParam {
+public class AddDeleteFavoritesParam {
     private Long memberId;
-    private String newFavorites;
+    private List<Long> favorites;
 
     public Long getMemberId() {
         return memberId;
@@ -17,11 +19,11 @@ public class AddFavoritesParam {
         this.memberId = memberId;
     }
 
-    public String getNewFavorites() {
-        return newFavorites;
+    public List<Long> getFavorites() {
+        return favorites;
     }
 
-    public void setNewFavorites(String newFavorites) {
-        this.newFavorites = newFavorites;
+    public void setFavorites(List<Long> favorites) {
+        this.favorites = favorites;
     }
 }

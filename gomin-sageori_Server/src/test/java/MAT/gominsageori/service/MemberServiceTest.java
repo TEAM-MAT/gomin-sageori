@@ -7,8 +7,11 @@ import MAT.gominsageori.repository.RestaurantRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -83,7 +86,8 @@ public class MemberServiceTest {
     void 즐겨찾기_추가() {
         Optional<Member> member = memberService.findOneByUserId("sam");
         try {
-            Set<Restaurant> restaurants = restaurantService.findSpecificDataById("2");
+            List<Long> selectedIds = new ArrayList<>();
+            Set<Restaurant> restaurants = restaurantService.findSpecificDataById(selectedIds);
             memberService.saveFavorites(member.get(),restaurants);
         }
         catch(Exception e) {
@@ -93,12 +97,39 @@ public class MemberServiceTest {
 
     @Test
     void 즐겨찾기_조회() {
-        Optional<Member> member = memberService.findOneById(1L);
+        Optional<Member> member = null;
+        try {
+            member = memberService.findOneById(2L);
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
         try {
             Set<Restaurant> restaurants = memberService.getFavoritesList(member.get());
             for(Restaurant iter : restaurants) {
                 System.out.println(iter.getName());
             }
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    //@Commit
+    void 즐겨찾기_삭제() {
+        Optional<Member> member = null;
+        try {
+            member = memberService.findOneById(5L);
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            List<Long> selectedIds = new ArrayList<>();
+            Set<Restaurant> restaurants = restaurantService.findSpecificDataById(selectedIds);
+            memberService.deleteFavorites(member.get(),restaurants);
+            System.out.println("삭제되었음");
         }
         catch(Exception e) {
             System.out.println(e.getMessage());

@@ -6,6 +6,7 @@ import MAT.gominsageori.domain.Restaurant;
 import javax.persistence.EntityManager;
 import java.util.Optional;
 import java.util.Set;
+import java.util.Spliterator;
 
 public class JpaMemberRepository implements MemberRepository {
 
@@ -77,5 +78,14 @@ public class JpaMemberRepository implements MemberRepository {
         Member member = em.find(Member.class, memberParam.getId());
         Set<Restaurant> restaurants = member.getFavoriteRestaurant();
         return restaurants;
+    }
+
+    @Override
+    public Optional<Member> deleteFavorites(Member memberParam, Set<Restaurant> restaurants) {
+        Member member = em.find(Member.class, memberParam.getId());
+        Set<Restaurant> oldFavories = member.getFavoriteRestaurant();
+        oldFavories.removeAll(restaurants);
+        member.setFavorites(oldFavories);
+        return Optional.of(member);
     }
 }
