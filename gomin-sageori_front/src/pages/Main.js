@@ -126,6 +126,9 @@ function Main() {
         MAXIMUM_PREFER_SELECT &&
       isPreferSelect[idx] === true
     ) {
+      const newArr = [...isPreferSelect];
+      newArr[idx] = !newArr[idx];
+      setIsPreferSelect(newArr);
       toggleIsPreferMaxSelect(false);
       preferSelectionChange(preferArr[idx][1]);
     } else {

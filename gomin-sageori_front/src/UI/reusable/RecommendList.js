@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import "../../styles/base/font.css";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import timeIcon from '../../logo/time.png'
 import locationIcon from '../../logo/location.png'
@@ -15,6 +16,7 @@ function RecommendList(props) {
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
     const [externalStar, setExternalStar] = useState("");
+    const [naverURL, setNaverURL] = useState("");
 
 
     useEffect( () => {
@@ -30,6 +32,7 @@ function RecommendList(props) {
                 setStartTime(response.data.startTime);
                 setEndTime(response.data.finTime);
                 setExternalStar(response.data.externalStar);
+                setNaverURL(response.data.naverMapUrl);
             });
     }, [])
 
@@ -152,9 +155,11 @@ function RecommendList(props) {
     const closeStyle = css`
       color: #FF2F2F;
     `
+
   return (
-      <div css={wrapStyle}
-           className="RecommendList">
+      <div  css={wrapStyle}
+            className="RecommendList"
+            onClick={() => window.open(naverURL, '_blank')}>
           <div css={imageStyle}>
               {/*image*/}
           </div>
