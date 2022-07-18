@@ -94,20 +94,20 @@ public class MemberController {
         try {
             member = memberService.findOneById(param.getMemberId());
         } catch (Exception e) {
-            return ResponseEntity.status(400).body(e.getMessage()); // URI로 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
+            return ResponseEntity.status(400).body(e.getMessage()); // 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
         }
         try {
             Set<Restaurant> restaurants = restaurantService.findRestaurantInfoFromListById(param.getFavorites());
             memberService.saveFavorites(member.get(),restaurants);
             return ResponseEntity.status(200).body(member.get().getUserId());
         } catch (Exception e) {
-            return ResponseEntity.status(400).body("No data found corresponding to the requested URI"); // URI로 넘어온 데이터에 해당하는 ID의 레스토랑이 없을 시 Exception
+            return ResponseEntity.status(400).body("No data found corresponding to the requested restaurant"); //데이터에 해당하는 ID의 레스토랑이 없을 시 Exception
         }
     }
 
     @ApiOperation(
             value = "즐겨찾기 조회"
-            , notes = "MemberId 값을 받아 즐겨찾기 조회 (ex : api/member/favorites/1)",
+            , notes = "MemberId 값을 받아 즐겨찾기 조회 (ex : api/member/1/favorites)",
             response = FavoritesReturnParam.class
     )
     @ResponseBody
@@ -164,7 +164,7 @@ public class MemberController {
 
     @ApiOperation(
             value = "즐겨찾기 삭제"
-            , notes = "MemberId를 받아 즐겨찾기 리스트 전체 삭제 (ex : api/member/favorites/1)",
+            , notes = "MemberId를 받아 즐겨찾기 리스트 전체 삭제 (ex : api/member/1/favorites)",
             response = String.class
     )
     @ResponseBody
