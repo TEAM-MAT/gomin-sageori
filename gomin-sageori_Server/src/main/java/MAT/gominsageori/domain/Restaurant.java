@@ -11,8 +11,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "Restaurant")
-@Getter
-@Setter
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,6 +61,18 @@ public class Restaurant {
     @Column(nullable = true)
     private int imageCount = 0;
 
+    public String getRestaurantType() {
+        return restaurantType;
+    }
+
+    public String getNaverMapUrl() {
+        return naverMapUrl;
+    }
+
+    public int getImageCount() {
+        return imageCount;
+    }
+
     public Long getId(){
         if(this.id != null){
             return id;
@@ -106,6 +116,10 @@ public class Restaurant {
         else {
             return "주소 정보 없음";
         }
+    }
+
+    public List<Menu> getMenus() {
+        return menus;
     }
 
     public Boolean getFranchise() {
