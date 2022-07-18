@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "Restaurant")
 public class Restaurant {
     @Id
