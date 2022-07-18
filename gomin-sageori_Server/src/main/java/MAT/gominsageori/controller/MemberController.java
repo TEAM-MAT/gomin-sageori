@@ -111,7 +111,7 @@ public class MemberController {
             response = FavoritesReturnParam.class
     )
     @ResponseBody
-    @GetMapping("favorites/{id}")
+    @GetMapping("/{id}/favorites")
     public ResponseEntity<FavoritesReturnParam> getFavoritesList(@PathVariable("id") Long id) {
         FavoritesReturnParam favoritesParam = new FavoritesReturnParam();
         Optional<Member> member = null;
@@ -168,7 +168,7 @@ public class MemberController {
             response = String.class
     )
     @ResponseBody
-    @DeleteMapping("/favorites/{id}")
+    @DeleteMapping("/{id}/favorites")
     public ResponseEntity<String> deleteFavorites(@PathVariable("id") Long id) {
         Optional<Member> member = null;
         try {
