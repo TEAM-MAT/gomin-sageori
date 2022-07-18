@@ -84,7 +84,13 @@ public class MemberServiceTest {
     @Test
     //@Commit
     void 즐겨찾기_추가() {
-        Optional<Member> member = memberService.findOneByUserId("sam");
+        Optional<Member> member = null;
+        try {
+            member = memberService.findOneByUserId("sam");
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
         try {
             List<Long> selectedIds = new ArrayList<>();
             Set<Restaurant> restaurants = restaurantService.findRestaurantInfoFromListById(selectedIds);

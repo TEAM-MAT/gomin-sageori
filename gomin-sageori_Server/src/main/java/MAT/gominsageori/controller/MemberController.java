@@ -90,18 +90,16 @@ public class MemberController {
     @ResponseBody
     @PostMapping("/favorites")
     public ResponseEntity<String> addFavorites(@RequestBody FavoritesAddParam param) {
-        Optional<Member> member = null;
-        try {
-            member = memberService.findOneById(param.getMemberId());
-        } catch (Exception e) {
-            return ResponseEntity.status(400).body(e.getMessage()); // 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
+        Optional<Member> member = memberService.findOneByUserId(param.getUserId());
+        if(!member.isPresent()) {
+            return ResponseEntity.status(400).body("No user id data"); // 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
         }
         try {
             Set<Restaurant> restaurants = restaurantService.findRestaurantInfoFromListById(param.getFavorites());
             memberService.saveFavorites(member.get(),restaurants);
             return ResponseEntity.status(200).body(member.get().getUserId());
         } catch (Exception e) {
-            return ResponseEntity.status(400).body("No data found corresponding to the requested restaurant"); //데이터에 해당하는 ID의 레스토랑이 없을 시 Exception
+            return ResponseEntity.status(400).body("No restaurant data corresponding to the requested ID in the list."); // 리스트로 요청된 ID에 해당하는 식당 데이터가 없을 시 Exception
         }
     }
 
@@ -111,14 +109,12 @@ public class MemberController {
             response = FavoritesReturnParam.class
     )
     @ResponseBody
-    @GetMapping("/{id}/favorites")
-    public ResponseEntity<FavoritesReturnParam> getFavoritesList(@PathVariable("id") Long id) {
+    @GetMapping("/{userId}/favorites")
+    public ResponseEntity<FavoritesReturnParam> getFavoritesList(@PathVariable("userId") String userId) {
         FavoritesReturnParam favoritesParam = new FavoritesReturnParam();
-        Optional<Member> member = null;
-        try {
-            member = memberService.findOneById(id);
-        } catch (Exception e) {
-            return ResponseEntity.status(400).body(favoritesParam); // URI로 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
+        Optional<Member> member = memberService.findOneByUserId(userId);
+        if(!member.isPresent()) {
+            return ResponseEntity.status(400).body(favoritesParam); // URL로 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
         }
         try {
             Set<Restaurant> restaurants = memberService.getFavoritesList(member.get());
@@ -146,11 +142,9 @@ public class MemberController {
     @ResponseBody
     @PutMapping("/favorites")
     public ResponseEntity<String> modifyFavorites(@RequestBody FavoritesModifyParam param) {
-        Optional<Member> member = null;
-        try {
-            member = memberService.findOneById(param.getMemberId());
-        } catch (Exception e) {
-            return ResponseEntity.status(400).body(e.getMessage()); // URI로 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
+        Optional<Member> member = memberService.findOneByUserId(param.getUserId());
+        if(!member.isPresent()) {
+            return ResponseEntity.status(400).body("No user id data"); // URI로 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
         }
         try {
             Set<Restaurant> addRestaurants = restaurantService.findRestaurantInfoFromListById(param.getAddFavorites());
@@ -158,7 +152,7 @@ public class MemberController {
             memberService.modifyFavorites(member.get(),addRestaurants,deleteRestaurants);
             return ResponseEntity.status(200).body(member.get().getUserId());
         } catch (Exception e) {
-            return ResponseEntity.status(400).body("No data found corresponding to the requested URI"); // URI로 넘어온 데이터에 해당하는 ID의 레스토랑이 없을 시 Exception
+            return ResponseEntity.status(400).body("No restaurant data corresponding to the requested ID in the list."); // 리스트로 요청된 ID에 해당하는 식당 데이터가 없을 시 Exception
         }
     }
 
@@ -168,13 +162,11 @@ public class MemberController {
             response = String.class
     )
     @ResponseBody
-    @DeleteMapping("/{id}/favorites")
-    public ResponseEntity<String> deleteFavorites(@PathVariable("id") Long id) {
-        Optional<Member> member = null;
-        try {
-            member = memberService.findOneById(id);
-        } catch (Exception e) {
-            return ResponseEntity.status(400).body(e.getMessage()); // URI로 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
+    @DeleteMapping("/{userId}/favorites")
+    public ResponseEntity<String> deleteFavorites(@PathVariable("userId") String userId) {
+        Optional<Member> member = memberService.findOneByUserId(userId);
+        if(!member.isPresent()) {
+            return ResponseEntity.status(400).body("No user id data"); // URL로 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
         }
         memberService.deleteAllFavorites(member.get());
         return ResponseEntity.status(200).body(member.get().getUserId());

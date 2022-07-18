@@ -15,18 +15,18 @@ public class FavoritesModifyParam {
     )
 
     @ApiParam(value = "유저id")
-    private Long memberId;
+    private String userId;
     @ApiParam(value = "추가할 favorites 리스트")
     private List<Long> addFavorites;
     @ApiParam(value = "제거할 favorites 리스트")
     private List<Long> deleteFavorites;
 
-    public Long getMemberId() {
-        return memberId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public List<Long> getAddFavorites() {

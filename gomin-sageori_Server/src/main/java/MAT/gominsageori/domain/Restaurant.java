@@ -82,12 +82,13 @@ public class Restaurant {
     }
 
     public Address getAddress() {
-        if(this.address != null){
+        return address;
+        /*if(this.address != null){
             return address;
         }
         else{
             throw new IllegalStateException("No Address data");
-        }
+        }*/
     }
 
     public void setAddress(Address address) {
@@ -116,13 +117,14 @@ public class Restaurant {
         }
     }
 
-    public Menu getBestMenu() {
-        if(this.bestMenu != null) {
+    public Menu getBestMenu(){
+        return bestMenu;
+        /*if(this.bestMenu != null) {
             return bestMenu;
         }
         else {
             throw new IllegalStateException("No menu data");
-        }
+        }*/
     }
 
     public Float getInternalStar() {
