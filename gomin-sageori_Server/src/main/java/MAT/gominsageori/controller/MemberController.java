@@ -133,7 +133,7 @@ public class MemberController {
             return ResponseEntity.status(200).body(favoritesParam);
         } catch (Exception e) {
             favoritesParam.setCount(0);
-            return ResponseEntity.status(204).body(favoritesParam); // 즐겨찾기 리스트가 0개일 때
+            return ResponseEntity.status(404).body(favoritesParam); // 즐겨찾기 리스트가 0개일 때
         }
     }
 
@@ -180,7 +180,7 @@ public class MemberController {
         try {
             memberService.deleteAllFavorites(member.get());
         } catch (Exception e) {
-            return ResponseEntity.status(400).body(e.getMessage()); // 즐겨찾기 목록이 전혀 없을 시 Exception
+            return ResponseEntity.status(204).body(e.getMessage()); // 즐겨찾기 목록이 전혀 없을 시 Exception
         }
         return ResponseEntity.status(200).body(member.get().getUserId());
     }
