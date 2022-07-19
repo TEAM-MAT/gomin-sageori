@@ -2,14 +2,13 @@
 import { css } from '@emotion/react';
 import "../../styles/base/font.css";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 import timeIcon from '../../logo/time.png'
 import locationIcon from '../../logo/location.png'
 import phoneIcon from '../../logo/phone.png'
 import starIcon from '../../logo/star.png'
 
-function RecommendList(props) {
+function BestRecommend(props) {
     const [bestMenu, setBestMenu] = useState("");
     const [address, setAddress] = useState("");
     const [callNum, setCallNum] = useState("");
@@ -17,7 +16,6 @@ function RecommendList(props) {
     const [endTime, setEndTime] = useState("");
     const [externalStar, setExternalStar] = useState("");
     const [naverURL, setNaverURL] = useState("");
-
 
     useEffect( () => {
         const axios = require("axios");
@@ -38,15 +36,15 @@ function RecommendList(props) {
 
     const checkTime = (start, end) => {
         // 현재 시간
-        const today = new Date();
+        let today = new Date();
 
-        const hours = today.getHours();
-        const minutes = today.getMinutes();
+        let hours = today.getHours();
+        let minutes = today.getMinutes();
 
-        const startHours = Number(start.slice(0, 2));
+        let startHours = Number(start.slice(0, 2));
 
-        const endHours = Number(end.slice(0, 2));
-        const endMinutes = Number(end.slice(3, 5));
+        let endHours = Number(end.slice(0, 2));
+        let endMinutes = Number(end.slice(3, 5));
 
         if (startHours <= hours && hours <= endHours && minutes < endMinutes){
             return "영업중";
@@ -59,20 +57,49 @@ function RecommendList(props) {
     const wrapStyle = css`
       width: 90vw;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: space-between;
+      align-items: center;
       margin-top: 15px;
       margin-bottom: 15px;
     `
 
     const imageStyle = css`
-      width: 120px;
-      height: 120px;
+      width: 200px;
+      height: 200px;
       background-color: black;
     `
 
+    const titleWrapStyle = css`
+      display: flex;
+      flex-direction: row;
+      font-size: 1.5em;
+      margin: 10px 0px;
+    `
+
+    const startWrapStyle = css`
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-size: 0.4em;
+    `
+
+    const starStyle = css`
+      width: 12px;
+      height: 12px;
+      background-image: url(${starIcon});
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin-left: 3px;
+      margin-right: 3px;
+    `
+
     const textWrap = css`
-      width: 60%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     `
 
     const bestMenuStyle = css`
@@ -94,11 +121,16 @@ function RecommendList(props) {
     `
 
     const infoWrapStyle = css`
-      font-size: 0.7em;
+      width: 100%;
+      font-size: 0.9em;
+      color: #656565;
+    `
+
+    const infoTitleStyle = css`
+      width: 100%;
     `
 
     const infoStyle = css`
-      color: #656565;
       margin-top: 3px;
       margin-bottom: 3px;
       margin-left: 5px;
@@ -137,66 +169,63 @@ function RecommendList(props) {
       background-repeat: no-repeat;
     `
 
-    const starStyle = css`
-      width: 12px;
-      height: 12px;
-      background-image: url(${starIcon});
-      background-position: center;
-      background-size: contain;
-      background-repeat: no-repeat;
-      margin-left: 3px;
-      margin-right: 3px;
-    `
-
     const openStyle = css`
+      font-size: 0.4em;
       color: #23B416;
+      margin-left: 4px;
     `
 
     const closeStyle = css`
+      font-size: 0.4em;
       color: #FF2F2F;
+      margin-left: 4px;
     `
-
-  return (
-      <div  css={wrapStyle}
-            className="RecommendList"
-            onClick={() => window.open(naverURL, '_blank')}>
-          <div css={imageStyle}>
-              {/*image*/}
-          </div>
-          <div css={textWrap}>
-              <div>
-                  {props.name}
-              </div>
-              <div>
-                  <div css={bestMenuStyle}>
-                      {bestMenu}
-                  </div>
-              </div>
-              <div css={infoWrapStyle}>
-                  <div css={infoDetailWrap}>
-                      <div css={locationIconStyle}/>
-                      <div css={infoStyle}>{address}</div>
-                  </div>
-                  <div css={infoDetailWrap}>
-                      <div css={phoneIconStyle}/>
-                      <div css={infoStyle}>{callNum == "전화번호 없음" ? "등록된 번호가 없습니다." : callNum}</div>
-                  </div>
-                  <div css={infoDetailWrap}>
-                      <div css={timeIconStyle}/>
-                      <div css={infoStyle}>{startTime.slice(0, 5) + " ~ " + endTime.slice(0, 5)}</div>
-                  </div>
-                  <div css={infoDetailWrap}>
-                      <div css={checkTime(startTime, endTime) == "영업중" ? openStyle : closeStyle}>
-                          {checkTime(startTime, endTime)}
-                      </div>
-                      <div css={starStyle}/>
-                      <div>{externalStar}</div>
-                  </div>
-
-              </div>
-          </div>
-      </div>
-  );
+    return (
+        <div css={wrapStyle}
+             className="RecommendList"
+             onClick={() => window.open(naverURL, '_blank')}>
+            <div css={imageStyle}>
+                {/*image*/}
+            </div>
+            <div css={textWrap}>
+                <div css={titleWrapStyle}>
+                    <div>
+                        {props.name}
+                    </div>
+                    <div css={startWrapStyle}>
+                        <div css={starStyle}/>
+                        <div>{externalStar}</div>
+                    </div>
+                </div>
+                <div>
+                    <div css={bestMenuStyle}>
+                        {bestMenu}
+                    </div>
+                </div>
+                <div css={infoWrapStyle}>
+                    <div css={infoTitleStyle}>
+                        가게정보
+                        <hr/>
+                    </div>
+                    <div css={infoDetailWrap}>
+                        <div css={locationIconStyle}/>
+                        <div css={infoStyle}>{address}</div>
+                    </div>
+                    <div css={infoDetailWrap}>
+                        <div css={phoneIconStyle}/>
+                        <div css={infoStyle}>{callNum == "전화번호 없음" ? "등록된 번호가 없습니다." : callNum}</div>
+                    </div>
+                    <div css={infoDetailWrap}>
+                        <div css={timeIconStyle}/>
+                        <div css={infoStyle}>{startTime.slice(0, 5) + " ~ " + endTime.slice(0, 5)}</div>
+                        <div css={checkTime(startTime, endTime) == "영업중" ? openStyle : closeStyle}>
+                            {checkTime(startTime, endTime)}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
 
-export default RecommendList;
+export default BestRecommend;
