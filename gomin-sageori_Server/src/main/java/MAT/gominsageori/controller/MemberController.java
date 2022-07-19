@@ -161,7 +161,7 @@ public class MemberController {
             memberService.modifyFavorites(member.get(),addRestaurants,deleteRestaurants);
             return ResponseEntity.status(200).body(member.get().getUserId());
         } catch (Exception e) {
-            return ResponseEntity.status(400).body(e.getMessage()); // 추가할 데이터가 이미 있거나 삭제할 데이터가 없을 시 Exception
+            return ResponseEntity.status(409).body(e.getMessage()); // 추가할 데이터가 이미 있거나 삭제할 데이터가 없을 시 Exception
         }
     }
 
@@ -180,7 +180,7 @@ public class MemberController {
         try {
             memberService.deleteAllFavorites(member.get());
         } catch (Exception e) {
-            return ResponseEntity.status(404).body(e.getMessage()); // 즐겨찾기 목록이 전혀 없을 시 Exception
+            return ResponseEntity.status(409).body(e.getMessage()); // 즐겨찾기 목록이 전혀 없을 시 Exception
         }
         return ResponseEntity.status(200).body(member.get().getUserId());
     }
