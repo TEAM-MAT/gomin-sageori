@@ -180,7 +180,7 @@ public class MemberController {
         try {
             memberService.deleteAllFavorites(member.get());
         } catch (Exception e) {
-            return ResponseEntity.status(204).body(e.getMessage()); // 즐겨찾기 목록이 전혀 없을 시 Exception
+            return ResponseEntity.status(404).body(e.getMessage()); // 즐겨찾기 목록이 전혀 없을 시 Exception
         }
         return ResponseEntity.status(200).body(member.get().getUserId());
     }
