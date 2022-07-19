@@ -81,7 +81,12 @@ public class MemberService {
         return member;
     }
 
-    public Member deleteAllFavorites(Member member) {
+    public Member deleteAllFavorites(Member member) throws Exception{
+        try {
+            memberRepository.getFavorites(member);
+        } catch (Exception e) {
+            throw new IllegalStateException("don't have any favorites list");
+        }
         memberRepository.deleteAllFavorites(member);
         return member;
     }

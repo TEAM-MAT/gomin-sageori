@@ -91,6 +91,11 @@ public class MemberController {
             return ResponseEntity.status(400).body("No user id data"); // 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
         }
         try {
+            memberService.getFavoritesList(member.get());
+            return ResponseEntity.status(400).body("already have a favorite list");
+        } catch (Exception e) {
+        }
+        try {
             Set<Restaurant> restaurants = restaurantService.findRestaurantInfoFromListById(param.getFavorites());
             memberService.saveFavorites(member.get(),restaurants);
             return ResponseEntity.status(200).body(member.get().getUserId());
@@ -172,7 +177,11 @@ public class MemberController {
         if(!member.isPresent()) {
             return ResponseEntity.status(400).body("No user id data"); // URL로 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
         }
-        memberService.deleteAllFavorites(member.get());
+        try {
+            memberService.deleteAllFavorites(member.get());
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
         return ResponseEntity.status(200).body(member.get().getUserId());
     }
 }
