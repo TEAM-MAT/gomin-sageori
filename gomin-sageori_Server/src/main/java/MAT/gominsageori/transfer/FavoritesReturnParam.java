@@ -16,15 +16,15 @@ public class FavoritesReturnParam {
     )
 
     @ApiParam(value = "사용자의 favorites 리스트")
-    private List<Restaurant> userfavorites;
+    private List<RestaurantInfoReturnByFavorites> userfavorites;
     @ApiParam(value = "사용자의 favorites의 수")
     private int count;
 
-    public List<Restaurant> getUserfavorites() {
+    public List<RestaurantInfoReturnByFavorites> getUserfavorites() {
         return userfavorites;
     }
 
-    public void setUserfavorites(List<Restaurant> userfavorites) {
+    public void setUserfavorites(List<RestaurantInfoReturnByFavorites> userfavorites) {
         this.userfavorites = userfavorites;
     }
 

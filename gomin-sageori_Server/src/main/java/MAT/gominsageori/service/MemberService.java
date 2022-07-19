@@ -86,7 +86,18 @@ public class MemberService {
         return member;
     }
 
-    public Member modifyFavorites(Member member, Set<Restaurant> addRestaurants, Set<Restaurant> deleteRestaurants) {
+    public Member modifyFavorites(Member member, Set<Restaurant> addRestaurants, Set<Restaurant> deleteRestaurants) throws Exception {
+        Set<Restaurant> oldFavorites = memberRepository.getFavorites(member);
+        for(Restaurant addIter : addRestaurants) {
+            if(oldFavorites.contains(addIter)) {
+                throw new IllegalStateException("Restaurant " + String.valueOf(addIter.getId()) + " already exists");
+            }
+        }
+        for(Restaurant deleteIter : deleteRestaurants) {
+            if(!oldFavorites.contains(deleteIter)) {
+                throw new IllegalStateException("Restaurant " + String.valueOf(deleteIter.getId()) + " doesn't already exist");
+            }
+        }
         memberRepository.setFavorites(member, addRestaurants);
         memberRepository.deleteFavorites(member, deleteRestaurants);
         return member;

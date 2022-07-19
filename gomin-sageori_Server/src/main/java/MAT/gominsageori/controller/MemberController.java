@@ -10,11 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.ArrayList;
+import java.util.*;
 
 
 @RestController
@@ -118,14 +114,16 @@ public class MemberController {
         }
         try {
             Set<Restaurant> restaurants = memberService.getFavoritesList(member.get());
-            List<Restaurant> restaurantList = new ArrayList<>(restaurants);
+            List<RestaurantInfoReturnByFavorites> favoritesRestaurantList = new ArrayList<>();
 
             int totalCount = 0;
-            for(Restaurant iter : restaurantList) {
+            for(Restaurant iter : restaurants) {
+                RestaurantInfoReturnByFavorites tempFavorites = new RestaurantInfoReturnByFavorites(iter.getId(),iter.getName(),iter.getNaverMapUrl());
+                favoritesRestaurantList.add(tempFavorites);
                 totalCount++;
             }
 
-            favoritesParam.setUserfavorites(restaurantList);
+            favoritesParam.setUserfavorites(favoritesRestaurantList);
             favoritesParam.setCount(totalCount);
             return ResponseEntity.status(200).body(favoritesParam);
         } catch (Exception e) {
@@ -146,13 +144,19 @@ public class MemberController {
         if(!member.isPresent()) {
             return ResponseEntity.status(400).body("No user id data"); // URI로 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
         }
+        Set<Restaurant> addRestaurants = new HashSet<>();
+        Set<Restaurant> deleteRestaurants = new HashSet<>();
         try {
-            Set<Restaurant> addRestaurants = restaurantService.findRestaurantInfoFromListById(param.getAddFavorites());
-            Set<Restaurant> deleteRestaurants = restaurantService.findRestaurantInfoFromListById(param.getDeleteFavorites());
+            addRestaurants = restaurantService.findRestaurantInfoFromListById(param.getAddFavorites());
+            deleteRestaurants = restaurantService.findRestaurantInfoFromListById(param.getDeleteFavorites());
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body("No restaurant data corresponding to the requested ID in the list."); // 리스트로 요청된 ID에 해당하는 식당 데이터가 없을 시 Exception
+        }
+        try {
             memberService.modifyFavorites(member.get(),addRestaurants,deleteRestaurants);
             return ResponseEntity.status(200).body(member.get().getUserId());
         } catch (Exception e) {
-            return ResponseEntity.status(400).body("No restaurant data corresponding to the requested ID in the list."); // 리스트로 요청된 ID에 해당하는 식당 데이터가 없을 시 Exception
+            return ResponseEntity.status(400).body(e.getMessage()); // 추가할 데이터가 이미 있거나 삭제할 데이터가 없을 시 Exception
         }
     }
 
