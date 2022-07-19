@@ -55,7 +55,7 @@ public class JpaMemberRepository implements MemberRepository {
         Member member = em.find(Member.class, memberParam.getId());
         member.setName(memberParam.getName());
         member.setPwd(memberParam.getPassword());
-        member.SetFavorites(memberParam.getFavoriteRestaurant());
+        member.setFavorites(memberParam.getFavoriteRestaurant());
         return member;
     }
 

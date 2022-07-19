@@ -7,6 +7,7 @@ import MAT.gominsageori.service.MemberService;
 import MAT.gominsageori.service.RestaurantService;
 import MAT.gominsageori.transfer.*;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.HashSet;
 
+
 @RestController
 @RequestMapping("/api/member")
 public class MemberController {
@@ -26,7 +28,7 @@ public class MemberController {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public MemberController(MemberService memberService, JwtTokenProvider jwtTokenProvider) {
+    public MemberController(MemberService memberService, JwtTokenProvider jwtTokenProvider, RestaurantService restaurantService) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.memberService = memberService;
         this.restaurantService = restaurantService;
