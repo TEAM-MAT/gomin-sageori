@@ -92,7 +92,7 @@ public class MemberController {
         }
         try {
             memberService.getFavoritesList(member.get());
-            return ResponseEntity.status(400).body("already have a favorite list");
+            return ResponseEntity.status(400).body("already have a favorite list"); // 즐겨찾기 목록이 이미 있을 시 Exception
         } catch (Exception e) {
         }
         try {
@@ -180,7 +180,7 @@ public class MemberController {
         try {
             memberService.deleteAllFavorites(member.get());
         } catch (Exception e) {
-            return ResponseEntity.status(400).body(e.getMessage());
+            return ResponseEntity.status(400).body(e.getMessage()); // 즐겨찾기 목록이 전혀 없을 시 Exception
         }
         return ResponseEntity.status(200).body(member.get().getUserId());
     }
