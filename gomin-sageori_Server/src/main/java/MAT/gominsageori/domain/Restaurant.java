@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Restaurant")
 @Getter
 @Setter
+@Table(name = "Restaurant")
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,6 +63,18 @@ public class Restaurant {
     @Column(nullable = true)
     private int imageCount = 0;
 
+    public String getRestaurantType() {
+        return restaurantType;
+    }
+
+    public String getNaverMapUrl() {
+        return naverMapUrl;
+    }
+
+    public int getImageCount() {
+        return imageCount;
+    }
+
     public Long getId(){
         if(this.id != null){
             return id;
@@ -82,12 +94,13 @@ public class Restaurant {
     }
 
     public Address getAddress() {
-        if(this.address != null){
+        return address;
+        /*if(this.address != null){
             return address;
         }
         else{
             throw new IllegalStateException("No Address data");
-        }
+        }*/
     }
 
     public void setAddress(Address address) {
@@ -107,6 +120,10 @@ public class Restaurant {
         }
     }
 
+    public List<Menu> getMenus() {
+        return menus;
+    }
+
     public Boolean getFranchise() {
         if(this.franchise != null) {
             return franchise;
@@ -116,13 +133,14 @@ public class Restaurant {
         }
     }
 
-    public Menu getBestMenu() {
-        if(this.bestMenu != null) {
+    public Menu getBestMenu(){
+        return bestMenu;
+        /*if(this.bestMenu != null) {
             return bestMenu;
         }
         else {
             throw new IllegalStateException("No menu data");
-        }
+        }*/
     }
 
     public Float getInternalStar() {

@@ -39,6 +39,19 @@ public class RestaurantService {
         return restaurantRepository.findRestaurantByLocation(location);
     }
 
+    public Set<Restaurant> findRestaurantInfoFromListById(List<Long> selectedIds) throws Exception {
+        Set<Restaurant> restaurants = new HashSet<>();
+        for(Long iter : selectedIds) {
+            try {
+                restaurants.add(restaurantRepository.findById(iter));
+            }
+            catch (Exception e) {
+                throw new Exception("no Restaurant result");
+            }
+        }
+        return restaurants;
+    }
+
     /**
      *
      * 전체 식당 조회

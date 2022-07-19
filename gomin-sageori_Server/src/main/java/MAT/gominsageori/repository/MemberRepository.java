@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface MemberRepository {
     Member save(Member member);
@@ -13,6 +14,9 @@ public interface MemberRepository {
     Optional<Member> findByUserId(String userId);
     Member update(Member member);
     void delete(Member member);
-    List<Restaurant> getFavorites(Member member);
+    Member setFavorites(Member member, Set<Restaurant> restaurants);
+    Set<Restaurant> getFavorites(Member member);
     Optional<Member> findByEmail(String email);
+    Optional<Member> deleteFavorites(Member memberParam, Set<Restaurant> restaurants);
+    Optional<Member> deleteAllFavorites(Member memberParam);
 }

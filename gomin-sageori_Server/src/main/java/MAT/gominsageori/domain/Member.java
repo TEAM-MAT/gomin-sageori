@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -40,7 +41,7 @@ public class Member implements UserDetails {
 
     @ManyToMany
     @JoinColumn( name = "favoriteRestaurant" , nullable = true)
-    private List<Restaurant> favoriteRestaurant;
+    private Set<Restaurant> favoriteRestaurant;
 
     public String getUserId() {
         if(this.userId != null) {
@@ -97,7 +98,8 @@ public class Member implements UserDetails {
     public void setPwd(String pwd) {
         this.password = pwd;
     }
-    public List<Restaurant> getFavoriteRestaurant() {
+
+    public Set<Restaurant> getFavoriteRestaurant() {
         if(this.favoriteRestaurant != null && !this.favoriteRestaurant.isEmpty()) {
             return this.favoriteRestaurant;
         }
@@ -114,7 +116,7 @@ public class Member implements UserDetails {
         return this.salt;
     }
 
-    public void SetFavorites(List<Restaurant> favorites){
+    public void setFavorites(Set<Restaurant> favorites){
         this.favoriteRestaurant = favorites;
     }
 

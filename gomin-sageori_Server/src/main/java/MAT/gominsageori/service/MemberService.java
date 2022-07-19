@@ -1,14 +1,15 @@
 package MAT.gominsageori.service;
 
 import MAT.gominsageori.domain.Member;
+import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.repository.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.transaction.Transactional;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
 
 
 @Transactional
@@ -33,6 +34,14 @@ public class MemberService {
                 });
     }
 
+    public Optional<Member> findOneById(Long id) throws Exception {
+        Optional<Member> member = memberRepository.findById(id);
+        if (!member.isPresent()) {
+            throw new NoSuchElementException("No data for that member");
+        }
+        return member;
+    }
+
     public Optional<Member> findOneByUserId(String userId) {
         return memberRepository.findByUserId(userId);
     }
@@ -52,6 +61,51 @@ public class MemberService {
         }
         else
             return null;
+    }
+
+    public Member saveFavorites(Member member, Set<Restaurant> restaurants) {
+        memberRepository.setFavorites(member, restaurants);
+        return member;
+    }
+
+    public Set<Restaurant> getFavoritesList(Member member) throws Exception {
+        Set<Restaurant> favoritesList = memberRepository.getFavorites(member);
+        if(favoritesList.size() == 0) {
+            throw new NoSuchElementException("반환할 리스트가 없습니다.");
+        }
+        return favoritesList;
+    }
+
+    public Member deleteFavorites(Member member, Set<Restaurant> restaurants) {
+        memberRepository.deleteFavorites(member,restaurants);
+        return member;
+    }
+
+    public Member deleteAllFavorites(Member member) throws Exception{
+        try {
+            memberRepository.getFavorites(member);
+        } catch (Exception e) {
+            throw new IllegalStateException("don't have any favorites list");
+        }
+        memberRepository.deleteAllFavorites(member);
+        return member;
+    }
+
+    public Member modifyFavorites(Member member, Set<Restaurant> addRestaurants, Set<Restaurant> deleteRestaurants) throws Exception {
+        Set<Restaurant> oldFavorites = memberRepository.getFavorites(member);
+        for(Restaurant addIter : addRestaurants) {
+            if(oldFavorites.contains(addIter)) {
+                throw new IllegalStateException("Restaurant " + String.valueOf(addIter.getId()) + " already exists");
+            }
+        }
+        for(Restaurant deleteIter : deleteRestaurants) {
+            if(!oldFavorites.contains(deleteIter)) {
+                throw new IllegalStateException("Restaurant " + String.valueOf(deleteIter.getId()) + " doesn't already exist");
+            }
+        }
+        memberRepository.setFavorites(member, addRestaurants);
+        memberRepository.deleteFavorites(member, deleteRestaurants);
+        return member;
     }
 
     public void delete(Member member) {

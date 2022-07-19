@@ -2,30 +2,34 @@ package MAT.gominsageori.controller;
 
 import MAT.gominsageori.auth.JwtTokenProvider;
 import MAT.gominsageori.domain.Member;
+import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.service.MemberService;
-import MAT.gominsageori.transfer.SignInParam;
-import MAT.gominsageori.transfer.SignUpParam;
+import MAT.gominsageori.service.RestaurantService;
+import MAT.gominsageori.transfer.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.HashSet;
 
 @RestController
 @RequestMapping("/api/member")
 public class MemberController {
     private final MemberService memberService;
+    private final RestaurantService restaurantService;
     private final JwtTokenProvider jwtTokenProvider;
 
     @Autowired
     public MemberController(MemberService memberService, JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.memberService = memberService;
+        this.restaurantService = restaurantService;
     }
 
     @ApiOperation(
@@ -90,4 +94,110 @@ public class MemberController {
         }
     }
 
+    @ApiOperation(
+            value = "즐겨찾기 추가"
+            , notes = "MemberId와 추가할 favorites 리스트를 통해 즐겨찾기 추가 (URL : api/member/favorites)",
+            response = String.class
+    )
+    @ResponseBody
+    @PostMapping("/favorites")
+    public ResponseEntity<String> addFavorites(@RequestBody FavoritesAddParam param) {
+        Optional<Member> member = memberService.findOneByUserId(param.getUserId());
+        if(!member.isPresent()) {
+            return ResponseEntity.status(400).body("No user id data"); // 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
+        }
+        try {
+            memberService.getFavoritesList(member.get());
+            return ResponseEntity.status(400).body("already have a favorite list"); // 즐겨찾기 목록이 이미 있을 시 Exception
+        } catch (Exception e) {
+        }
+        try {
+            Set<Restaurant> restaurants = restaurantService.findRestaurantInfoFromListById(param.getFavorites());
+            memberService.saveFavorites(member.get(),restaurants);
+            return ResponseEntity.status(200).body(member.get().getUserId());
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body("No restaurant data corresponding to the requested ID in the list."); // 리스트로 요청된 ID에 해당하는 식당 데이터가 없을 시 Exception
+        }
+    }
+
+    @ApiOperation(
+            value = "즐겨찾기 조회"
+            , notes = "MemberId 값을 받아 즐겨찾기 조회 (ex : api/member/1/favorites)",
+            response = FavoritesReturnParam.class
+    )
+    @ResponseBody
+    @GetMapping("/{userId}/favorites")
+    public ResponseEntity<FavoritesReturnParam> getFavoritesList(@PathVariable("userId") String userId) {
+        FavoritesReturnParam favoritesParam = new FavoritesReturnParam();
+        Optional<Member> member = memberService.findOneByUserId(userId);
+        if(!member.isPresent()) {
+            return ResponseEntity.status(400).body(favoritesParam); // URL로 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
+        }
+        try {
+            Set<Restaurant> restaurants = memberService.getFavoritesList(member.get());
+            List<RestaurantInfoReturnByFavorites> favoritesRestaurantList = new ArrayList<>();
+
+            int totalCount = 0;
+            for(Restaurant iter : restaurants) {
+                RestaurantInfoReturnByFavorites tempFavorites = new RestaurantInfoReturnByFavorites(iter.getId(),iter.getName(),iter.getNaverMapUrl());
+                favoritesRestaurantList.add(tempFavorites);
+                totalCount++;
+            }
+
+            favoritesParam.setUserfavorites(favoritesRestaurantList);
+            favoritesParam.setCount(totalCount);
+            return ResponseEntity.status(200).body(favoritesParam);
+        } catch (Exception e) {
+            favoritesParam.setCount(0);
+            return ResponseEntity.status(404).body(favoritesParam); // 즐겨찾기 리스트가 0개일 때
+        }
+    }
+
+    @ApiOperation(
+            value = "즐겨찾기 수정"
+            , notes = "MemberId와 추가할 favorites 리스트, 제거할 favorites 리스트를 통해 즐겨찾기 수정 (URL : api/member/favorites)",
+            response = String.class
+    )
+    @ResponseBody
+    @PutMapping("/favorites")
+    public ResponseEntity<String> modifyFavorites(@RequestBody FavoritesModifyParam param) {
+        Optional<Member> member = memberService.findOneByUserId(param.getUserId());
+        if(!member.isPresent()) {
+            return ResponseEntity.status(400).body("No user id data"); // URI로 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
+        }
+        Set<Restaurant> addRestaurants = new HashSet<>();
+        Set<Restaurant> deleteRestaurants = new HashSet<>();
+        try {
+            addRestaurants = restaurantService.findRestaurantInfoFromListById(param.getAddFavorites());
+            deleteRestaurants = restaurantService.findRestaurantInfoFromListById(param.getDeleteFavorites());
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body("No restaurant data corresponding to the requested ID in the list."); // 리스트로 요청된 ID에 해당하는 식당 데이터가 없을 시 Exception
+        }
+        try {
+            memberService.modifyFavorites(member.get(),addRestaurants,deleteRestaurants);
+            return ResponseEntity.status(200).body(member.get().getUserId());
+        } catch (Exception e) {
+            return ResponseEntity.status(409).body(e.getMessage()); // 추가할 데이터가 이미 있거나 삭제할 데이터가 없을 시 Exception
+        }
+    }
+
+    @ApiOperation(
+            value = "즐겨찾기 삭제"
+            , notes = "MemberId를 받아 즐겨찾기 리스트 전체 삭제 (ex : api/member/1/favorites)",
+            response = String.class
+    )
+    @ResponseBody
+    @DeleteMapping("/{userId}/favorites")
+    public ResponseEntity<String> deleteFavorites(@PathVariable("userId") String userId) {
+        Optional<Member> member = memberService.findOneByUserId(userId);
+        if(!member.isPresent()) {
+            return ResponseEntity.status(400).body("No user id data"); // URL로 넘어온 데이터에 해당하는 ID의 member가 없을 시 Exception
+        }
+        try {
+            memberService.deleteAllFavorites(member.get());
+        } catch (Exception e) {
+            return ResponseEntity.status(409).body(e.getMessage()); // 즐겨찾기 목록이 전혀 없을 시 Exception
+        }
+        return ResponseEntity.status(200).body(member.get().getUserId());
+    }
 }
