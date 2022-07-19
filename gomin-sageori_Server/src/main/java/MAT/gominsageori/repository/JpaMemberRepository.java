@@ -35,8 +35,8 @@ public class JpaMemberRepository implements MemberRepository {
                 "FROM Member m " +
                 "WHERE m.userId = :userId")
                 .setParameter("userId", userId)
-                .getResultStream()
-                .findAny();
+                .getResultList()
+                .stream().findAny();
     }
 
     @Override
@@ -54,8 +54,8 @@ public class JpaMemberRepository implements MemberRepository {
     public Member update(Member memberParam) {
         Member member = em.find(Member.class, memberParam.getId());
         member.setName(memberParam.getName());
-        member.setPwd(memberParam.getPwd());
-        member.setFavorites(memberParam.getFavoriteRestaurant());
+        member.setPwd(memberParam.getPassword());
+        member.SetFavorites(memberParam.getFavoriteRestaurant());
         return member;
     }
 

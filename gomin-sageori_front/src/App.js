@@ -1,11 +1,14 @@
+import { Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
-import RecommendList from "./UI/reusable/RecommendList";
+import Recommend from "./pages/Recommend";
 
 function App() {
   return (
     <div className="App">
-      <Main />
-      <RecommendList />
+    <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/recommend" element={<Recommend />} />
+    </Routes>
     </div>
   );
 }

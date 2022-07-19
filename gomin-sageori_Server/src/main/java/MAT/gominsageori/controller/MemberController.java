@@ -1,5 +1,6 @@
 package MAT.gominsageori.controller;
 
+import MAT.gominsageori.auth.JwtTokenProvider;
 import MAT.gominsageori.domain.Member;
 import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.service.MemberService;
@@ -10,17 +11,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.HashSet;
 
 @RestController
 @RequestMapping("/api/member")
 public class MemberController {
     private final MemberService memberService;
     private final RestaurantService restaurantService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public MemberController(MemberService memberService, RestaurantService restaurantService) {
+    public MemberController(MemberService memberService, JwtTokenProvider jwtTokenProvider) {
+        this.jwtTokenProvider = jwtTokenProvider;
         this.memberService = memberService;
         this.restaurantService = restaurantService;
     }
@@ -44,6 +51,10 @@ public class MemberController {
         member.setEmail(param.getEmail());
         member.setName(param.getName());
 
+        List<String> tempRoles = new ArrayList<>();
+        tempRoles.add("user");
+        member.setRoles(tempRoles);
+
         String pwdBeforeEncryption = param.getPassword();
         HashMap<String,String> saltAndPw = memberService.pwdEncryption(pwdBeforeEncryption);
 
@@ -57,6 +68,11 @@ public class MemberController {
         return ResponseEntity.status(200).body(member.getUserId());
     }
 
+    @ApiOperation(
+            value = "로그인"
+            , notes = "userId , password를 받아 로그인 수행. (request body, JSON), JWT토큰을 리턴해줌. 실패 시 400 status code리턴",
+            response = String.class
+    )
     @ResponseBody
     @PostMapping("/signin")
     public ResponseEntity<String> signIn(@RequestBody SignInParam param){
@@ -70,11 +86,11 @@ public class MemberController {
         }
         Member member = findResult.get();
         String encodedInput = memberService.loginPwdEncryption(param.getPassword(),member.getSalt());
-        if(encodedInput.equals(member.getPwd())) {
-            return ResponseEntity.status(200).body("succeed");
+        if(encodedInput.equals(member.getPassword())) {
+            return ResponseEntity.status(200).body(jwtTokenProvider.createToken(member.getUserId(), member.getRoles()));
         }
         else {
-            return ResponseEntity.status(403).body("fail");
+            return ResponseEntity.status(400).body("fail");
         }
     }
 

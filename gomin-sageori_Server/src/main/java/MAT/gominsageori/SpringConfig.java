@@ -1,11 +1,13 @@
 package MAT.gominsageori;
 
 import MAT.gominsageori.repository.*;
+import MAT.gominsageori.service.CustomUserDetailService;
 import MAT.gominsageori.service.MemberService;
 import MAT.gominsageori.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -39,4 +41,6 @@ public class SpringConfig {
         return new JpaMenuRepository(em);
     }
 
+    @Bean
+    public UserDetailsService userDetailsService() {return new CustomUserDetailService(memberRepository());}
 }
