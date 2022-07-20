@@ -8,7 +8,10 @@ import locationIcon from '../../logo/location.png';
 import phoneIcon from '../../logo/phone.png';
 import starIcon from '../../logo/star.png';
 
+const axios = require('axios');
+
 function BestRecommend(props) {
+  const { name, id } = props;
   const [bestMenu, setBestMenu] = useState('');
   const [address, setAddress] = useState('');
   const [callNum, setCallNum] = useState('');
@@ -18,13 +21,11 @@ function BestRecommend(props) {
   const [naverURL, setNaverURL] = useState('');
 
   useEffect(() => {
-    const axios = require('axios');
-    axios.get(`/api/restaurant/${props.id}`).then(response => {
-      console.log(response.data);
+    axios.get(`/api/restaurant/${id}`).then(response => {
       setBestMenu(response.data.bestMenu);
       // 주소 수정 필요
       setAddress(
-        response.data.address.floor == '층 정보 없음'
+        response.data.address.floor === '층 정보 없음'
           ? `${response.data.address.city} ${response.data.address.district} ${response.data.address.road}`
           : `${response.data.address.city} ${response.data.address.district} ${response.data.address.road} ${response.data.address.floor}`,
       );
@@ -185,11 +186,19 @@ function BestRecommend(props) {
       css={wrapStyle}
       className="RecommendList"
       onClick={() => window.open(naverURL, '_blank')}
+      onKeyPress={() => {}}
+      role="button"
+      tabIndex="0"
     >
-      <div css={imageStyle}>{/* image */}</div>
+      <div css={imageStyle}>
+        <img
+          alt={name}
+          src={`https://gomin-image.s3.ap-northeast-2.amazonaws.com/restaurant-images/${id}_1.jpg`}
+        />
+      </div>
       <div css={textWrap}>
         <div css={titleWrapStyle}>
-          <div>{props.name}</div>
+          <div>{name}</div>
           <div css={startWrapStyle}>
             <div css={starStyle} />
             <div>{externalStar}</div>
@@ -210,7 +219,9 @@ function BestRecommend(props) {
           <div css={infoDetailWrap}>
             <div css={phoneIconStyle} />
             <div css={infoStyle}>
-              {callNum == '전화번호 없음' ? '등록된 번호가 없습니다.' : callNum}
+              {callNum === '전화번호 없음'
+                ? '등록된 번호가 없습니다.'
+                : callNum}
             </div>
           </div>
           <div css={infoDetailWrap}>
@@ -220,7 +231,7 @@ function BestRecommend(props) {
             </div>
             <div
               css={
-                checkTime(startTime, endTime) == '영업중'
+                checkTime(startTime, endTime) === '영업중'
                   ? openStyle
                   : closeStyle
               }
