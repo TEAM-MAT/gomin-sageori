@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css } from "@emotion/react";
+import { jsx, css } from '@emotion/react';
 
-import { containerColStyle } from "../../styles/layout/Container";
+import { containerColStyle } from '../../styles/layout/Container';
 
 function Intro() {
   const introBackStyle = css`

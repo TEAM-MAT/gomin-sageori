@@ -1,42 +1,32 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import "../../styles/base/font.css";
-import { useState, useEffect } from "react";
+import { css } from '@emotion/react';
+import '../../styles/base/font.css';
+import { useState, useEffect } from 'react';
 
-import timeIcon from "../../logo/time.png";
-import locationIcon from "../../logo/location.png";
-import phoneIcon from "../../logo/phone.png";
-import starIcon from "../../logo/star.png";
+import timeIcon from '../../logo/time.png';
+import locationIcon from '../../logo/location.png';
+import phoneIcon from '../../logo/phone.png';
+import starIcon from '../../logo/star.png';
 
 function BestRecommend(props) {
-  const [bestMenu, setBestMenu] = useState("");
-  const [address, setAddress] = useState("");
-  const [callNum, setCallNum] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [externalStar, setExternalStar] = useState("");
-  const [naverURL, setNaverURL] = useState("");
+  const [bestMenu, setBestMenu] = useState('');
+  const [address, setAddress] = useState('');
+  const [callNum, setCallNum] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
+  const [externalStar, setExternalStar] = useState('');
+  const [naverURL, setNaverURL] = useState('');
 
   useEffect(() => {
-    const axios = require("axios");
-    axios.get("/api/restaurant/" + props.id).then((response) => {
+    const axios = require('axios');
+    axios.get(`/api/restaurant/${props.id}`).then(response => {
       console.log(response.data);
       setBestMenu(response.data.bestMenu);
       // 주소 수정 필요
       setAddress(
-        response.data.address.floor == "층 정보 없음"
-          ? response.data.address.city +
-              " " +
-              response.data.address.district +
-              " " +
-              response.data.address.road
-          : response.data.address.city +
-              " " +
-              response.data.address.district +
-              " " +
-              response.data.address.road +
-              " " +
-              response.data.address.floor
+        response.data.address.floor == '층 정보 없음'
+          ? `${response.data.address.city} ${response.data.address.district} ${response.data.address.road}`
+          : `${response.data.address.city} ${response.data.address.district} ${response.data.address.road} ${response.data.address.floor}`,
       );
       setCallNum(response.data.callNumber);
       setStartTime(response.data.startTime);
@@ -59,10 +49,9 @@ function BestRecommend(props) {
     const endMinutes = Number(end.slice(3, 5));
 
     if (startHours <= hours && hours <= endHours && minutes < endMinutes) {
-      return "영업중";
-    } else {
-      return "영업 종료";
+      return '영업중';
     }
+    return '영업 종료';
   };
 
   const wrapStyle = css`
@@ -195,8 +184,9 @@ function BestRecommend(props) {
     <div
       css={wrapStyle}
       className="RecommendList"
-      onClick={() => window.open(naverURL, "_blank")}>
-      <div css={imageStyle}>{/*image*/}</div>
+      onClick={() => window.open(naverURL, '_blank')}
+    >
+      <div css={imageStyle}>{/* image */}</div>
       <div css={textWrap}>
         <div css={titleWrapStyle}>
           <div>{props.name}</div>
@@ -220,20 +210,21 @@ function BestRecommend(props) {
           <div css={infoDetailWrap}>
             <div css={phoneIconStyle} />
             <div css={infoStyle}>
-              {callNum == "전화번호 없음" ? "등록된 번호가 없습니다." : callNum}
+              {callNum == '전화번호 없음' ? '등록된 번호가 없습니다.' : callNum}
             </div>
           </div>
           <div css={infoDetailWrap}>
             <div css={timeIconStyle} />
             <div css={infoStyle}>
-              {startTime.slice(0, 5) + " ~ " + endTime.slice(0, 5)}
+              {`${startTime.slice(0, 5)} ~ ${endTime.slice(0, 5)}`}
             </div>
             <div
               css={
-                checkTime(startTime, endTime) == "영업중"
+                checkTime(startTime, endTime) == '영업중'
                   ? openStyle
                   : closeStyle
-              }>
+              }
+            >
               {checkTime(startTime, endTime)}
             </div>
           </div>

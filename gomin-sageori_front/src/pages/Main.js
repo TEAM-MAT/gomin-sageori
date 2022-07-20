@@ -256,7 +256,7 @@ function Main() {
       {/*<Header></Header>*/}
       <Intro></Intro>
       <div>
-        {" "}
+        {' '}
         {/*내용 부분 감싸는 div*/}
         <div css={containerStyle}>
           <h3 css={h3Style}>먹고자 하는 음식의 특징을 선택해주세요</h3>
@@ -336,27 +336,26 @@ function Main() {
             })}
           </div>
         </div>
-          <NavLink to="/recommend">
-            <ConfirmButton
-              content="찾아보기"
-              handleClick={(e) => {
-                if (notCompleteSelect) {
-                  e.preventDefault();
-                } else {
-                  console.log("실행");
-                  setRecommendResult(userSelection);
-                  setUserSelection({
-                    prefer: new Set(),
-                    atmosphere: "",
-                    allergy: "",
-                    franchise: false,
-                    region: "",
-                  });
-                }
-              }}
-            />
-          </NavLink>
-
+        <NavLink to="/recommend">
+          <ConfirmButton
+            content="찾아보기"
+            handleClick={e => {
+              if (notCompleteSelect) {
+                e.preventDefault();
+              } else {
+                console.log('실행');
+                setRecommendResult(userSelection);
+                setUserSelection({
+                  prefer: new Set(),
+                  atmosphere: '',
+                  allergy: '',
+                  franchise: false,
+                  region: '',
+                });
+              }
+            }}
+          />
+        </NavLink>
       </div>
       {/* Alert 작성중 */}
       {/* <Alert /> */}

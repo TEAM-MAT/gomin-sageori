@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import { useEffect } from "react";
-import styled from "@emotion/styled";
-import { ArrowLongRight } from "@emotion-icons/entypo";
+import { css } from '@emotion/react';
+import { useEffect } from 'react';
+import styled from '@emotion/styled';
+import { ArrowLongRight } from '@emotion-icons/entypo';
 
 function ConfirmButton({ content, handleClick }) {
   const confirmWrapStyle = css`
