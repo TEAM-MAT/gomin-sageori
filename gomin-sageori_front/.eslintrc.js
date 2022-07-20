@@ -7,6 +7,8 @@ module.exports = {
   extends: ['eslint:recommended', 'airbnb', 'plugin:prettier/recommended'],
   rules: {
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
-    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/destructuring-assignment': ['<enabled>', 'always'],
   },
 };
