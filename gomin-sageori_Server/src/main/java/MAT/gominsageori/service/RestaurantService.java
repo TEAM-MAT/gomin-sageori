@@ -83,8 +83,9 @@ public class RestaurantService {
         List<Restaurant> restaurantCandidates;
         try{
             String menuFilteringQuery = makeMenuFilteringQuery(menu); //menu 필터링 쿼리를 입력받은 조건으로부터 만듦.
+            String franchiseFilteringQuery = makeFranchiseFilteringQuery(recommandParam.getFranchise());
             restaurantCandidates = restaurantRepository
-                    .recommendationQuery(recommandParam.getLocation(), recommandParam.getFranchise(), menuFilteringQuery);
+                    .recommendationQuery(recommandParam.getLocation(), franchiseFilteringQuery, menuFilteringQuery);
         } catch (Exception e){
             if(e.getMessage() == "검색할 특징이 없음") {
                 throw new Exception("검색할 특징이 없음");
@@ -123,8 +124,8 @@ public class RestaurantService {
         String noodleFilter = "( m.isNoodle = true )";
         String riceFilter = "( m.isRice = true )";
         String spicyFilter = "( m.isSpicy = true )";
-        String sweetFilter = "( m.Sweet = true )";
-        String soupFilter = "( m.Sweet = true )";
+        String sweetFilter = "( m.isSweet = true )";
+        String soupFilter = "( m.isSoup = true )";
         int count = 0;
         if (menu.isBread()) {
             filteringQuery += breadFilter;
@@ -187,5 +188,12 @@ public class RestaurantService {
         else {
             return filteringQuery;
         }
+    }
+    public String makeFranchiseFilteringQuery(Boolean franchise) {
+        String filteringQuery = "";
+        if(franchise == false) {
+            filteringQuery = " AND r.franchise = false";
+        }
+        return filteringQuery;
     }
 }
