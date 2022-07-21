@@ -3,6 +3,8 @@ package MAT.gominsageori.controller;
 import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.service.RestaurantService;
 import MAT.gominsageori.transfer.RestaurantInfoSchema;
+import MAT.gominsageori.transfer.recommendationSchema;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,32 @@ public class RestaurantController {
     }
 
     //식당 정보 API
+    @ApiOperation(
+            value = "식당 정보 조회"
+            , notes = "식당 id를 이용해 식당 정보를 받는다",
+            response = Restaurant.class
+    )
+    @ApiImplicitParams(
+            {
+                    @ApiImplicitParam(
+                            name = "restaurant Id"
+                            , value = "식당 id "
+                            , required = true
+                            , dataType = "Long"
+                            , paramType = "body"
+                            , defaultValue = "None"
+                            , example = "1"
+                    )
+            }
+
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    code = 200,
+                    response = Restaurant.class,
+                    message = "restaurant 정보"
+            )
+    })
     @ResponseBody
     @GetMapping("/{id}")
     public ResponseEntity<Object> restaurantInfo(@PathVariable Long id){

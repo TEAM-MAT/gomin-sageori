@@ -66,11 +66,15 @@ public class RecommendationController {
                     code = 200,
                     response = recommendationSchema.class,
                     message = ""
+            ),
+            @ApiResponse(
+                    code = 204,
+                    response = recommendationSchema.class,
+                    message = "no recommendation provided"
             )
         }
 
     )
-
     @ResponseBody
     @GetMapping("")
     public ResponseEntity<recommendationSchema> Recommend(@ModelAttribute RecommandParam param){
