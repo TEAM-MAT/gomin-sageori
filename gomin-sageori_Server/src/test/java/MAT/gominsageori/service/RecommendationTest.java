@@ -40,7 +40,7 @@ public class RecommendationTest {
         recommandParam.setFranchise(false);
 
         List<String> menuCharacters = new ArrayList<>();
-        menuCharacters.add("hot"); menuCharacters.add("meat");
+        menuCharacters.add("soup"); //menuCharacters.add("meat");
         recommandParam.setCharacteristic(menuCharacters);
 
         //List<String> menuAllergy = new ArrayList<>();
@@ -49,7 +49,7 @@ public class RecommendationTest {
         try {
             List<Restaurant> findRestaurants = restaurantService.recommandRestaurant(recommandParam);
             for(Restaurant restaurantIter : findRestaurants) {
-                System.out.println(restaurantIter.getName());
+                System.out.println(restaurantIter.getName() + " " + restaurantIter.getFranchise());
             }
         } catch(Exception e) {
             System.out.println(e.getMessage());

@@ -6,7 +6,7 @@ import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.service.MemberService;
 import MAT.gominsageori.service.RestaurantService;
 import MAT.gominsageori.transfer.*;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +39,23 @@ public class MemberController {
             , notes = "id,email,name,password를 받아 회원가입을 수행(request body, JSON)",
             response = String.class
     )
+    @ApiResponses({
+            @ApiResponse(
+                    code = 200,
+                    response = String.class,
+                    message = "회원가입 성공"
+            ),
+            @ApiResponse(
+                    code = 400,
+                    response = String.class,
+                    message = "이름 또는 이메일이 주어지지 않음"
+            ),
+            @ApiResponse(
+                    code = 409,
+                    response = String.class,
+                    message = "id또는 이메일 중복"
+            ),
+    })
     @ResponseBody
     @PostMapping("/signup")
     public ResponseEntity<String> signUp(@RequestBody SignUpParam param) {
@@ -75,6 +92,18 @@ public class MemberController {
             , notes = "userId , password를 받아 로그인 수행. (request body, JSON), JWT토큰을 리턴해줌. 실패 시 400 status code리턴",
             response = String.class
     )
+    @ApiResponses({
+            @ApiResponse(
+                    code = 200,
+                    response = String.class,
+                    message = "jwt 토큰이 리턴됨"
+            ),
+            @ApiResponse(
+                    code = 400,
+                    response = String.class,
+                    message = "로그인 실패, body에 실패 이유 적혀있음."
+            ),
+    })
     @ResponseBody
     @PostMapping("/signin")
     public ResponseEntity<String> signIn(@RequestBody SignInParam param){
@@ -84,7 +113,7 @@ public class MemberController {
         Optional<Member> findResult = memberService.findOneByUserId(param.getUserId());
 
         if(findResult.isEmpty()) {
-            return ResponseEntity.status(403).body("fail");
+            return ResponseEntity.status(400).body("fail");
         }
         Member member = findResult.get();
         String encodedInput = memberService.loginPwdEncryption(param.getPassword(),member.getSalt());
@@ -98,9 +127,21 @@ public class MemberController {
 
     @ApiOperation(
             value = "즐겨찾기 추가"
-            , notes = "MemberId와 추가할 favorites 리스트를 통해 즐겨찾기 추가 (URL : api/member/favorites)",
+            , notes = "userId와 추가할 favorites 리스트를 통해 즐겨찾기 추가, 이미 즐겨찾기가 있으면 오류발생. (URL : api/member/favorites)",
             response = String.class
     )
+    @ApiResponses({
+            @ApiResponse(
+                    code = 200,
+                    response = String.class,
+                    message = "즐겨찾기 추가됨"
+            ),
+            @ApiResponse(
+                    code = 400,
+                    response = String.class,
+                    message = "즐겨찾기 목록이 이미 있거나, userid가 없거나, 즐겨찾기 정보가 잘못됨. body 참고"
+            ),
+    })
     @ResponseBody
     @PostMapping("/favorites")
     public ResponseEntity<String> addFavorites(@RequestBody FavoritesAddParam param) {
@@ -124,9 +165,26 @@ public class MemberController {
 
     @ApiOperation(
             value = "즐겨찾기 조회"
-            , notes = "MemberId 값을 받아 즐겨찾기 조회 (ex : api/member/1/favorites)",
+            , notes = "userId 값을 받아 즐겨찾기 조회 (ex : api/member/1/favorites)",
             response = FavoritesReturnParam.class
     )
+    @ApiResponses({
+            @ApiResponse(
+                    code = 200,
+                    response = FavoritesReturnParam.class,
+                    message = "즐겨찾기 리턴 됨"
+            ),
+            @ApiResponse(
+                    code = 400,
+                    response = FavoritesReturnParam.class,
+                    message = "URL의 userId가 잘못됨"
+            ),
+            @ApiResponse(
+                    code = 404,
+                    response = FavoritesReturnParam.class,
+                    message = "즐겨찾기가 존재하지 않음."
+            ),
+    })
     @ResponseBody
     @GetMapping("/{userId}/favorites")
     public ResponseEntity<FavoritesReturnParam> getFavoritesList(@PathVariable("userId") String userId) {
@@ -157,9 +215,26 @@ public class MemberController {
 
     @ApiOperation(
             value = "즐겨찾기 수정"
-            , notes = "MemberId와 추가할 favorites 리스트, 제거할 favorites 리스트를 통해 즐겨찾기 수정 (URL : api/member/favorites)",
+            , notes = "userId와 추가할 favorites 리스트, 제거할 favorites 리스트를 통해 즐겨찾기 수정 (URL : api/member/favorites)",
             response = String.class
     )
+    @ApiResponses({
+            @ApiResponse(
+                    code = 200,
+                    response = String.class,
+                    message = "즐겨찾기 수정됨"
+            ),
+            @ApiResponse(
+                    code = 400,
+                    response = FavoritesReturnParam.class,
+                    message = "URL의 userId가 잘못됨"
+            ),
+            @ApiResponse(
+                    code = 409,
+                    response = FavoritesReturnParam.class,
+                    message = "즐겨찾기 요청과 현재 즐겨찾기 목록이 충돌됨."
+            ),
+    })
     @ResponseBody
     @PutMapping("/favorites")
     public ResponseEntity<String> modifyFavorites(@RequestBody FavoritesModifyParam param) {
@@ -185,9 +260,26 @@ public class MemberController {
 
     @ApiOperation(
             value = "즐겨찾기 삭제"
-            , notes = "MemberId를 받아 즐겨찾기 리스트 전체 삭제 (ex : api/member/1/favorites)",
+            , notes = "userId를 받아 즐겨찾기 리스트 전체 삭제 (ex : api/member/1/favorites)",
             response = String.class
     )
+    @ApiResponses({
+            @ApiResponse(
+                    code = 200,
+                    response = String.class,
+                    message = "즐겨찾기 삭제됨"
+            ),
+            @ApiResponse(
+                    code = 400,
+                    response = FavoritesReturnParam.class,
+                    message = "URL의 userId가 잘못됨"
+            ),
+            @ApiResponse(
+                    code = 409,
+                    response = FavoritesReturnParam.class,
+                    message = "즐겨찾기가 없어 삭제 수행 불가."
+            ),
+    })
     @ResponseBody
     @DeleteMapping("/{userId}/favorites")
     public ResponseEntity<String> deleteFavorites(@PathVariable("userId") String userId) {

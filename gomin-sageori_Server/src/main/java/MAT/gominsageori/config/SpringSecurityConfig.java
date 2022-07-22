@@ -42,11 +42,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/api/member/favorites").authenticated()
+                .antMatchers("/api/member/**/favorites").authenticated()
                 .anyRequest().permitAll()
                 .and()
-                    .addFilterBefore(new JwtAuthFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
-                .logout()
-                    .logoutUrl("/api/member/logout");
+                    .addFilterBefore(new JwtAuthFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
                 //.deleteCookies()
     }
 
