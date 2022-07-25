@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import styled from "@emotion/styled";
-import useStore from "../../state/store";
-import "../../styles/base/font.css";
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import useStore from '../../state/store';
+import '../../styles/base/font.css';
 
 function Alert(props) {
   const { isPreferMaxSelect } = useStore();

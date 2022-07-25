@@ -44,7 +44,7 @@ function Menu() {
     margin: 1em;
   `;
 
-  const MenuIcon = styled(Menu)`
+  const MenuImage = styled(MenuIcon)`
     width: 25px;
     position: absolute;
     left: 140px;
@@ -71,7 +71,7 @@ function Menu() {
 
   return (
     <div css={isMenuSelect ? selectedMenuStyle : menuStyle} id="Menu">
-      <MenuIcon onClick={handleMenuClick} />
+      <MenuImage onClick={handleMenuClick} />
       <div css={loginDivStyle} id="login">
         <SampleProfileImage />
       </div>

@@ -1,7 +1,6 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import '../../styles/base/font.css';
-import { useState, useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 
 import timeIcon from '../../logo/time.png';
 import locationIcon from '../../logo/location.png';
@@ -68,7 +67,6 @@ function RecommendList(props) {
   const imageStyle = css`
     width: 120px;
     height: 120px;
-    background-color: black;
   `;
 
   const textWrap = css`
@@ -165,9 +163,10 @@ function RecommendList(props) {
       role="button"
       tabIndex="0"
     >
-      <div css={imageStyle}>
+      <div>
         <img
           alt={name}
+          css={imageStyle}
           src={`https://gomin-image.s3.ap-northeast-2.amazonaws.com/restaurant-images/${id}_1.jpg`}
         />
       </div>

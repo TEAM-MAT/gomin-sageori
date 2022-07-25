@@ -13,7 +13,9 @@ import Alert from "../UI/reusable/Alert";
 import { useEffect, useState } from "react";
 import RecommendList from "../UI/reusable/RecommendList";
 import { NavLink } from "react-router-dom";
-import useStore from "../state/store";
+import useStore from '../state/store';
+
+const shortId = require('shortid');
 
 function Main() {
   const { userSelection, setUserSelection } = useStore();
@@ -25,15 +27,15 @@ function Main() {
   const { isPreferMaxSelect, toggleIsPreferMaxSelect } = useStore();
 
   const preferArr = [
-    ["없음", ""],
-    ["국물이 있는", "soup"],
-    ["매운", "spicy"],
-    ["달달한", "sweet"],
-    ["뜨거운", "hot"],
-    ["고기가 있는", "meat"],
-    ["면이 있는", "noodle"],
-    ["밥이 있는", "rice"],
-    ["빵이 있는", "bread"],
+    ['없음', ''],
+    ['국물이 있는', 'soup'],
+    ['매운', 'spicy'],
+    ['달달한', 'sweet'],
+    ['뜨거운', 'hot'],
+    ['고기가 있는', 'meat'],
+    ['면이 있는', 'noodle'],
+    ['밥이 있는', 'rice'],
+    ['빵이 있는', 'bread'],
   ];
   // const atmosphereArr = [
   //   "없음",
@@ -64,9 +66,9 @@ function Main() {
   //   "쇠고기",
   //   "닭고기",
   // ];
-  const regionArr = ["숭입", "설입", "신촌"];
+  const regionArr = ['숭입', '설입', '신촌'];
 
-  const preferSelectionChange = (value) => {
+  const preferSelectionChange = value => {
     const oldSet = userSelection.prefer;
     if (oldSet.has(value)) {
       oldSet.delete(value);
@@ -80,7 +82,7 @@ function Main() {
     setUserSelection(newForm);
   };
 
-  const regionSelectionChange = (value) => {
+  const regionSelectionChange = value => {
     const newForm = {
       ...userSelection,
       region: value,
@@ -89,7 +91,7 @@ function Main() {
   };
 
   const [isPreferSelect, setIsPreferSelect] = useState(
-    Array(preferArr.length).fill(false)
+    Array(preferArr.length).fill(false),
   );
   // const [isAtmosphereSelect, setIsAtmosphereSelect] = useState(
   //   Array(atmosphereArr.length).fill(false)
@@ -98,11 +100,11 @@ function Main() {
   //   Array(allergyArr.length).fill(false)
   // );
   const [isRegionSelect, setIsRegionSelect] = useState(
-    Array(regionArr.length).fill(false)
+    Array(regionArr.length).fill(false),
   );
 
   const [isPreferDisable, setIsPreferDisable] = useState(
-    Array(preferArr.length).fill(false)
+    Array(preferArr.length).fill(false),
   );
   // const [isAtmosphereDisable, setIsAtmosphereDisable] = useState(
   //   Array(atmosphereArr.length).fill(false)
@@ -113,17 +115,15 @@ function Main() {
 
   const MAXIMUM_PREFER_SELECT = 3;
 
-  const preferHandleClick = (idx) => {
-    //3개 초과 클릭 시
+  const preferHandleClick = idx => {
+    // 3개 초과 클릭 시
     if (
-      isPreferSelect.filter((p) => p === true).length >=
-        MAXIMUM_PREFER_SELECT &&
+      isPreferSelect.filter(p => p === true).length >= MAXIMUM_PREFER_SELECT &&
       isPreferSelect[idx] === false
     ) {
       toggleIsPreferMaxSelect(true);
     } else if (
-      isPreferSelect.filter((p) => p === true).length >=
-        MAXIMUM_PREFER_SELECT &&
+      isPreferSelect.filter(p => p === true).length >= MAXIMUM_PREFER_SELECT &&
       isPreferSelect[idx] === true
     ) {
       const newArr = [...isPreferSelect];
@@ -140,7 +140,7 @@ function Main() {
     }
   };
 
-  const preferHandleDisable = (idx) => {
+  const preferHandleDisable = idx => {
     // 1, 2, 5, 6, 8, 9, 10, 11, 없음(0)
     if (idx === 0 && isPreferDisable[0] === false) {
       const newDisableArr = Array(preferArr.length).fill(true);
@@ -208,7 +208,7 @@ function Main() {
   //   }
   // };
 
-  const regionHandleClick = (idx) => {
+  const regionHandleClick = idx => {
     const newRegionArr = Array(regionArr.length).fill(false);
     newRegionArr[idx] = true;
     setIsRegionSelect(newRegionArr);
@@ -216,7 +216,7 @@ function Main() {
   };
 
   const notCompleteSelect =
-    userSelection.prefer.size < 1 || userSelection.region === "";
+    userSelection.prefer.size < 1 || userSelection.region === '';
 
   const h3Style = css`
     font-size: 0.95em;
@@ -253,18 +253,17 @@ function Main() {
 
   return (
     <div css={scrollStyle}>
-      {/*<Header></Header>*/}
-      <Intro></Intro>
+      {/* <Header></Header> */}
+      <Intro />
       <div>
         {' '}
-        {/*내용 부분 감싸는 div*/}
+        {/* 내용 부분 감싸는 div */}
         <div css={containerStyle}>
           <h3 css={h3Style}>먹고자 하는 음식의 특징을 선택해주세요</h3>
           <div css={buttonWrapStyle}>
             {preferArr.map((elm, index) => {
               return (
                 <BasicButton
-                  key={index}
                   isSelected={isPreferSelect[index]}
                   handleClick={preferHandleClick}
                   elementIndex={index}
@@ -315,7 +314,7 @@ function Main() {
         <div css={containerStyle}>
           <h3 css={h3Style}>프랜차이즈를 선택 대상에 포함시킬까요?</h3>
           <div css={toggleButtonWrapStyle}>
-            <ToggleButton content="포함" toggledContent="미포함"></ToggleButton>
+            <ToggleButton content="포함" toggledContent="미포함" />
           </div>
         </div>
         <div css={containerStyle}>
@@ -324,7 +323,6 @@ function Main() {
             {regionArr.map((elm, index) => {
               return (
                 <BasicButton
-                  key={index}
                   isSelected={isRegionSelect[index]}
                   handleClick={regionHandleClick}
                   elementIndex={index}
@@ -343,7 +341,6 @@ function Main() {
               if (notCompleteSelect) {
                 e.preventDefault();
               } else {
-                console.log('실행');
                 setRecommendResult(userSelection);
                 setUserSelection({
                   prefer: new Set(),
