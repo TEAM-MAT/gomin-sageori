@@ -1,18 +1,18 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import Intro from "../UI/main/Intro";
-import Header from "../UI/main/Header";
+import { css } from '@emotion/react';
+import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import Intro from '../UI/main/Intro';
+import Header from '../UI/main/Header';
 import {
   containerColStyle,
   containerRowStyle,
-} from "../styles/layout/Container";
-import BasicButton from "../UI/reusable/BasicButton";
-import ToggleButton from "../UI/reusable/ToggleButton";
-import ConfirmButton from "../UI/reusable/ConfirmButton";
-import Alert from "../UI/reusable/Alert";
-import { useEffect, useState } from "react";
-import RecommendList from "../UI/reusable/RecommendList";
-import { NavLink } from "react-router-dom";
+} from '../styles/layout/Container';
+import BasicButton from '../UI/reusable/BasicButton';
+import ToggleButton from '../UI/reusable/ToggleButton';
+import ConfirmButton from '../UI/reusable/ConfirmButton';
+import Alert from '../UI/reusable/Alert';
+import RecommendList from '../UI/reusable/RecommendList';
 import useStore from '../state/store';
 
 const shortId = require('shortid');
@@ -68,7 +68,7 @@ function Main() {
   // ];
   const regionArr = ['숭입', '설입', '신촌'];
 
-  const preferSelectionChange = value => {
+  const preferSelectionChange = (value) => {
     const oldSet = userSelection.prefer;
     if (oldSet.has(value)) {
       oldSet.delete(value);
@@ -82,7 +82,7 @@ function Main() {
     setUserSelection(newForm);
   };
 
-  const regionSelectionChange = value => {
+  const regionSelectionChange = (value) => {
     const newForm = {
       ...userSelection,
       region: value,
@@ -115,15 +115,17 @@ function Main() {
 
   const MAXIMUM_PREFER_SELECT = 3;
 
-  const preferHandleClick = idx => {
+  const preferHandleClick = (idx) => {
     // 3개 초과 클릭 시
     if (
-      isPreferSelect.filter(p => p === true).length >= MAXIMUM_PREFER_SELECT &&
+      isPreferSelect.filter((p) => p === true).length >=
+        MAXIMUM_PREFER_SELECT &&
       isPreferSelect[idx] === false
     ) {
       toggleIsPreferMaxSelect(true);
     } else if (
-      isPreferSelect.filter(p => p === true).length >= MAXIMUM_PREFER_SELECT &&
+      isPreferSelect.filter((p) => p === true).length >=
+        MAXIMUM_PREFER_SELECT &&
       isPreferSelect[idx] === true
     ) {
       const newArr = [...isPreferSelect];
@@ -140,7 +142,7 @@ function Main() {
     }
   };
 
-  const preferHandleDisable = idx => {
+  const preferHandleDisable = (idx) => {
     // 1, 2, 5, 6, 8, 9, 10, 11, 없음(0)
     if (idx === 0 && isPreferDisable[0] === false) {
       const newDisableArr = Array(preferArr.length).fill(true);
@@ -208,7 +210,7 @@ function Main() {
   //   }
   // };
 
-  const regionHandleClick = idx => {
+  const regionHandleClick = (idx) => {
     const newRegionArr = Array(regionArr.length).fill(false);
     newRegionArr[idx] = true;
     setIsRegionSelect(newRegionArr);
@@ -261,18 +263,17 @@ function Main() {
         <div css={containerStyle}>
           <h3 css={h3Style}>먹고자 하는 음식의 특징을 선택해주세요</h3>
           <div css={buttonWrapStyle}>
-            {preferArr.map((elm, index) => {
-              return (
-                <BasicButton
-                  isSelected={isPreferSelect[index]}
-                  handleClick={preferHandleClick}
-                  elementIndex={index}
-                  content={elm[0]}
-                  handleDisable={preferHandleDisable}
-                  isDisable={isPreferDisable[index]}
-                />
-              );
-            })}
+            {preferArr.map((elm, index) => (
+              <BasicButton
+                key=""
+                isSelected={isPreferSelect[index]}
+                handleClick={preferHandleClick}
+                elementIndex={index}
+                content={elm[0]}
+                handleDisable={preferHandleDisable}
+                isDisable={isPreferDisable[index]}
+              />
+            ))}
           </div>
         </div>
         {/* <div css={containerStyle}>
@@ -320,24 +321,23 @@ function Main() {
         <div css={containerStyle}>
           <h3 css={h3Style}>방문하고 싶으신 지역을 선택해주세요</h3>
           <div css={buttonWrapStyle}>
-            {regionArr.map((elm, index) => {
-              return (
-                <BasicButton
-                  isSelected={isRegionSelect[index]}
-                  handleClick={regionHandleClick}
-                  elementIndex={index}
-                  content={elm}
-                  handleDisable={() => {}}
-                  isDisable={null}
-                />
-              );
-            })}
+            {regionArr.map((elm, index) => (
+              <BasicButton
+                key=""
+                isSelected={isRegionSelect[index]}
+                handleClick={regionHandleClick}
+                elementIndex={index}
+                content={elm}
+                handleDisable={() => {}}
+                isDisable={null}
+              />
+            ))}
           </div>
         </div>
         <NavLink to="/recommend">
           <ConfirmButton
             content="찾아보기"
-            handleClick={e => {
+            handleClick={(e) => {
               if (notCompleteSelect) {
                 e.preventDefault();
               } else {
