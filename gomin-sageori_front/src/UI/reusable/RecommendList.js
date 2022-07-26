@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import '../../styles/base/font.css';
-import { useState, useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 
 import timeIcon from '../../logo/time.png';
 import locationIcon from '../../logo/location.png';
@@ -21,7 +21,7 @@ function RecommendList(props) {
   const [naverURL, setNaverURL] = useState('');
 
   useEffect(() => {
-    axios.get(`/api/restaurant/${id}`).then(response => {
+    axios.get(`/api/restaurant/${id}`).then((response) => {
       setBestMenu(response.data.bestMenu);
       // 주소 수정 필요
       setAddress(
@@ -68,7 +68,6 @@ function RecommendList(props) {
   const imageStyle = css`
     width: 120px;
     height: 120px;
-    background-color: black;
   `;
 
   const textWrap = css`
@@ -84,11 +83,13 @@ function RecommendList(props) {
     font-weight: 300;
     color: #474747;
 
-    width: 90px;
+    width: max-content;
+    min-width: 90px;
     height: 22px;
     background-color: #ffe1cb;
     border-radius: 50px;
 
+    padding: 0 5px;
     margin-top: 5px;
     margin-bottom: 5px;
   `;
@@ -157,17 +158,11 @@ function RecommendList(props) {
   `;
 
   return (
-    <div
-      css={wrapStyle}
-      className="RecommendList"
-      onClick={() => window.open(naverURL, '_blank')}
-      onKeyPress={() => {}}
-      role="button"
-      tabIndex="0"
-    >
-      <div css={imageStyle}>
+    <div css={wrapStyle} onClick={() => window.open(naverURL, '_blank')}>
+      <div>
         <img
           alt={name}
+          css={imageStyle}
           src={`https://gomin-image.s3.ap-northeast-2.amazonaws.com/restaurant-images/${id}_1.jpg`}
         />
       </div>

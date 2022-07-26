@@ -59,7 +59,7 @@ function BasicButton(props) {
   `;
 
   useEffect(() => {
-    console.log('yes');
+    // console.log('yes');
   }, []);
 
   return (

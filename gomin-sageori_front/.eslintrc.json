@@ -1,0 +1,30 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["airbnb", "plugin:react/recommended"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "arrow-parens": "off", //화살표 함수 prettier랑 충돌
+    "linebreak-style": "off", //마찬가지로 prettier랑 충돌
+    "no-unused-vars": "off", //변수 선언만 하고 사용 X
+    "object-curly-newline":"off", //중괄호였나
+    "operator-linebreak":"off", //prettier 충돌
+    "implicit-arrow-linebreak":"off", //prettier 충돌
+    "jsx-a11y/no-static-element-interactions":"off", //div에 onclick 달았을 때 default event를 설정해주어야 함
+    "jsx-a11y/no-noninteractive-element-interactions":"off", //noninteractive element에 interaction달아서
+    "jsx-a11y/click-events-have-key-events":"off", //div에 onclick 달았을 때 default event를 설정해주어야 함
+    "react/destructuring-assignment": "off", //props destructuring 하라는거
+    "react/prop-types": "off", //나중에 TS 적용하면 해결
+    "react/jsx-filename-extension": "off", //.jsx 안 쓴 거
+    "react/react-in-jsx-scope": "off" //import React 안 한 거
+  }
+}

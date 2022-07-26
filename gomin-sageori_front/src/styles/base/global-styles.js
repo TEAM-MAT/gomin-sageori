@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import "./font.css";
+import { css } from '@emotion/react';
+import './font.css';
 
 const reset = css`
   html {
     -ms-text-size-adjust: 100%; /* 2 */
     -webkit-text-size-adjust: 100%; /* 2 */
     * {
-      font-family: "pretendard";
+      font-family: 'pretendard';
     }
   }
 
@@ -188,26 +188,26 @@ input[type="submit"] {
     line-height: normal;
   }
 
-  input[type="checkbox"],
-  input[type="radio"] {
+  input[type='checkbox'],
+  input[type='radio'] {
     box-sizing: border-box; /* 1 */
     padding: 0; /* 2 */
   }
 
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
     height: auto;
   }
 
-  input[type="search"] {
+  input[type='search'] {
     -webkit-appearance: textfield; /* 1 */
     -moz-box-sizing: content-box;
     -webkit-box-sizing: content-box; /* 2 */
     box-sizing: content-box;
   }
 
-  input[type="search"]::-webkit-search-cancel-button,
-  input[type="search"]::-webkit-search-decoration {
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-decoration {
     -webkit-appearance: none;
   }
 
