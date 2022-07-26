@@ -12,28 +12,38 @@ const axios = require('axios');
 
 function BestRecommend(props) {
   const { name, id } = props;
-  const [bestMenu, setBestMenu] = useState('');
-  const [address, setAddress] = useState('');
-  const [callNum, setCallNum] = useState('');
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
-  const [externalStar, setExternalStar] = useState('');
-  const [naverURL, setNaverURL] = useState('');
+  const [states, setStates] = useState({
+    bestMenu: '',
+    address: '',
+    callNum: '',
+    startTime: '',
+    endTime: '',
+    externalStar: '',
+    naverURL: '',
+  });
 
+  const stateHandler = (stateName, stateVal) => {
+    setStates(prevState => {
+      return {
+        ...prevState,
+        [stateName]: stateVal,
+      };
+    });
+  };
   useEffect(() => {
     axios.get(`/api/restaurant/${id}`).then(response => {
-      setBestMenu(response.data.bestMenu);
-      // 주소 수정 필요
-      setAddress(
-        response.data.address.floor === '층 정보 없음'
-          ? `${response.data.address.city} ${response.data.address.district} ${response.data.address.road}`
-          : `${response.data.address.city} ${response.data.address.district} ${response.data.address.road} ${response.data.address.floor}`,
+      stateHandler('bestMenu', response.data.bestMenu);
+      stateHandler(
+          'address',
+          response.data.address.floor === '층 정보 없음'
+              ? `${response.data.address.city} ${response.data.address.district} ${response.data.address.road}`
+              : `${response.data.address.city} ${response.data.address.district} ${response.data.address.road} ${response.data.address.floor}`,
       );
-      setCallNum(response.data.callNumber);
-      setStartTime(response.data.startTime);
-      setEndTime(response.data.finTime);
-      setExternalStar(response.data.externalStar);
-      setNaverURL(response.data.naverMapUrl);
+      stateHandler('callNum', response.data.bestMenu);
+      stateHandler('startTime', response.data.bestMenu);
+      stateHandler('endTime', response.data.bestMenu);
+      stateHandler('externalStar', response.data.bestMenu);
+      stateHandler('naverURL', response.data.bestMenu);
     });
   }, []);
 
@@ -185,7 +195,7 @@ function BestRecommend(props) {
     <div
       css={wrapStyle}
       className="RecommendList"
-      onClick={() => window.open(naverURL, '_blank')}
+      onClick={() => window.open(states.naverURL, '_blank')}
       onKeyPress={() => {}}
       role="button"
       tabIndex="0"
@@ -198,14 +208,14 @@ function BestRecommend(props) {
       </div>
       <div css={textWrap}>
         <div css={titleWrapStyle}>
-          <div>{name}</div>
+          <div>{states.name}</div>
           <div css={startWrapStyle}>
             <div css={starStyle} />
-            <div>{externalStar}</div>
+            <div>{states.externalStar}</div>
           </div>
         </div>
         <div>
-          <div css={bestMenuStyle}>{bestMenu}</div>
+          <div css={bestMenuStyle}>{states.bestMenu}</div>
         </div>
         <div css={infoWrapStyle}>
           <div css={infoTitleStyle}>
@@ -214,29 +224,29 @@ function BestRecommend(props) {
           </div>
           <div css={infoDetailWrap}>
             <div css={locationIconStyle} />
-            <div css={infoStyle}>{address}</div>
+            <div css={infoStyle}>{states.address}</div>
           </div>
           <div css={infoDetailWrap}>
             <div css={phoneIconStyle} />
             <div css={infoStyle}>
-              {callNum === '전화번호 없음'
+              {states.callNum === '전화번호 없음'
                 ? '등록된 번호가 없습니다.'
-                : callNum}
+                : states.callNum}
             </div>
           </div>
           <div css={infoDetailWrap}>
             <div css={timeIconStyle} />
             <div css={infoStyle}>
-              {`${startTime.slice(0, 5)} ~ ${endTime.slice(0, 5)}`}
+              {`${states.startTime.slice(0, 5)} ~ ${states.endTime.slice(0, 5)}`}
             </div>
             <div
               css={
-                checkTime(startTime, endTime) === '영업중'
+                checkTime(states.startTime, states.endTime) === '영업중'
                   ? openStyle
                   : closeStyle
               }
             >
-              {checkTime(startTime, endTime)}
+              {checkTime(states.startTime, states.endTime)}
             </div>
           </div>
         </div>

@@ -27,7 +27,7 @@ const useStore = create((set) => ({
       })
       .then((response) => {
         set(() => ({ recommendResult: response.data.restaurants }));
-        // console.log(response.data.restaurants);
+        console.log(response.data.restaurants);
       });
   },
   isPreferMaxSelect: { isMax: false, maxNumber: 3 },
