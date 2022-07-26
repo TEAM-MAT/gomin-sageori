@@ -2,7 +2,7 @@ import create from 'zustand';
 
 const axios = require('axios');
 
-const useStore = create(set => ({
+const useStore = create((set) => ({
   // isAllSelect: false,
   // setIsAllSelect: (bool) => set((state) => ({ isAllSelect: bool })),
   userSelection: {
@@ -12,7 +12,7 @@ const useStore = create(set => ({
     franchise: false,
     region: '',
   },
-  setUserSelection: p => set(() => ({ userSelection: p })),
+  setUserSelection: (p) => set(() => ({ userSelection: p })),
   recommendResult: [],
   async setRecommendResult(selection) {
     const preferStr = Array.from(selection.prefer).join(',');
@@ -24,12 +24,12 @@ const useStore = create(set => ({
           location: selection.region,
         },
       })
-      .then(response => {
+      .then((response) => {
         set(() => ({ recommendResult: response.data.restaurants }));
       });
   },
   isPreferMaxSelect: { isMax: false, maxNumber: 3 },
-  toggleIsPreferMaxSelect: p =>
+  toggleIsPreferMaxSelect: (p) =>
     set(() => ({
       isPreferMaxSelect: { isMax: p },
     })),
