@@ -26,17 +26,10 @@ gomin-sageori_Server/src/main/resources/application.properties
 gomin-sageori_Server/src/main/application.properties
 
 # Tools for Gitpod
-<<<<<<< Updated upstream
-.gitpod.yml
-
-#가상환경
-/gomin/*
-=======
-.gitpod.ymlgomin/bin gomin/include gomin/lib gomin/share gomin/src
+gomin/bin gomin/include gomin/lib gomin/share gomin/src
 
 # 가상환경
 /gomin/* 
->>>>>>> Stashed changes
 gomin-sageori_Server/src/main/.DS_Store
 gomin-sageori_Server/src/main/java/.DS_Store
 gomin-sageori_Server/src/main/java/MAT/gominsageori/.DS_Store
@@ -45,3 +38,5 @@ gomin-sageori_Server/src/.DS_Store
 gomin-sageori_Server/src/main/resources/.DS_Store
 gomin-sageori_Server/.DS_Store
 .DS_Store
+
+SetUpProxy.js
