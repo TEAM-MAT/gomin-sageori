@@ -28,7 +28,7 @@ public class Restaurant {
     private Float externalStar; //외부 평점
 
     @Column(nullable = true)
-    private Float internalStar; //내부 평점
+    private Float internalStar= 0.0F; //내부 평점
 
     @Column(nullable = true)
     private Time startTime; //영업시작시간
@@ -62,6 +62,9 @@ public class Restaurant {
 
     @Column(nullable = true)
     private int imageCount = 0;
+
+    @Column(nullable = false)
+    private int usersGaveStars = 0;
 
     public String getRestaurantType() {
         return restaurantType;
@@ -207,5 +210,9 @@ public class Restaurant {
 
     public void setMenus(List<Menu> menus) {
         this.menus = menus;
+    }
+
+    public void incrementUsersGaveStars() {
+        this.usersGaveStars += 1;
     }
 }

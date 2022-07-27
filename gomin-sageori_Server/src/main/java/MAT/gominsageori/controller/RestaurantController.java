@@ -4,6 +4,7 @@ import MAT.gominsageori.domain.Restaurant;
 import MAT.gominsageori.service.RestaurantService;
 import MAT.gominsageori.transfer.RestaurantInfoSchema;
 import MAT.gominsageori.transfer.recommendationSchema;
+import MAT.gominsageori.transfer.starsUpdateParam;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -70,4 +71,43 @@ public class RestaurantController {
             return ResponseEntity.status(200).body(payload);
         }
     }
+
+    //식당 별점 갱신 API
+    @ApiOperation(
+            value = "식당 별점 갱신"
+            , notes = "식당 id를 이용해 별점을 갱신한다.",
+            response = String.class
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    code = 200,
+                    response = String.class,
+                    message = "별점 갱신 완료"
+            ),
+            @ApiResponse(
+                    code = 400,
+                    response = String.class,
+                    message = "식당 id가 잘못됨."
+            )
+    })
+    @ResponseBody
+    @PutMapping("/stars")
+    public ResponseEntity<String> updateStars(@ModelAttribute starsUpdateParam param) {
+        Object findResult = restaurantService.findOneById(param.getId()).get("result");
+        if(findResult.getClass() == String.class) {
+            //에러 발생. 존재하지 않음.
+            return ResponseEntity.status(400).body("restaurant doesn't exist");
+        }
+        else {
+            Restaurant restaurant = (Restaurant) findResult;
+            try {
+                restaurantService.updateStars(restaurant, param.getStars());
+                return ResponseEntity.status(200).body(restaurant.getName());
+            } catch (Exception ex){
+                return ResponseEntity.status(500).body("Internal Error");
+            }
+        }
+
+    }
+
 }

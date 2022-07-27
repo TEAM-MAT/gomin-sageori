@@ -44,6 +44,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/member/favorites").authenticated()
                 .antMatchers("/api/member/**/favorites").authenticated()
+                .antMatchers("/api/restaurant/stars").authenticated()
                 .anyRequest().permitAll()
                 .and()
                     .addFilterBefore(new JwtAuthFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
