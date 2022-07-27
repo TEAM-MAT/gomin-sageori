@@ -35,8 +35,6 @@ function Main() {
     ['빵이 있는', 'bread'],
   ];
 
-  const regionArr = ["숭입", "설입", "신촌"];
-
   const regionArr = ['숭입', '설입', '신촌'];
 
   const selectionSetChange = (value, subject) => {
