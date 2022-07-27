@@ -34,16 +34,16 @@ function BestRecommend(props) {
     axios.get(`/api/restaurant/${id}`).then(response => {
       stateHandler('bestMenu', response.data.bestMenu);
       stateHandler(
-          'address',
-          response.data.address.floor === '층 정보 없음'
-              ? `${response.data.address.city} ${response.data.address.district} ${response.data.address.road}`
-              : `${response.data.address.city} ${response.data.address.district} ${response.data.address.road} ${response.data.address.floor}`,
+        'address',
+        response.data.address.floor === '층 정보 없음'
+          ? `${response.data.address.city} ${response.data.address.district} ${response.data.address.road}`
+          : `${response.data.address.city} ${response.data.address.district} ${response.data.address.road} ${response.data.address.floor}`,
       );
-      stateHandler('callNum', response.data.bestMenu);
-      stateHandler('startTime', response.data.bestMenu);
-      stateHandler('endTime', response.data.bestMenu);
-      stateHandler('externalStar', response.data.bestMenu);
-      stateHandler('naverURL', response.data.bestMenu);
+      stateHandler('callNum', response.data.callNumber);
+      stateHandler('startTime', response.data.startTime);
+      stateHandler('endTime', response.data.finTime);
+      stateHandler('externalStar', response.data.externalStar);
+      stateHandler('naverURL', response.data.naverMapURL);
     });
   }, []);
 
