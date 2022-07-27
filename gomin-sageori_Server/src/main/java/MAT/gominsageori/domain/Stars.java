@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name = "stars")
-public class stars {
+public class Stars {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

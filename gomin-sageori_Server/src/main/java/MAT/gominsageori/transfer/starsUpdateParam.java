@@ -13,8 +13,11 @@ public class starsUpdateParam {
             example = ""
     )
 
+    @ApiParam( name = "userId")
+    private String userId;
+
     @ApiParam( name = "식당Id")
-    private Long id;
+    private Long RestaurantId;
 
     @ApiParam( name = "별점" )
     private Float stars;

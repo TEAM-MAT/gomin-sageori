@@ -1,7 +1,11 @@
 package MAT.gominsageori.controller;
 
+import MAT.gominsageori.domain.Member;
 import MAT.gominsageori.domain.Restaurant;
+import MAT.gominsageori.domain.Stars;
+import MAT.gominsageori.service.MemberService;
 import MAT.gominsageori.service.RestaurantService;
+import MAT.gominsageori.service.StarsService;
 import MAT.gominsageori.transfer.RestaurantInfoSchema;
 import MAT.gominsageori.transfer.recommendationSchema;
 import MAT.gominsageori.transfer.starsUpdateParam;
@@ -13,15 +17,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/restaurant")
 public class RestaurantController {
     private RestaurantService restaurantService;
+    private StarsService starsService;
+    private MemberService memberService;
 
     @Autowired
-    public void RestaurantController(RestaurantService restaurantService) {
+    public void RestaurantController(RestaurantService restaurantService, StarsService starsService, MemberService memberService) {
         this.restaurantService = restaurantService;
+        this.starsService = starsService;
+        this.memberService = memberService;
     }
 
     @GetMapping("/")
@@ -93,18 +102,24 @@ public class RestaurantController {
     @ResponseBody
     @PutMapping("/stars")
     public ResponseEntity<String> updateStars(@ModelAttribute starsUpdateParam param) {
-        Object findResult = restaurantService.findOneById(param.getId()).get("result");
-        if(findResult.getClass() == String.class) {
+        Object findResult = restaurantService.findOneById(param.getRestaurantId()).get("result");
+        Optional member = memberService.findOneByUserId(param.getUserId());
+        if(findResult.getClass() == String.class || member.isEmpty()) {
             //에러 발생. 존재하지 않음.
             return ResponseEntity.status(400).body("restaurant doesn't exist");
         }
         else {
             Restaurant restaurant = (Restaurant) findResult;
             try {
-                restaurantService.updateStars(restaurant, param.getStars());
+                Member temp = (Member) member.get();
+                Stars stars = new Stars();
+                stars.setStars(param.getStars());
+                stars.setRestaurantPK(param.getRestaurantId());
+                stars.setUserPK(temp.getId());
+                starsService.giveStar(stars);
                 return ResponseEntity.status(200).body(restaurant.getName());
             } catch (Exception ex){
-                return ResponseEntity.status(500).body("Internal Error");
+                return ResponseEntity.status(500).body("Something got wrong");
             }
         }
 

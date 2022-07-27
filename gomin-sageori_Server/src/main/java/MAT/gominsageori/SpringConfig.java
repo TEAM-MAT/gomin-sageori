@@ -43,4 +43,7 @@ public class SpringConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {return new CustomUserDetailService(memberRepository());}
+
+    @Bean
+    public StarsRepository starsRepository() { return new JpaStarsRepository(em); }
 }

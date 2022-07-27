@@ -62,8 +62,6 @@ public class Restaurant {
     @Column(nullable = true)
     private int imageCount = 0;
 
-    @Column(nullable = false)
-    private int usersGaveStars = 0;
 
     public String getRestaurantType() {
         return restaurantType;
@@ -211,7 +209,4 @@ public class Restaurant {
         this.menus = menus;
     }
 
-    public void incrementUsersGaveStars() {
-        this.usersGaveStars += 1;
-    }
 }

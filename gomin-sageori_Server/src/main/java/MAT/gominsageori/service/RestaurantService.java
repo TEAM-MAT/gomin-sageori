@@ -37,16 +37,6 @@ public class RestaurantService {
         }
     }
 
-    public void updateStars(Restaurant restaurant, Float stars) throws Exception {
-        restaurant.incrementUsersGaveStars();
-        restaurant.setInternalStar((Float)(stars/restaurant.getUsersGaveStars()));
-        try {
-            restaurantRepository.update(restaurant);
-        } catch (Exception ex) {
-            throw ex;
-        }
-    }
-
     private void validateDuplicateRestaurant(Restaurant restaurant) {
         restaurantRepository.findByName(restaurant.getName())
                 .ifPresent(r -> {
