@@ -8,12 +8,17 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name = "stars")
+@Table(name = "stars", uniqueConstraints = {
+        @UniqueConstraint(
+                name = "uqUserRestaurant",
+                columnNames = {"userPK","restaurantPK"}
+        )
+})
 public class Stars {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int order;
+    private int star_order;
 
     @Column(nullable = false)
     private Long userPK;

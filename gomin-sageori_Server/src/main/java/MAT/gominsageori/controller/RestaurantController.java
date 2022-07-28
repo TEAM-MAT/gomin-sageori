@@ -7,7 +7,7 @@ import MAT.gominsageori.service.MemberService;
 import MAT.gominsageori.service.RestaurantService;
 import MAT.gominsageori.service.StarsService;
 import MAT.gominsageori.transfer.RestaurantInfoSchema;
-import MAT.gominsageori.transfer.starsPostUpdateParam;
+import MAT.gominsageori.transfer.starsPatchUpdateParam;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -142,11 +142,11 @@ public class RestaurantController {
     })
     @ResponseBody
     @PatchMapping("{restaurantId}/stars")
-    public ResponseEntity<String> updateStars(@PathVariable Long restaurantId, @ModelAttribute starsPostUpdateParam param) {
+    public ResponseEntity<String> updateStars(@ModelAttribute starsPatchUpdateParam param) {
         Restaurant findResult;
         Optional<Member> member;
         try {
-            findResult = restaurantService.findOneById(restaurantId);
+            findResult = restaurantService.findOneById(param.getRestaurantId());
             member = memberService.findOneByUserId(param.getUserId());
         } catch (Exception ex) {
             return ResponseEntity.status(400).body("restaurant doesn't exist");
@@ -161,7 +161,7 @@ public class RestaurantController {
                 Member temp = member.get();
                 Stars stars = new Stars();
                 stars.setStars(param.getStars());
-                stars.setRestaurantPK(restaurantId);
+                stars.setRestaurantPK(param.getRestaurantId());
                 stars.setUserPK(temp.getId());
                 starsService.giveStar(stars);
                 return ResponseEntity.status(200).body(restaurant.getName());

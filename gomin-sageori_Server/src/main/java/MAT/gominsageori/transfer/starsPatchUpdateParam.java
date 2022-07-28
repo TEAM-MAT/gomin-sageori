@@ -7,15 +7,18 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class starsPostUpdateParam {
+public class starsPatchUpdateParam {
     @ApiModelProperty(
             name = "별점 업데이트 body",
             example = ""
     )
 
+    @ApiParam( name = "restaurantId")
+    private Long restaurantId;
+
     @ApiParam( name = "userId")
     private String userId;
 
-    @ApiParam( name = "별점" )
+    @ApiParam( name = "stars" )
     private Float stars;
 }
