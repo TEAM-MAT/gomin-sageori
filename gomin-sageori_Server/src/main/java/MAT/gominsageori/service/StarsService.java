@@ -57,5 +57,14 @@ public class StarsService {
         }
     }
 
+    public Stars getStarByRestaurantAndUser(Long memberPK, Long restaurantPK) throws Exception {
+        Optional<Stars> findResult = starsRepository.findByMemberAndRestaurant(memberPK, restaurantPK);
+        if(findResult.isEmpty()) {
+            throw new Exception("no stars");
+        } else {
+            return findResult.get();
+        }
+    }
+
 
 }

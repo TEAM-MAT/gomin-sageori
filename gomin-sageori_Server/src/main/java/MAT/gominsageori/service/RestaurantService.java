@@ -69,18 +69,14 @@ public class RestaurantService {
         return restaurantRepository.findAll();
     }
 
-    public HashMap<String, Object> findOneById(Long restaurantId) {
+    public Restaurant findOneById(Long restaurantId) throws Exception {
         Restaurant findResult;
         try {
             findResult = restaurantRepository.findById(restaurantId);
+            return findResult;
         } catch (Exception ex) {
-            HashMap<String, Object> returning = new HashMap<>();
-            returning.put("result", ex.getMessage());
-            return returning;
+            throw ex;
         }
-        HashMap<String, Object> payLoad = new HashMap<>();
-        payLoad.put("result", findResult);
-        return payLoad;
     }
 
     public Optional<Restaurant> findOnebyName(String restaurantName) {

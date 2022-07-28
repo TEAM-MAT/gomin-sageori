@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class starsUpdateParam {
+public class starsPostUpdateParam {
     @ApiModelProperty(
             name = "별점 업데이트 body",
             example = ""
@@ -15,9 +15,6 @@ public class starsUpdateParam {
 
     @ApiParam( name = "userId")
     private String userId;
-
-    @ApiParam( name = "식당Id")
-    private Long RestaurantId;
 
     @ApiParam( name = "별점" )
     private Float stars;
