@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Stars {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int star_order;
 
     @Column(nullable = false)

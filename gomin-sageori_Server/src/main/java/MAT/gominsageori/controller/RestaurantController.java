@@ -141,7 +141,7 @@ public class RestaurantController {
             )
     })
     @ResponseBody
-    @PatchMapping("{restaurantId}/stars")
+    @PatchMapping(value = "{restaurantId}/stars", produces = "application/text; charset=utf8")
     public ResponseEntity<String> updateStars(@PathVariable Long restaurantId,@RequestBody starsPatchUpdateParam param) {
         Restaurant findResult;
         Optional<Member> member;
