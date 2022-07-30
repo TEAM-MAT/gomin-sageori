@@ -76,14 +76,14 @@ public class JpaStarsRepository implements StarsRepository{
 
     @Override
     public Float getAverageStars(Long restaurantPK) {
-        Float result = em.createQuery(
+        Double result = em.createQuery(
                 "SELECT AVG(s.stars) " +
                         "FROM Stars s " +
                         "WHERE s.restaurantPK = :restaurantPK ",
-                Float.class
+                Double.class
         )
                 .setParameter("restaurantPK", restaurantPK)
                 .getSingleResult();
-        return result;
+        return result.floatValue();
     }
 }

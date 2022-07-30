@@ -142,30 +142,30 @@ public class RestaurantController {
     })
     @ResponseBody
     @PatchMapping("{restaurantId}/stars")
-    public ResponseEntity<String> updateStars(@ModelAttribute starsPatchUpdateParam param) {
+    public ResponseEntity<String> updateStars(@PathVariable Long restaurantId,@RequestBody starsPatchUpdateParam param) {
         Restaurant findResult;
         Optional<Member> member;
         try {
-            findResult = restaurantService.findOneById(param.getRestaurantId());
+            findResult = restaurantService.findOneById(restaurantId);
             member = memberService.findOneByUserId(param.getUserId());
         } catch (Exception ex) {
             return ResponseEntity.status(400).body("restaurant doesn't exist");
         }
         if(member.isEmpty()) {
             //에러 발생. 존재하지 않음.
-            return ResponseEntity.status(400).body("restaurant doesn't exist");
+            return ResponseEntity.status(400).body("user doesn't exist");
         }
         else {
-            Restaurant restaurant = (Restaurant) findResult;
             try {
                 Member temp = member.get();
                 Stars stars = new Stars();
                 stars.setStars(param.getStars());
-                stars.setRestaurantPK(param.getRestaurantId());
+                stars.setRestaurantPK(restaurantId);
                 stars.setUserPK(temp.getId());
                 starsService.giveStar(stars);
-                return ResponseEntity.status(200).body(restaurant.getName());
+                return ResponseEntity.status(200).body(findResult.getName());
             } catch (Exception ex){
+                System.out.println(ex.getMessage());
                 return ResponseEntity.status(500).body("Something got wrong");
             }
         }

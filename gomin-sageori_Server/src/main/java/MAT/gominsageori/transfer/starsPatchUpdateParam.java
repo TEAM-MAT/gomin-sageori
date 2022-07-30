@@ -13,9 +13,6 @@ public class starsPatchUpdateParam {
             example = ""
     )
 
-    @ApiParam( name = "restaurantId")
-    private Long restaurantId;
-
     @ApiParam( name = "userId")
     private String userId;
 
