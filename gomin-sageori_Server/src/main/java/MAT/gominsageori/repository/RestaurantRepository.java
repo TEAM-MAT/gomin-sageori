@@ -19,4 +19,5 @@ public interface RestaurantRepository {
     Optional<Restaurant> findRestaurantByAdd(Address address);
     List<Restaurant> findRestaurantByLocation(String location);
     List<Restaurant> recommendationQuery(String location, String franchiseFilteringQuery, String menuFilteringQuery);
+    void update(Restaurant restaurant) throws Exception;
 }

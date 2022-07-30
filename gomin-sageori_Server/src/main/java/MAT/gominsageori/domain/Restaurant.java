@@ -2,7 +2,6 @@ package MAT.gominsageori.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Time;
@@ -28,7 +27,7 @@ public class Restaurant {
     private Float externalStar; //외부 평점
 
     @Column(nullable = true)
-    private Float internalStar; //내부 평점
+    private Float internalStar= 0.0F; //내부 평점
 
     @Column(nullable = true)
     private Time startTime; //영업시작시간
@@ -62,6 +61,7 @@ public class Restaurant {
 
     @Column(nullable = true)
     private int imageCount = 0;
+
 
     public String getRestaurantType() {
         return restaurantType;
@@ -208,4 +208,5 @@ public class Restaurant {
     public void setMenus(List<Menu> menus) {
         this.menus = menus;
     }
+
 }
