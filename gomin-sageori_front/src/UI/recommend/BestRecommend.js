@@ -11,8 +11,9 @@ import starIcon from '../../logo/star.png';
 const axios = require('axios');
 
 function BestRecommend(props) {
-  const { name, id } = props;
+  const { id, name } = props;
   const [states, setStates] = useState({
+    name: '',
     bestMenu: '',
     address: '',
     callNum: '',
@@ -208,7 +209,7 @@ function BestRecommend(props) {
       </div>
       <div css={textWrap}>
         <div css={titleWrapStyle}>
-          <div>{states.name}</div>
+          <div>{name}</div>
           <div css={startWrapStyle}>
             <div css={starStyle} />
             <div>{states.externalStar}</div>

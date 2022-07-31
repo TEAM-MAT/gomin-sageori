@@ -24,7 +24,7 @@ function Main() {
   const { isPreferMaxSelect, toggleIsPreferMaxSelect } = useStore();
 
   const preferArr = [
-    ['없음', ''],
+    ['없음', 'none'],
     ['국물이 있는', 'soup'],
     ['매운', 'spicy'],
     ['달달한', 'sweet'],
@@ -49,7 +49,7 @@ function Main() {
       subject: oldSet,
     };
     setUserSelection(newForm);
-    console.log(userSelection);
+    // console.log(userSelection);
   };
 
   const regionSelectionChange = (value) => {
@@ -179,13 +179,10 @@ function Main() {
                 e.preventDefault();
               } else {
                 setRecommendResult(userSelection);
-                setUserSelection({
-                  prefer: new Set(),
-                  atmosphere: '',
-                  allergy: '',
-                  franchise: false,
-                  region: '',
-                });
+                console.log(userSelection);
+                const preferSelectionArr = Array.from(userSelection.prefer);
+                localStorage.setItem('preferSelection', JSON.stringify(preferSelectionArr));
+                localStorage.setItem('userSelection', JSON.stringify(userSelection));
               }
             }}
           />

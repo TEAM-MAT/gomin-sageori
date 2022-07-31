@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import useStore from '../state/store';
 import RecommendList from '../UI/reusable/RecommendList';
 import BestRecommend from '../UI/recommend/BestRecommend';
+import Selection from '../UI/recommend/Selection';
 
 const shortId = require('shortid');
 
@@ -12,11 +13,8 @@ function Recommend() {
   let recommendBool = true;
 
   useEffect(() => {
-    if (recommendResult.length > 0) {
-      recommendBool = true;
-    } else {
-      recommendBool = false;
-    }
+    if (recommendResult.length > 0) recommendBool = true;
+    else recommendBool = false;
   }, [recommendResult]);
 
   const conWrap = css`
@@ -29,6 +27,9 @@ function Recommend() {
 
   return (
     <div className="Recommend">
+      <div>
+        <Selection />
+      </div>
       <div css={conWrap}>
         {/* <BestRecommend id={recommendResult[0].id} name={recommendResult[0].name}/> */}
         {recommendBool ? (
