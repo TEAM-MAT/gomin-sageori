@@ -82,6 +82,9 @@ public class RecommendationController {
             List<Restaurant> restaurants = restaurantService.recommandRestaurant(param);
             recommendationSchema payload = new recommendationSchema();
             for( int i = 0 ; i<restaurants.size() ; i++){
+                if(i>19){
+                    break;
+                }
                 HashMap<String, Object> temp = new HashMap<>();
                 Restaurant toSend_restaurant = restaurants.get(i);
                 String name = toSend_restaurant.getName();
