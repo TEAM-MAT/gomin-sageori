@@ -4,7 +4,7 @@ module.exports = app => {
   app.use(
     createProxyMiddleware('/api', {
       // domain
-      target: 'http://15.164.111.113:8080',
+      target: process.env.REACT_APP_EC2_URL,
       changeOrigin: true,
     }),
   );
