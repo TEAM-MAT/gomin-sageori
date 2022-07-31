@@ -7,16 +7,13 @@ import BasicButton from './BasicButton';
 const shortId = require('shortid');
 
 function MultipleSelection(props) {
-  const {
-    data,
-    selectArr,
-    selectFtn,
-    disableArr,
-    disableFtn,
-    MAX_SELECT,
-    selectionChange,
-  } = props;
+  const { data, MAX_SELECT, selectionChange } = props;
+
+  const [selectArr, setSelectArr] = useState(Array(data.length).fill(false));
+  const [disableArr, setDisableArr] = useState(Array(data.length).fill(false));
+
   const { isPreferMaxSelect, toggleIsPreferMaxSelect } = useStore();
+
   const containerStyle = css`
     display: flex;
     flex-direction: column;
@@ -55,13 +52,13 @@ function MultipleSelection(props) {
     ) {
       const newArr = [...selectArr];
       newArr[idx] = !newArr[idx];
-      selectFtn(newArr);
+      setSelectArr(newArr);
       toggleIsPreferMaxSelect(false);
       selectionChange(data[idx][1]);
     } else {
       const newArr = [...selectArr];
       newArr[idx] = !newArr[idx];
-      selectFtn(newArr);
+      setSelectArr(newArr);
       toggleIsPreferMaxSelect(false);
       selectionChange(data[idx][1]);
     }
@@ -71,23 +68,23 @@ function MultipleSelection(props) {
     // 1, 2, 5, 6, 8, 9, 10, 11, 없음(0)
     if (idx === 0 && disableArr[0] === false) {
       const newDisableArr = Array(data.length).fill(true);
-      disableFtn(newDisableArr);
+      setDisableArr(newDisableArr);
       const newArr = Array(data.length).fill(false);
       newArr[0] = true;
-      selectFtn(newArr);
+      setSelectArr(newArr);
     } else if (idx === 0 && disableArr[0] === true) {
       // 초기화
       const newArr = Array(data.length).fill(false);
-      selectFtn(newArr);
+      setSelectArr(newArr);
 
       const newDisableArr = Array(data.length).fill(false);
-      disableFtn(newDisableArr);
+      setDisableArr(newDisableArr);
     } else if (disableArr[0] === true) {
       const newArr = Array(data.length).fill(false);
       newArr[idx] = true;
-      selectFtn(newArr);
+      setSelectArr(newArr);
       const newDisableArr = Array(data.length).fill(false);
-      disableFtn(newDisableArr);
+      setDisableArr(newDisableArr);
     }
   };
 

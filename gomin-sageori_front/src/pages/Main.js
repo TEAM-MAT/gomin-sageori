@@ -60,16 +60,8 @@ function Main() {
     setUserSelection(newForm);
   };
 
-  const [isPreferSelect, setIsPreferSelect] = useState(
-    Array(preferArr.length).fill(false),
-  );
-
   const [isRegionSelect, setIsRegionSelect] = useState(
     Array(regionArr.length).fill(false),
-  );
-
-  const [isPreferDisable, setIsPreferDisable] = useState(
-    Array(preferArr.length).fill(false),
   );
 
   const regionHandleClick = (idx) => {
@@ -126,10 +118,6 @@ function Main() {
         <MultipleSelection
           subject="prefer"
           data={preferArr}
-          selectArr={isPreferSelect}
-          selectFtn={setIsPreferSelect}
-          disableArr={isPreferDisable}
-          diableFtn={setIsPreferDisable}
           MAX_SELECT={3}
           selectionChange={selectionSetChange}
         />
