@@ -95,12 +95,6 @@ public class Restaurant {
 
     public Address getAddress() {
         return address;
-        /*if(this.address != null){
-            return address;
-        }
-        else{
-            throw new IllegalStateException("No Address data");
-        }*/
     }
 
     public void setAddress(Address address) {
@@ -112,12 +106,7 @@ public class Restaurant {
     }
 
     public String getFullAddress() {
-        if(this.address != null) {
-            return this.address.getFullAddress();
-        }
-        else {
-            return "주소 정보 없음";
-        }
+        return this.address.getFullAddress();
     }
 
     public List<Menu> getMenus() {
@@ -135,12 +124,6 @@ public class Restaurant {
 
     public Menu getBestMenu(){
         return bestMenu;
-        /*if(this.bestMenu != null) {
-            return bestMenu;
-        }
-        else {
-            throw new IllegalStateException("No menu data");
-        }*/
     }
 
     public Float getInternalStar() {
@@ -162,39 +145,19 @@ public class Restaurant {
     }
 
     public String getBusinessDate() {
-        if(this.businessDate != null) {
-            return businessDate;
-        }
-        else {
-            return "영업일 정보 없음";
-        }
+        return businessDate;
     }
 
     public String getStartTime() {
-        if(this.startTime != null) {
-            return startTime.toString();
-        }
-        else {
-            return "영업 시작 시간 없음";
-        }
+        return startTime.toString();
     }
 
     public String getFinTime() {
-        if(this.finTime != null) {
-            return finTime.toString();
-        }
-        else {
-            return "영업 종료 시간 없음";
-        }
+        return finTime.toString();
     }
 
     public String getCallNumber() {
-        if(this.callNumber != null) {
-            return callNumber;
-        }
-        else {
-            return "전화번호 없음";
-        }
+        return callNumber;
     }
 
     public void setFranchise(Boolean franchise) {

@@ -38,7 +38,7 @@ public class Address {
 
     public String getFullAddress() {
         if(this.city == null && this.district == null && this.road == null && this.buildingNumber == null && this.floor == null) {
-            return "도로명주소 정보 없음";
+            return null;
         }
         else {
             if (this.city != null) {
@@ -61,56 +61,26 @@ public class Address {
     }
 
     public String getCity() {
-        if(this.city != null) {
-            return city;
-        }
-        else {
-            return "도시 정보 없음";
-        }
+        return city;
     }
 
     public String getDistrict() {
-        if(this.district != null) {
-            return district;
-        }
-        else {
-            return "시,군,구 정보 없음";
-        }
+        return district;
     }
     public String getLocation() {
-        if(this.location != null) {
-            return location;
-        }
-        else {
-            return "지역 정보 없음";
-        }
+        return location;
     }
 
     public String getRoad() {
-        if(this.road != null) {
-            return road;
-        }
-        else {
-            return "도로명 정보 없음";
-        }
+        return road;
     }
 
     public String getBuildingNumber() {
-        if(this.buildingNumber != null) {
-            return buildingNumber;
-        }
-        else {
-            return "건물 번호 정보 없음";
-        }
+        return buildingNumber;
     }
 
     public String getFloor() {
-        if(this.floor != null) {
-            return floor;
-        }
-        else {
-            return "층 정보 없음";
-        }
+        return floor;
     }
 
     public String setCity(String city) {
