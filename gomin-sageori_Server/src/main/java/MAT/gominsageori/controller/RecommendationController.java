@@ -81,7 +81,10 @@ public class RecommendationController {
         try{
             List<Restaurant> restaurants = restaurantService.recommandRestaurant(param);
             recommendationSchema payload = new recommendationSchema();
-            for( int i = 0 ; i<restaurants.size() ; i++){
+            for( int i = 0 ; i<restaurants.size() ; i++) {
+                if(i>19){
+                    break;
+                }
                 HashMap<String, Object> temp = new HashMap<>();
                 Restaurant toSend_restaurant = restaurants.get(i);
                 String name = toSend_restaurant.getName();
@@ -91,7 +94,11 @@ public class RecommendationController {
                 temp.put("address", address);
                 payload.addRestaurant(temp);
             }
-            payload.setSize(restaurants.size());
+            if(restaurants.size() > 20) {
+                payload.setSize(20);
+            } else {
+                payload.setSize(restaurants.size());
+            }
             return ResponseEntity.status(200).body(payload);
         }
         //추천 알고리즘 호출 및 리턴값 받기

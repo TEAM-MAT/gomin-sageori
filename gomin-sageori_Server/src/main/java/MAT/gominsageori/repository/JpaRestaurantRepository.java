@@ -25,6 +25,15 @@ public class JpaRestaurantRepository implements RestaurantRepository{
     }
 
     @Override
+    public void update(Restaurant restaurant) throws Exception{
+        try {
+            em.merge(restaurant);
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
+
+    @Override
     public Restaurant findById(Long id) throws Exception{
         Restaurant result = em.find(Restaurant.class,id);
         if (result == null) {
