@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css } from "@emotion/react";
-import Menu from "./Menu";
+import { jsx, css } from '@emotion/react';
+import Menu from './Menu';
 
 function Header() {
   const divStyle = css`

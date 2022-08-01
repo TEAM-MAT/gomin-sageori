@@ -1,24 +1,23 @@
-import create from "zustand";
+import create from 'zustand';
+
+const axios = require('axios');
 
 const useStore = create((set) => ({
   // isAllSelect: false,
   // setIsAllSelect: (bool) => set((state) => ({ isAllSelect: bool })),
   userSelection: {
     prefer: new Set(),
-    atmosphere: "",
-    allergy: "",
+    atmosphere: '',
+    allergy: '',
     franchise: false,
-    region: "",
+    region: '',
   },
   setUserSelection: (p) => set(() => ({ userSelection: p })),
   recommendResult: [],
   async setRecommendResult(selection) {
-    console.log("1");
-    const preferStr = Array.from(selection.prefer).join(",");
-    console.log(selection.region);
-    const axios = require("axios");
+    const preferStr = Array.from(selection.prefer).join(',');
     await axios
-      .get("/api/recommendation", {
+      .get('/api/recommendation', {
         params: {
           characteristic: preferStr,
           franchise: selection.franchise,
@@ -27,7 +26,6 @@ const useStore = create((set) => ({
       })
       .then((response) => {
         set(() => ({ recommendResult: response.data.restaurants }));
-        // console.log(response.data.restaurants);
       });
   },
   isPreferMaxSelect: { isMax: false, maxNumber: 3 },
