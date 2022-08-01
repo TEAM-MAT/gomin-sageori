@@ -49,7 +49,6 @@ function Main() {
       subject: oldSet,
     };
     setUserSelection(newForm);
-    console.log(userSelection);
   };
 
   const regionSelectionChange = (value) => {
@@ -110,33 +109,14 @@ function Main() {
 
   return (
     <div css={scrollStyle}>
-      {/* <Header></Header> */}
       <Intro />
       <div>
-        {' '}
-        {/* 내용 부분 감싸는 div */}
         <MultipleSelection
           subject="prefer"
           data={preferArr}
           MAX_SELECT={3}
           selectionChange={selectionSetChange}
         />
-        {/* <div css={containerStyle}>
-          <h3 css={h3Style}>먹고자 하는 음식의 특징을 선택해주세요</h3>
-          <div css={buttonWrapStyle}>
-            {preferArr.map((elm, index) => (
-              <BasicButton
-                key=""
-                isSelected={isPreferSelect[index]}
-                handleClick={preferHandleClick}
-                elementIndex={index}
-                content={elm[0]}
-                handleDisable={preferHandleDisable}
-                isDisable={isPreferDisable[index]}
-              />
-            ))}
-          </div>
-        </div> */}
         <div css={containerStyle}>
           <h3 css={h3Style}>프랜차이즈를 선택 대상에 포함시킬까요?</h3>
           <div css={toggleButtonWrapStyle}>
