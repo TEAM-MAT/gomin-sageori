@@ -40,3 +40,4 @@ gomin-sageori_Server/.DS_Store
 .DS_Store
 
 gomin-sageori_Front/src/SetUpProxy.js
+gomin-sageori_front/.env

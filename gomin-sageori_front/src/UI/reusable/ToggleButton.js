@@ -58,10 +58,6 @@ function BasicButton(props) {
     cursor: pointer;
   `;
 
-  useEffect(() => {
-    // console.log('yes');
-  }, []);
-
   return (
     <div className="BasicButton">
       <div css={buttonBGStyle}>
