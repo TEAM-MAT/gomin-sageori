@@ -1,6 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import "../../styles/base/font.css";
+import { css } from '@emotion/react';
+import shortid from 'shortid';
+import '../../styles/base/font.css';
+
+const shortId = require('shortid');
 
 function BasicButton(props) {
   const { isSelected, handleClick, elementIndex, handleDisable, isDisable } =
@@ -56,14 +59,15 @@ function BasicButton(props) {
   `;
 
   return (
-    <div className="BasicButton">
-      {/*if문 처리 수정*/}
+    <div className="BasicButton" key={shortId}>
+      {/* if문 처리 수정 */}
       {isDisable && elementIndex !== 0 ? (
         <li
           onClick={() => {
             handleDisable(elementIndex);
           }}
-          css={buttonStyle}>
+          css={buttonStyle}
+        >
           {props.content}
         </li>
       ) : (
@@ -72,7 +76,8 @@ function BasicButton(props) {
             handleClick(elementIndex);
             handleDisable(elementIndex);
           }}
-          css={isSelected ? clickedButtonStyle : buttonStyle}>
+          css={isSelected ? clickedButtonStyle : buttonStyle}
+        >
           {props.content}
         </li>
       )}

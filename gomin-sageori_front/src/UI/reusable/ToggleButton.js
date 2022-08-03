@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { jsx, css } from "@emotion/react";
-import { useState, useEffect } from "react";
+import { jsx, css } from '@emotion/react';
+import { useState, useEffect } from 'react';
 
 function BasicButton(props) {
   const [Toggle, setToggle] = useState();
@@ -58,10 +58,6 @@ function BasicButton(props) {
     cursor: pointer;
   `;
 
-  useEffect(() => {
-    console.log("yes");
-  }, []);
-
   return (
     <div className="BasicButton">
       <div css={buttonBGStyle}>
@@ -69,7 +65,8 @@ function BasicButton(props) {
           css={Toggle === false ? buttonStyle : toggledButtonStyle}
           onClick={() => {
             setToggle(!Toggle);
-          }}>
+          }}
+        >
           {Toggle === false ? props.content : props.toggledContent}
         </div>
       </div>

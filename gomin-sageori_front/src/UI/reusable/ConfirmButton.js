@@ -1,8 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import { useEffect } from "react";
-import styled from "@emotion/styled";
-import { ArrowLongRight } from "@emotion-icons/entypo";
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import { ArrowLongRight } from '@emotion-icons/entypo';
 
 function ConfirmButton({ content, handleClick }) {
   const confirmWrapStyle = css`
@@ -16,9 +15,11 @@ function ConfirmButton({ content, handleClick }) {
     right: 0;
     margin: 1em 5vw;
 
-    background-color: #03a9f4;
+    background-color: #f5ad79;
+    color: black;
     border-radius: 5px;
-    font-size: 0.95em;
+    font-size: 0.8em;
+    font-weight: 500;
     border: solid 0.7px transparent;
 
     display: flex;
@@ -29,8 +30,7 @@ function ConfirmButton({ content, handleClick }) {
     cursor: pointer;
 
     &:hover {
-      background-color: #0277bd;
-      border: solid 0.7px #01579b;
+      background-color: #f87d26;
     }
   `;
 

@@ -1,20 +1,20 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import useStore from "../state/store";
-import { useEffect, useState } from "react";
-import RecommendList from "../UI/reusable/RecommendList";
-import BestRecommend from "../UI/recommend/BestRecommend";
+import { css } from '@emotion/react';
+import { useEffect } from 'react';
+import useStore from '../state/store';
+import RecommendList from '../UI/reusable/RecommendList';
+import BestRecommend from '../UI/recommend/BestRecommend';
+import Selection from '../UI/recommend/Selection';
+
+const shortId = require('shortid');
 
 function Recommend() {
-  const recommendResult = useStore((state) => state.recommendResult);
+  const recommendResult = useStore(state => state.recommendResult);
   let recommendBool = true;
 
   useEffect(() => {
-    console.log(recommendResult);
-    console.log(recommendResult.length);
-    recommendResult.length > 0
-      ? (recommendBool = true)
-      : (recommendBool = false);
+    if (recommendResult.length > 0) recommendBool = true;
+    else recommendBool = false;
   }, [recommendResult]);
 
   const conWrap = css`
@@ -27,29 +27,31 @@ function Recommend() {
 
   return (
     <div className="Recommend">
+      <div>
+        <Selection />
+      </div>
       <div css={conWrap}>
-        {/*<BestRecommend id={recommendResult[0].id} name={recommendResult[0].name}/>*/}
+        {/* <BestRecommend id={recommendResult[0].id} name={recommendResult[0].name}/> */}
         {recommendBool ? (
           recommendResult.map((key, index) => {
-            if (index != 0) {
+            if (index !== 0) {
               return (
                 <>
-                  <RecommendList key={index} id={key.id} name={key.name} />
-                  {/*<div key={index} css={testStyle}>*/}
-                  {/*    {key.address}*/}
-                  {/*</div>*/}
-                </>
-              );
-            } else {
-              return (
-                <>
-                  <BestRecommend key={index} id={key.id} name={key.name} />
-                  {/*<div key={index} css={testStyle}>*/}
-                  {/*    {key.address}*/}
-                  {/*</div>*/}
+                  <RecommendList key={shortId} id={key.id} name={key.name} />
+                  {/* <div key={index} css={testStyle}> */}
+                  {/*    {key.address} */}
+                  {/* </div> */}
                 </>
               );
             }
+            return (
+              <>
+                <BestRecommend key={shortId} id={key.id} name={key.name} />
+                {/* <div key={index} css={testStyle}> */}
+                {/*    {key.address} */}
+                {/* </div> */}
+              </>
+            );
           })
         ) : (
           <div>Loading</div>
